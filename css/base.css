@@ -108,16 +108,24 @@ body.locked { overflow: hidden; }
 }
 .page-bar {
   display: flex; justify-content: space-between; align-items: center;
-  gap: 12px 24px; flex-wrap: wrap;
+  gap: 16px;
   margin-bottom: clamp(20px, 3vw, 32px);
 }
-.crumbs { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.crumbs { display: flex; gap: 10px; align-items: center; flex: 1; min-width: 0; white-space: nowrap; }
+.crumbs > * { flex: none; }
+.crumbs > :not([aria-hidden]) { flex: 0 1 auto; min-width: 2.5em; overflow: hidden; text-overflow: ellipsis; }
+.crumbs > a:first-child { flex: none; }
+.pbtn { position: relative; display: inline-flex; align-items: center; gap: 10px; flex: none; }
+.pbtn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; }
 .crumbs a { color: var(--mute); transition: color .3s; }
 .crumbs a:hover, .crumbs a:focus-visible { color: var(--ink); outline: none; }
 .crumbs span[aria-hidden] { color: var(--mute); }
 
 @media (max-width: 700px) {
   .wmk { letter-spacing: .2em; }
+  .pbtn { width: 44px; height: 44px; padding: 0; justify-content: center; border-radius: 50%; }
+  .pbtn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .pbtn svg { width: 16px; height: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
