@@ -15,7 +15,7 @@
    COLOUR pure black ground that matches the photograph, ivory ink, graphite folders, paper white inside them
    TYPE Newsreader light for titles and notes, Inter Tight for interface text
    LAYOUT logo top left, contact top right, portrait centred, folders in a row across its lower edge; phone: portrait, then folders stacked in a row of three */
-:root{color-scheme:dark;--bg:#0d0d0d;--ink:#EDEAE4;--mute:#8B8882;--line:rgba(237,234,228,.12);--card:#0D0D0F}
+:root{color-scheme:dark;--bg:#0c0c0c;--ink:#EDEAE4;--mute:#8B8882;--line:rgba(237,234,228,.12);--card:#0D0D0F}
 *{box-sizing:border-box;min-width:0}
 html,body{background:var(--bg)}
 body{margin:0;color:var(--ink);font:400 15px/1.55 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
@@ -33,10 +33,10 @@ img{max-width:100%;display:block}
 .portrait{position:absolute;left:50%;top:0;height:min(92svh,980px);aspect-ratio:752/967;transform:translateX(-50%);-webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent 96%);mask-image:linear-gradient(to bottom,#000 62%,transparent 96%)}
 .portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .portrait .base{filter:none}
-.portrait.glow .lit{filter:brightness(1.55) contrast(1.03)}
+.portrait.glow .lit{filter:brightness(2) contrast(1.03)}
 .portrait.glow .base{filter:brightness(1.08)}
 .portrait .base{transition:filter .6s}
-.portrait .lit{transition:filter .6s;filter:brightness(1.3) contrast(1.04);-webkit-mask-image:radial-gradient(circle var(--r,160px) at var(--x,50%) var(--y,40%),#000 35%,transparent 100%);mask-image:radial-gradient(circle var(--r,160px) at var(--x,50%) var(--y,40%),#000 35%,transparent 100%)}
+.portrait .lit{transition:filter .6s;filter:brightness(1.5) contrast(1.04);-webkit-mask-image:radial-gradient(circle var(--r,160px) at var(--x,50%) var(--y,40%),#000 35%,transparent 100%);mask-image:radial-gradient(circle var(--r,160px) at var(--x,50%) var(--y,40%),#000 35%,transparent 100%)}
 .ring{position:absolute;z-index:3;left:0;top:0;border-radius:50%;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(237,234,228,.22);will-change:transform}
 .words{position:absolute;inset:0;z-index:2;pointer-events:none;-webkit-mask-image:radial-gradient(circle var(--r,160px) at var(--hx,50%) var(--hy,40%),#000 30%,transparent 78%);mask-image:radial-gradient(circle var(--r,160px) at var(--hx,50%) var(--hy,40%),#000 30%,transparent 78%)}
 .words span{position:absolute;transform:translate(-50%,-50%);width:max-content;max-width:15ch;text-align:center;font:300 clamp(13px,1.05vw,15px)/1.7 Montserrat,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#fff}
@@ -364,7 +364,7 @@ const PRINCIPLE='<div class="principle"><div class="phil"><span class="lbl">Prin
  +'<div class="xd"><div class="ow"><div class="oh"><div><b class="otitle">Get Ada to her first report</b><span class="ohint" id="xH">Click the dark button to move through each screen</span></div><div class="oseg" role="tablist" aria-label="Path"><button role="tab" id="tA" aria-selected="true">Account first</button><button role="tab" id="tB" aria-selected="false">Value first</button></div></div>'
  +'<div class="ob"><ol class="xsteps" id="xS"></ol><div class="ocv"><div class="oprog"><span id="xN">Step 1 of 7</span><span class="obar"><i id="xB"></i></span></div><div class="ocard" id="scr"></div><div class="otoast" id="xToast" hidden><span id="xTt"></span><button type="button" id="xTb"></button></div></div></div>'
  +'<div class="of"><div class="ost"><b>Time to value</b><span id="xT">0:00.0</span></div><div class="ost"><b>Clicks</b><span id="xC">0</span></div><div class="ocmp" id="xG"></div></div></div>'
- +'<div class="xfoot"><span>A made-up product, just to show the idea.</span><button type="button" id="reset">Start again</button></div></div></div>';
+ +'<div class="xfoot"><span></span><button type="button" id="reset">Start again</button></div></div></div>';
 const REPORT='<div class="xrep"><span class="lb">Your first report</span><div class="xbig">\u20A6 48.2m</div><span class="xup">Monthly sales, up 12% on last month</span><div class="xbars"><i style="height:42%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:66%"></i><i style="height:71%"></i><i style="height:88%"></i><i style="height:80%"></i></div></div>';
 const F=(l,v)=>'<div class="xf">'+l+'<div>'+v+'</div></div>';
 const PATHS={
