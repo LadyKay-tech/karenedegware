@@ -116,7 +116,7 @@ body.locked { overflow: hidden; }
 .crumbs > :not([aria-hidden]) { flex: 0 1 auto; min-width: 2.5em; overflow: hidden; text-overflow: ellipsis; }
 .crumbs > a:first-child { flex: none; }
 .pbtn { position: relative; display: inline-flex; align-items: center; gap: 10px; flex: none; }
-.pbtn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; }
+.pbtn svg { display: none; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; }
 .crumbs a { color: var(--mute); transition: color .3s; }
 .crumbs a:hover, .crumbs a:focus-visible { color: var(--ink); outline: none; }
 .crumbs span[aria-hidden] { color: var(--mute); }
@@ -125,7 +125,7 @@ body.locked { overflow: hidden; }
   .wmk { letter-spacing: .2em; }
   .pbtn { width: 44px; height: 44px; padding: 0; justify-content: center; border-radius: 50%; }
   .pbtn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .pbtn svg { width: 16px; height: 16px; }
+  .pbtn svg { display: block; }
 }
 
 @media (prefers-reduced-motion: reduce) {
