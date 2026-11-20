@@ -22,7 +22,7 @@ body{margin:0;color:var(--ink);font:400 15px/1.55 "Inter Tight",system-ui,sans-s
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
 img{max-width:100%;display:block}
-.top{position:fixed;z-index:20;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:max(2vw,16px) max(4vw,20px);pointer-events:none}
+.top{position:fixed;z-index:20;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(var(--bg) 35%,rgba(12,12,12,0));padding:max(2vw,16px) max(4vw,20px);pointer-events:none}
 .top>*{pointer-events:auto}
 .wmk{display:inline-block;font:400 clamp(12px,1vw,14px)/1 Montserrat,"Inter Tight",sans-serif;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap;color:#fff}
 .wmk b{font-weight:700}
@@ -121,6 +121,15 @@ body.ready .folder{animation:rise .8s cubic-bezier(.2,.8,.2,1) both}
 body.ready .folder:nth-child(2){animation-delay:.12s}
 @keyframes rise{from{opacity:0;transform:translateY(30px)}}
 body.locked{overflow:hidden}
+.intro{position:relative;padding:clamp(90px,12vw,170px) max(4vw,20px);border-top:1px solid rgba(255,255,255,.06)}
+.iw{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,6vw,96px);align-items:start}
+.ih{margin:0;font:200 clamp(40px,5vw,72px)/1 "Inter Tight",sans-serif;letter-spacing:-.03em}
+.ib p{margin:0 0 20px;max-width:46ch;font:300 clamp(17px,1.45vw,20px)/1.6 "Inter Tight",sans-serif;color:#C9C5BE}
+.ib p:last-child{color:var(--ink);margin-bottom:0}
+.intro.pre .ih,.intro.pre .ib p{opacity:0;transform:translateY(18px)}
+.intro .ih,.intro .ib p{transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.intro .ib p:nth-child(2){transition-delay:.12s}.intro .ib p:nth-child(3){transition-delay:.24s}
+@media(max-width:760px){.iw{grid-template-columns:minmax(0,1fr)}}
 .principle{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:clamp(28px,5vw,72px);align-items:start;opacity:0;transform:translateY(20px);transition:opacity .4s,transform .45s cubic-bezier(.2,.8,.2,1)}
 .room.on .principle{opacity:1;transform:none}
 .phil{position:sticky;top:24px}
@@ -263,8 +272,8 @@ body.locked{overflow:hidden}
 </header>
 <main class="hero" id="hero">
   <div class="portrait" id="portrait">
-    <img class="base" src="assets/karen.jpg" alt="Portrait of Karen Edegware">
-    <img class="lit" src="assets/karen.jpg" alt="" aria-hidden="true">
+    <img class="base" src="assets/karen.webp" alt="Portrait of Karen Edegware">
+    <img class="lit" src="assets/karen.webp" alt="" aria-hidden="true">
   </div>
   <div class="words" id="words" aria-hidden="true"><span>Lead with the <b>outcome</b></span><span>Design for genuine <b>utility</b></span><span>Pricing is a decision about <b>value</b></span><span>Start with the customer’s <b>question</b></span><span>Activity is not <b>progress</b></span><span>A demo is proof of <b>value</b></span><span>Sell only what the product can <b>deliver</b></span><span>A feature request is evidence of a <b>need</b></span></div>
   <div class="ring" id="ring" aria-hidden="true"></div>
@@ -273,6 +282,16 @@ body.locked{overflow:hidden}
     <div class="folders" id="folders"></div>
   </section>
 </main>
+<section class="intro" id="intro" aria-label="Introduction">
+  <div class="iw">
+    <h2 class="ih">I’m Karen.</h2>
+    <div class="ib">
+      <p>I started out designing logos in 2014, and I’ve never stopped asking why a design works, or doesn’t, for the business behind it.</p>
+      <p>That question took me from brand design into product design, then product management, and now into running a project management office, where I get to see how good ideas survive budgets, people and deadlines.</p>
+      <p>So I bring both halves to a product: the craft that makes it feel right, and the commercial thinking that makes it pay its way.</p>
+    </div>
+  </div>
+</section>
 <div class="extract" id="extract" hidden>
   <div class="bigf" id="bigf"></div>
   <div class="log" aria-live="polite"><p class="ttl" id="ttl"></p><div class="bar"><i id="barI"></i></div><ol id="logList"></ol></div>
@@ -472,6 +491,7 @@ const fromHash=()=>{const id=location.hash.slice(1),f=FOLDERS.find(x=>x.id===id)
 addEventListener('hashchange',fromHash);
 const ready=()=>{if(body.classList.contains('ready'))return;body.classList.remove('intro');body.classList.add('ready');setTimeout(()=>{const m=document.getElementById('introMark');if(m)m.remove()},1200);place();paint();fromHash()};
 place();paint();start();
+const intro=document.getElementById('intro');if(!rm.matches&&'IntersectionObserver' in window){intro.classList.add('pre');const introIO=new IntersectionObserver(es=>{if(es[0].isIntersecting){intro.classList.remove('pre');introIO.disconnect()}},{threshold:.25});introIO.observe(intro)}
 if(rm.matches)ready();else{setTimeout(ready,2300);document.getElementById('introMark').addEventListener('click',ready)}
 }
 </script>
