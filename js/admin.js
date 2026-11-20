@@ -12,7 +12,8 @@
   const API = "https://api.github.com";
   const TOKEN_KEY = "ke-cms-token";
   const DRAFTS_KEY = "ke-cms-drafts";
-  const MAX_SIDE = 2400; /* longest side of an uploaded picture, in pixels */
+  const MAX_SIDE = 2400;
+  const NO_WRITE = "This token can read your site but can’t publish to it. On GitHub, edit the token: under Repository access make sure <b>karenedegware</b> is selected, and under Repository permissions set <b>Contents</b> to <b>Read and write</b>. Then sign in again."; /* longest side of an uploaded picture, in pixels */
 
   const $ = (id) => document.getElementById(id);
   const views = { signin: $("viewSignin"), list: $("viewList"), editor: $("viewEditor") };
@@ -144,14 +145,16 @@
     try {
       await gh(repoPath(""));
       await readIndex();
+      /* The repository is public, so reading proves nothing. Writing a small unused blob checks the token can publish. */
+      await gh(repoPath("/git/blobs"), { method: "POST", body: JSON.stringify({ content: "check", encoding: "utf-8" }) });
       try { localStorage.setItem(TOKEN_KEY, token); } catch (e) { /* storage unavailable */ }
       $("status").hidden = true;
       await openList();
     } catch (e) {
       if (e.message === "unauthorised") return;
       token = "";
-      status(e.status === 404
-        ? "That token can’t see the karenedegware repository. Check that it has access to that repository only, with Contents set to Read and write."
+      status(e.status === 403 || e.status === 404
+        ? NO_WRITE
         : "Couldn’t sign in: " + escapeHTML(e.message), { error: true });
     }
   }
@@ -467,7 +470,7 @@
       const url = `${SITE}notes/${note.slug}/`;
       status(`Done. Your note will be live in about a minute at <a href="${url}" target="_blank" rel="noopener">${escapeHTML(url)}</a>`, { sticky: true });
     } catch (e) {
-      if (e.message !== "unauthorised") status("Couldn’t publish: " + escapeHTML(e.message), { error: true });
+      if (e.message !== "unauthorised") status(e.status === 403 ? NO_WRITE : "Couldn’t publish: " + escapeHTML(e.message), { error: true });
     } finally {
       busy(false);
     }
@@ -502,7 +505,7 @@
       status("The note has been removed from the site.");
       await openList();
     } catch (e) {
-      if (e.message !== "unauthorised") status("Couldn’t remove it: " + escapeHTML(e.message), { error: true });
+      if (e.message !== "unauthorised") status(e.status === 403 ? NO_WRITE : "Couldn’t remove it: " + escapeHTML(e.message), { error: true });
     } finally {
       busy(false);
     }
