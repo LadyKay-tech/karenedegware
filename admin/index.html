@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Notes editor | Karen Edegware</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500&family=Montserrat:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/notes.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin">
+  <header class="abar">
+    <a class="logo" href="../" aria-label="Back to the site"><span class="wmk">Karen <b>Edegware</b></span></a>
+    <span class="cap dim">Notes editor</span>
+    <div class="aact" id="session" hidden>
+      <a class="pill" href="../notes/" target="_blank" rel="noopener">View notes</a>
+      <button class="pill" type="button" id="signOut">Sign out</button>
+    </div>
+  </header>
+
+  <div class="status" id="status" role="status" aria-live="polite" hidden></div>
+
+  <!-- Sign in -->
+  <main class="awrap" id="viewSignin" hidden>
+    <section class="acard narrow">
+      <h1 class="ah">Sign in</h1>
+      <p class="amute">This editor publishes straight to your website. It needs a GitHub access token that can only change this one repository. The token is kept in this browser only.</p>
+      <form id="signinForm" class="aform">
+        <label class="afield">
+          <span class="cap">Access token</span>
+          <input id="token" type="password" autocomplete="off" spellcheck="false" required placeholder="github_pat_...">
+        </label>
+        <button class="abtn" type="submit">Sign in</button>
+      </form>
+      <details class="ahelp">
+        <summary class="cap">How to get a token</summary>
+        <ol>
+          <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> while signed in to GitHub.</li>
+          <li>Name it <b>Notes editor</b> and pick an expiry date, up to a year.</li>
+          <li>Under <b>Repository access</b>, choose <b>Only select repositories</b> and pick <b>karenedegware</b>.</li>
+          <li>Under <b>Permissions</b>, open <b>Repository permissions</b> and set <b>Contents</b> to <b>Read and write</b>.</li>
+          <li>Click <b>Generate token</b>, copy it, and paste it above.</li>
+        </ol>
+      </details>
+    </section>
+  </main>
+
+  <!-- All notes -->
+  <main class="awrap" id="viewList" hidden>
+    <div class="ahead">
+      <h1 class="ah">Notes</h1>
+      <button class="abtn" type="button" id="newNote">New note</button>
+    </div>
+    <div id="postList"></div>
+  </main>
+
+  <!-- Write or edit a note -->
+  <main class="awrap" id="viewEditor" hidden>
+    <div class="ahead">
+      <button class="pill" type="button" id="backToList">All notes</button>
+      <div class="aact">
+        <button class="pill" type="button" id="saveDraft">Save draft</button>
+        <button class="abtn" type="button" id="publish">Publish</button>
+      </div>
+    </div>
+
+    <form class="aeditor" id="editor" autocomplete="off">
+      <div class="acol">
+        <label class="afield">
+          <span class="cap">Title</span>
+          <input id="fTitle" class="atitle" type="text" required maxlength="140" placeholder="Give the note a title">
+        </label>
+        <div class="arow">
+          <label class="afield">
+            <span class="cap">Link</span>
+            <span class="aslug"><span class="amute">/notes/</span><input id="fSlug" type="text" required maxlength="80" pattern="[a-z0-9-]+"></span>
+          </label>
+          <label class="afield adate">
+            <span class="cap">Date</span>
+            <input id="fDate" type="date" required>
+          </label>
+        </div>
+        <label class="afield">
+          <span class="cap">Summary <span class="dim" id="sumCount"></span></span>
+          <textarea id="fSummary" rows="2" maxlength="200" placeholder="One or two sentences for the notes list and link previews"></textarea>
+        </label>
+
+        <div class="afield">
+          <span class="cap">Picture</span>
+          <div class="adrop" id="drop">
+            <input id="fImage" type="file" accept="image/*" class="sr">
+            <img id="imgPreview" alt="" hidden>
+            <div class="adropmsg" id="dropMsg">
+              <span>Drop a picture here, or <label for="fImage" class="alink">choose one</label></span>
+              <span class="amute">Large photos are resized for the web automatically</span>
+            </div>
+          </div>
+          <div class="aimgact" id="imgActions" hidden>
+            <label for="fImage" class="pill">Replace</label>
+            <button type="button" class="pill" id="removeImage">Remove</button>
+          </div>
+        </div>
+        <div class="arow" id="imgFields" hidden>
+          <label class="afield">
+            <span class="cap">Describe the picture</span>
+            <input id="fAlt" type="text" maxlength="200" placeholder="For people using screen readers">
+          </label>
+          <label class="afield">
+            <span class="cap">Caption</span>
+            <input id="fCaption" type="text" maxlength="200" placeholder="Optional">
+          </label>
+        </div>
+
+        <div class="afield">
+          <div class="atabs" role="tablist">
+            <button type="button" role="tab" aria-selected="true" id="tabWrite">Write</button>
+            <button type="button" role="tab" aria-selected="false" id="tabPreview">Preview</button>
+          </div>
+          <div class="atools" id="tools" aria-label="Formatting">
+            <button type="button" data-md="bold" title="Bold"><b>B</b></button>
+            <button type="button" data-md="italic" title="Italic"><i>I</i></button>
+            <button type="button" data-md="heading" title="Heading">H</button>
+            <button type="button" data-md="link" title="Link">Link</button>
+            <button type="button" data-md="quote" title="Quote">Quote</button>
+            <button type="button" data-md="list" title="List">List</button>
+            <button type="button" data-md="divider" title="Divider">Divider</button>
+          </div>
+          <textarea id="fBody" class="abody" rows="18" placeholder="Write here. Leave an empty line between paragraphs."></textarea>
+          <div class="apreview notes" id="preview" hidden></div>
+        </div>
+
+        <div class="adanger" id="dangerZone" hidden>
+          <button type="button" class="alink" id="unpublish">Remove this note from the site</button>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <script src="../js/core.js"></script>
+  <script src="../js/markdown.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

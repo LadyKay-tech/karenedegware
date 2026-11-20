@@ -1,0 +1,129 @@
+/* Folder pages: the Product Design file browser and the P3MO file grid */
+
+/* File browser window */
+.browser {
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015));
+  box-shadow: 0 60px 100px -50px rgba(0, 0, 0, .95), inset 0 1px 0 rgba(255, 255, 255, .05);
+  overflow: hidden;
+}
+.bhead {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.bscroll {
+  max-height: min(640px, calc(100svh - 280px));
+  min-height: 320px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 22px 20px 40px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, .22) transparent;
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 40px), transparent);
+  mask-image: linear-gradient(#000 calc(100% - 40px), transparent);
+}
+.bscroll::-webkit-scrollbar { width: 8px; }
+.bscroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .2); border-radius: 8px; }
+.bgrid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 28px 20px;
+}
+
+/* A file */
+.doc {
+  display: flex; flex-direction: column; gap: 12px;
+  height: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: background .3s, border-color .3s, transform .4s var(--ease);
+}
+a.doc:hover, a.doc:focus-visible {
+  background: rgba(255, 255, 255, .04);
+  border-color: var(--line-strong);
+  transform: translateY(-4px);
+  outline: none;
+}
+.doc[aria-disabled="true"] { cursor: default; }
+
+.sheet {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 6px;
+  padding: 16% 14%;
+  display: flex; flex-direction: column; gap: 7%;
+  clip-path: polygon(0 0, calc(100% - 22%) 0, 100% 17.6%, 100% 100%, 0 100%);
+  background: rgba(255, 255, 255, .05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
+.sheet::after {
+  content: ""; position: absolute; top: 0; right: 0;
+  width: 22%; aspect-ratio: 1;
+  background: linear-gradient(225deg, transparent 50%, rgba(255, 255, 255, .14) 50%);
+  border-bottom-left-radius: 4px;
+}
+.sheet i { display: block; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, .12); }
+.sheet i:nth-child(1) { width: 62%; height: 6px; }
+.sheet i:nth-child(2) { width: 88%; }
+.sheet i:nth-child(3) { width: 74%; }
+.sheet i:nth-child(4) { width: 80%; }
+
+/* An open file is real paper with a glimpse of its prototype */
+.doc.open .sheet {
+  background: linear-gradient(170deg, #f6f3ec, #dcd7cc);
+  box-shadow: 0 24px 40px -24px rgba(0, 0, 0, .9);
+}
+.doc.open .sheet::after { background: linear-gradient(225deg, transparent 50%, #c9c3b7 50%); }
+.doc.open .sheet i { background: #bdb7ab; }
+.mini {
+  margin-top: auto;
+  display: flex; align-items: flex-end; gap: 7%;
+  height: 34%;
+}
+.mini b { flex: 1; border-radius: 2px 2px 0 0; background: #1a1a1a; }
+.mini b:nth-child(odd) { background: #c2bcb1; }
+.mini b:last-child { background: var(--rose); }
+
+.dname { display: block; font-size: 15px; line-height: 1.3; letter-spacing: -.005em; }
+.dfile { display: block; margin-top: 3px; color: var(--mute); font-size: 12px; overflow-wrap: anywhere; }
+.dstate { margin-top: auto; color: var(--mute); }
+.doc.open .dstate { color: var(--ink); }
+.doc.open .dstate::before {
+  content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--rose); margin-right: 8px; vertical-align: 1px;
+}
+
+/* P3MO grid */
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+.file {
+  display: flex; flex-direction: column; gap: 14px;
+  min-height: 200px; padding: 22px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid var(--line);
+  box-shadow: 0 40px 70px -40px rgba(0, 0, 0, .9);
+  transition: border-color .3s;
+}
+.file:hover { border-color: rgba(237, 234, 228, .3); }
+.ftype {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--mute);
+  font: 500 10px/1.3 Montserrat, sans-serif; letter-spacing: .14em; text-transform: uppercase;
+}
+.ftype svg { width: 16px; height: 16px; flex: none; }
+.file.note { background: linear-gradient(160deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .03)); }
+.file.note p { margin: 0; font: 200 clamp(20px, 1.9vw, 26px)/1.25 "Inter Tight", sans-serif; letter-spacing: -.015em; }
+.file.lead { grid-column: span 2; }
+.file.lead p { font-size: clamp(26px, 3vw, 38px); }
+.file h3 { margin: 0; font: 300 22px/1.2 "Inter Tight", sans-serif; letter-spacing: -.01em; }
+.soon { margin-top: auto; color: var(--mute); font: 500 10px/1.3 Montserrat, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+
+@media (max-width: 700px) {
+  .bgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
+  .bscroll { padding: 16px 12px 36px; max-height: none; min-height: 0; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+  .file.lead { grid-column: auto; }
+  .dname { font-size: 14px; }
+}
