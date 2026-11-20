@@ -19,9 +19,9 @@
     checkout:
       `<span class="pv-k">Your basket</span>` +
       `<span class="pv-row"><span>Items</span><span>£48.00</span></span>` +
-      `<span class="pv-row"><span>Delivery</span><span>£3.99</span></span>` +
-      `<span class="pv-row pv-tot"><span>Total</span><span>£51.99</span></span>` +
-      `<span class="pv-btn">Pay £51.99</span>`,
+      `<span class="pv-row"><span>Delivery and fees</span><span>£6.49</span></span>` +
+      `<span class="pv-row pv-tot"><span>Total</span><span>£54.49</span></span>` +
+      `<span class="pv-btn">Pay £54.49</span>`,
     notify:
       `<span class="pv-n dim"><i></i>We miss you!</span>` +
       `<span class="pv-n dim"><i></i>Time to check in</span>` +
@@ -29,7 +29,7 @@
     savings:
       `<span class="pv-k">Rent fund</span><span class="pv-big">£640 <em>of £900</em></span>` +
       `<span class="pv-track"><b style="width:71%"></b></span>` +
-      `<span class="pv-k">£40 added this week</span>`,
+      `<span class="pv-k">£80 added this week</span>`,
     cancel:
       `<span class="pv-h">Before you go</span>` +
       `<span class="pv-chips"><span>Too pricey</span><span class="on">Not using it</span></span>` +
@@ -45,8 +45,8 @@
       `<span class="pv-cb on"><i>${tick}</i><span>Email receipt</span><em>Free</em></span>`,
     status:
       `<span class="pv-tl done"><i>${tick}</i><span>Sent</span><em>09:12</em></span>` +
-      `<span class="pv-tl done"><i>${tick}</i><span>Bank received</span><em>09:40</em></span>` +
-      `<span class="pv-tl now"><i></i><span>Arrives by</span><em>14:15</em></span>`,
+      `<span class="pv-tl done"><i>${tick}</i><span>Bank received</span><em>09:13</em></span>` +
+      `<span class="pv-tl now"><i></i><span>Arrives by</span><em>09:40</em></span>`,
     kyc:
       `<span class="pv-k">3 of 4 done</span>` +
       `<span class="pv-ck done"><i>${tick}</i>Photo ID</span>` +
@@ -67,7 +67,7 @@
     grid.innerHTML = data.principles
       .map((p) => {
         const isOpen = p.status === "open";
-        const pv = `<span class="pv pv-${p.preview || "blank"}" aria-hidden="true">${PREVIEW[p.preview] || ""}</span>`;
+        const pv = `<span class="pv pv-${p.preview || "blank"}" aria-hidden="true"><span class="pvi"><span class="pv-doc"><i></i><i></i></span>${PREVIEW[p.preview] || ""}<span class="pv-doc pv-end"><i></i><i></i><i></i></span></span></span>`;
         const meta =
           `<span class="dmeta">` +
           (p.area ? `<span class="darea cap">${escapeHTML(p.area)}</span>` : "") +
