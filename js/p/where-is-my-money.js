@@ -107,6 +107,7 @@
     start(p, ui) {
       Object.assign(ui.s, { checks: 0, amt: "", upto: 0, landed: false, shared: false });
       ui.screen(home());
+      ui.notes(p === "A" ? ["Watch what Kemi knows once she taps Send"] : ["Same app. Watch what changes after she taps Send"]);
     },
     act(name, el, ui, p) {
       const s = ui.s;

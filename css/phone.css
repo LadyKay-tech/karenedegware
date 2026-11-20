@@ -10,34 +10,16 @@
 }
 .ocv-phone .oprog { grid-column: 1 / -1; }
 
-/* Device */
-.phone {
+/* The app panel (no device frame) */
+.app {
   position: relative;
-  width: 292px; height: 604px;
-  padding: 9px;
-  border-radius: 50px;
-  background: linear-gradient(145deg, #2a2a2e, #0c0c0e 40%, #1b1b1f);
-  box-shadow:
-    inset 0 0 0 1.5px #3a3a40, inset 0 0 0 3px #0b0b0c,
-    0 50px 80px -30px rgba(0, 0, 0, .55), 0 18px 30px -18px rgba(0, 0, 0, .5);
+  width: 360px; height: 640px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #f3f4f7;
+  isolation: isolate;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 40px 70px -34px rgba(0, 0, 0, .45), 0 14px 28px -18px rgba(0, 0, 0, .3);
 }
-.phone::before, .phone::after { content: ""; position: absolute; width: 3px; border-radius: 2px; background: #1c1c20; }
-.phone::before { left: -2px; top: 120px; height: 56px; box-shadow: 0 70px 0 #1c1c20; }
-.phone::after { right: -2px; top: 150px; height: 84px; }
-.ph-screen { position: relative; height: 100%; border-radius: 42px; overflow: hidden; background: #f3f4f7; isolation: isolate; }
-.ph-bar {
-  position: absolute; z-index: 8; top: 0; left: 0; right: 0; height: 44px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 2px 26px 0 30px;
-  color: #111; font: 600 13.5px/1 "Inter Tight", system-ui, sans-serif; letter-spacing: -.01em;
-  pointer-events: none; transition: color .3s;
-}
-.ph-island { position: absolute; left: 50%; top: 10px; width: 86px; height: 25px; border-radius: 20px; background: #000; transform: translateX(-50%); }
-.ph-sig { display: flex; align-items: center; gap: 5px; }
-.ph-sig svg { height: 11px; width: auto; fill: currentColor; }
-.ph-screen:has(.scr.dark) .ph-bar, .ph-screen:has(.scr.cam) .ph-bar { color: #fff; }
-.ph-home { position: absolute; z-index: 9; left: 50%; bottom: 7px; width: 104px; height: 4px; border-radius: 3px; background: #111; transform: translateX(-50%); pointer-events: none; }
-.ph-screen:has(.scr.cam) .ph-home { background: #fff; }
 .ph-app { position: absolute; inset: 0; animation: appin .32s var(--ease); }
 @keyframes appin { from { opacity: 0; transform: translateX(10px); } }
 
@@ -45,7 +27,7 @@
 .scr {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
-  padding-top: 44px;
+  padding-top: 8px;
   background: #f3f4f7; color: #121217;
   font: 400 13px/1.35 "Inter Tight", system-ui, sans-serif;
   text-align: left;
@@ -59,6 +41,7 @@
 .ap-tr { display: flex; gap: 8px; color: #6e6e80; font-size: 12px; }
 .ap-ib { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: #fff; box-shadow: 0 1px 2px rgba(16, 24, 40, .08); flex: none; }
 .cam .ap-ib { background: rgba(255, 255, 255, .14); box-shadow: none; }
+.scr.cam { padding-top: 8px; }
 .ic { width: 18px; height: 18px; flex: none; }
 .ap-h { font: 600 20px/1.2 "Inter Tight", sans-serif; letter-spacing: -.02em; margin: 2px 0 0; }
 .ap-p { margin: 0; color: #6e6e80; font-size: 12.5px; }
@@ -66,7 +49,7 @@
 
 /* Dark hero with balance and round actions */
 .ap-hero {
-  margin-top: -44px; padding: 52px 14px 18px;
+  margin-top: -8px; padding: 18px 14px 18px;
   color: #fff;
   background:
     radial-gradient(120% 80% at 80% 0%, rgba(126, 104, 255, .55), transparent 60%),
@@ -132,7 +115,7 @@ button.ap-row:hover { background: #fafafc; }
 .ap-pill .ic { width: 12px; height: 12px; }
 
 /* Tab bar */
-.ap-tabs { display: flex; justify-content: space-around; padding: 8px 4px 22px; background: rgba(255, 255, 255, .96); border-top: 1px solid #ececf1; }
+.ap-tabs { display: flex; justify-content: space-around; padding: 8px 4px 12px; background: rgba(255, 255, 255, .96); border-top: 1px solid #ececf1; }
 .ap-tabs span { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 48px; font-size: 9.5px; color: #9a9aab; }
 .ap-tabs span.on { color: #121217; font-weight: 600; }
 .ap-tabs .ic { width: 20px; height: 20px; }
@@ -167,7 +150,7 @@ button.ap-row:hover { background: #fafafc; }
 .ap-kv.ok b { color: #13804b; }
 .ap-kv.muted b { color: #9a9aab; font-weight: 400; font-style: italic; }
 .ph-banner {
-  position: absolute; z-index: 7; top: 46px; left: 8px; right: 8px;
+  position: absolute; z-index: 7; top: 10px; left: 8px; right: 8px;
   display: grid; grid-template-columns: 30px 1fr auto; gap: 9px; align-items: center;
   padding: 9px 11px; border-radius: 18px;
   background: rgba(248, 248, 251, .94);
@@ -285,8 +268,8 @@ button.ap-row:hover { background: #fafafc; }
   .ocv-phone { grid-template-columns: minmax(0, 1fr); justify-items: center; padding: 18px 10px 22px; }
   .ph-notes { width: 100%; max-width: 320px; }
 }
-@media (max-width: 380px) {
-  .phone { width: 272px; height: 566px; }
+@media (max-width: 420px) {
+  .app { width: 100%; max-width: 360px; height: 620px; }
 }
 .ap-pin { display: flex; justify-content: center; gap: 14px; padding: 8px 0 4px; }
 .ap-pin i { width: 13px; height: 13px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px #c3c3cf; transition: background .15s, box-shadow .15s; }
@@ -295,7 +278,7 @@ button.ap-row:hover { background: #fafafc; }
 .ap-toast { pointer-events: none; animation: toastin .4s cubic-bezier(.2, 1.3, .4, 1), toastout .4s 1.8s forwards; }
 @keyframes toastout { to { opacity: 0; transform: translate(-50%, 6px); } }
 .ph-banner { pointer-events: none; }
-.ap-toast { bottom: auto; top: 50px; }
+.ap-toast { bottom: auto; top: 14px; }
 .ap-split { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
 .ap-split .ab-sec { padding: 0 16px; width: auto; }
 .ap-badges span { aspect-ratio: auto; height: 44px; }

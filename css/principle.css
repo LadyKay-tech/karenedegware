@@ -350,3 +350,41 @@
 .ocmp .v { white-space: normal; text-align: right; max-width: 15em; line-height: 1.3; }
 .xsw { aspect-ratio: 16 / 9; }
 .xtile { font-size: 11.5px; }
+
+/* Full screen on phones: the prototype takes over the screen like a real app */
+.ofs {
+  display: none; align-items: center; gap: 6px;
+  min-height: 34px; padding: 0 12px; border-radius: 99px;
+  background: #1a1a1a; color: #fff; font-size: 12.5px; font-weight: 500; white-space: nowrap;
+}
+.ofs svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ofs .x { display: none; }
+@media (max-width: 760px), (pointer: coarse) { .ofs { display: inline-flex; } }
+
+html.ke-fs, html.ke-fs body { overflow: hidden; height: 100%; }
+.ow.fs {
+  position: fixed; inset: 0; z-index: 300;
+  display: flex; flex-direction: column;
+  height: 100vh; height: 100dvh;
+  border-radius: 0;
+  animation: fsin .3s var(--ease);
+}
+@keyframes fsin { from { opacity: 0; transform: scale(.98); } }
+.ow.fs .oh { flex-wrap: nowrap; gap: 10px; padding: calc(10px + env(safe-area-inset-top)) 12px 10px; }
+.ow.fs .oh > div:first-child { display: none; }
+.ow.fs .oseg { flex: 1; }
+.ow.fs .oseg button { flex: 1; padding: 0 8px; }
+.ow.fs .ofs { display: inline-flex; width: 34px; padding: 0; justify-content: center; }
+.ow.fs .ofs .t, .ow.fs .ofs .e { display: none; }
+.ow.fs .ofs .x { display: block; }
+.ow.fs .of, .ow.fs .ph-notes, .ow.fs .oprog { display: none; }
+.ow.fs .ocv { flex: 1; min-height: 0; padding: 12px 12px calc(12px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; }
+.ow.fs .ocv:has(.otoast:not([hidden])) { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+.ow.fs .ocard { flex: 1; min-height: 0; overflow-y: auto; }
+.ow.fs .otoast { position: fixed; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 10; }
+.ow.fs .ob { flex: 1; min-height: 0; }
+/* Money prototypes: the app fills the screen edge to edge */
+.ow.fs .ocv-phone { display: block; padding: 0; position: relative; }
+.ow.fs .app { width: 100%; max-width: none; height: 100%; border-radius: 0; box-shadow: none; }
+.ow.fs .ap-tabs { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+.ow.fs .ap-sheet { padding-bottom: calc(26px + env(safe-area-inset-bottom)); }

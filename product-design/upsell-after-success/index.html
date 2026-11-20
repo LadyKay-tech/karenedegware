@@ -13,10 +13,10 @@
   <link rel="manifest" href="../../site.webmanifest">
   <meta name="theme-color" content="#0c0c0c">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500&family=Montserrat:wght@300;400;500;600;700&display=swap">
-  <link rel="stylesheet" href="../../css/base.css?v=20261120f">
-  <link rel="stylesheet" href="../../css/extract.css?v=20261120f">
-  <link rel="stylesheet" href="../../css/principle.css?v=20261120f">
-  <link rel="stylesheet" href="../../css/phone.css?v=20261120f">
+  <link rel="stylesheet" href="../../css/base.css?v=20261120g">
+  <link rel="stylesheet" href="../../css/extract.css?v=20261120g">
+  <link rel="stylesheet" href="../../css/principle.css?v=20261120g">
+  <link rel="stylesheet" href="../../css/phone.css?v=20261120g">
 </head>
 <body>
   <header class="top">
@@ -55,14 +55,11 @@
               <button role="tab" id="tA" aria-selected="true" type="button">On a schedule</button>
               <button role="tab" id="tB" aria-selected="false" type="button">After it helps</button>
             </div>
+            <button class="ofs" id="fsBtn" type="button" aria-label="Full screen" aria-pressed="false"><svg class="e" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span class="t">Full screen</span><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
           </div>
           <div class="ocv ocv-phone">
             <div class="oprog" id="xP" hidden><span id="xN"></span><span class="obar"><i id="xB"></i></span></div>
-            <div class="phone"><div class="ph-screen">
-              <div class="ph-bar"><span>9:41</span><i class="ph-island"></i><span class="ph-sig"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 11.6 5.7 9.2a3.3 3.3 0 0 1 4.6 0zM3.5 7a6.4 6.4 0 0 1 9 0l-1.4 1.4a4.4 4.4 0 0 0-6.2 0zM1.2 4.7a9.6 9.6 0 0 1 13.6 0L13.4 6.1a7.6 7.6 0 0 0-10.8 0z"/></svg><svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".45"/><rect x="2.5" y="2.5" width="16" height="7" rx="1.6"/><rect x="24" y="4" width="2" height="4" rx="1" opacity=".45"/></svg></span></div>
-              <div class="ph-app" id="scr"></div>
-              <i class="ph-home"></i>
-            </div></div>
+            <div class="app"><div class="ph-app" id="scr"></div></div>
             <aside class="ph-notes" id="xNotes" aria-live="polite"></aside>
             <div class="otoast" id="xToast" hidden><span id="xTt"></span><button type="button" id="xTb"></button></div>
           </div>
@@ -79,9 +76,10 @@
     <a href="../../notes/">Notes</a>
   </footer>
 
-  <script src="../../js/core.js?v=20261120f"></script>
-  <script src="../../js/proto.js?v=20261120f"></script>
-  <script src="../../js/phone.js?v=20261120f"></script>
-  <script src="../../js/p/upsell-after-success.js?v=20261120f"></script>
+  <script src="../../js/core.js?v=20261120g"></script>
+  <script src="../../js/proto.js?v=20261120g"></script>
+  <script src="../../js/phone.js?v=20261120g"></script>
+  <script src="../../js/p/upsell-after-success.js?v=20261120g"></script>
+  <script src="../../js/fullscreen.js?v=20261120g"></script>
 </body>
 </html>
