@@ -237,6 +237,29 @@ body.locked{overflow:hidden}
 .xfoot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;margin-top:12px;color:var(--mute);font-size:13px}
 .xfoot button{min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:99px;color:var(--mute);font-size:13px}
 .xfoot button:hover{color:var(--ink);border-color:var(--ink)}
+.ow{background:#F3F2EF;border-color:rgba(0,0,0,.06);color:#1a1a1a;box-shadow:0 40px 80px -40px rgba(0,0,0,.9)}
+.oh{border-bottom-color:rgba(0,0,0,.07)}
+.oapp{color:#6b6862}.oapp i{background:linear-gradient(135deg,#2a2a2d,#8a867f)}
+.oseg{background:rgba(0,0,0,.05)}.oseg button{color:#6b6862}.oseg button[aria-selected=true]{background:#1a1a1a;color:#F3F2EF}.oseg button:focus-visible{outline-color:#1a1a1a}
+.xsteps{border-right-color:rgba(0,0,0,.07)}
+.xsteps li{color:#a19d96}.xsteps li.ok{color:#4a4844}.xsteps li.cur{color:#111}
+.xsteps .ic{border-color:rgba(0,0,0,.15)}
+.xsteps li.ok .ic{background:#1a1a1a;border-color:#1a1a1a;color:#F3F2EF}
+.xsteps li.cur .ic{border-color:#111}
+.xsteps li.val .ic{border-color:#c9786a;color:#b05a4b}
+.xsteps li.val.ok .ic,.xsteps li.val.cur .ic{background:#efc9c0;border-color:#efc9c0;color:#6b2619}
+.xsteps em{color:#a19d96}.xsteps .xdiv{background:rgba(0,0,0,.08)}
+.mwb h4{color:#111}.mwb .sm{color:#6b6862}
+.xf{color:#7c7871}.xf div{border-color:rgba(0,0,0,.1);color:#1a1a1a;background:#fff}
+.xchips span{border-color:rgba(0,0,0,.12);color:#6b6862;background:#fff}.xchips .on{border-color:#1a1a1a;color:#111}
+.xplans div{border-color:rgba(0,0,0,.1);color:#7c7871;background:#fff}.xplans .on{border-color:#1a1a1a}.xplans b{color:#111}
+.xempty{border-color:rgba(0,0,0,.1);color:#a19d96;background:#fff}
+.xgo{background:#1a1a1a;color:#F3F2EF}.xgo:hover{background:#000}.xgo:focus-visible{outline-color:#1a1a1a}
+.xrep{border-color:rgba(0,0,0,.08);background:#fff}.xrep .lb{color:#6b6862}.xbig{color:#111}.xup{color:#b05a4b}
+.xbars i{background:#1a1a1a}.xbars i:nth-child(odd){background:#c9c5be}
+.of{border-top-color:rgba(0,0,0,.07)}
+.ost b{color:#8a867f}.ost span{color:#111}
+.ocmp{color:#6b6862}.ocmp .t{background:rgba(0,0,0,.07)}.ocmp .t i{background:#1a1a1a}.ocmp .r.b .t i{background:#d98f80}
 @container (max-width:560px){.ob{grid-template-columns:minmax(0,1fr)}.xsteps{display:none}.of{grid-template-columns:auto auto}.ocmp{grid-column:1/-1}}
 @media(max-width:700px){.wmk{letter-spacing:.2em}.words span{font-size:11px;max-width:11ch;letter-spacing:.18em}.portrait{height:min(70svh,640px)}.fname{font-size:10px}.fmeta{display:none}.pick{margin-bottom:6px}.file.lead{grid-column:auto}}
 @media(hover:none){.ring{display:none}}
@@ -248,7 +271,7 @@ body.locked{overflow:hidden}
 <div class="intro-mark" id="introMark" aria-hidden="true"><span class="wmk">Karen <b>Edegware</b></span></div>
 <header class="top">
   <a class="logo" href="#" aria-label="Karen Edegware, home" style="padding:12px 0"><span class="wmk">Karen <b>Edegware</b></span></a>
-  <a class="talk" href="mailto:hello@karenedegware.com">Get in touch</a>
+  <a class="talk" href="mailto:karenjimmyede@gmail.com">Get in touch</a>
 </header>
 <main class="hero" id="hero">
   <div class="portrait" id="portrait">
@@ -349,7 +372,7 @@ const PRINCIPLE='<div class="principle"><div class="phil"><span class="lbl">Prin
  +'<p>The moment I care about is the first time a person gets something useful out of the product. A report they can send. A number they didn’t have yesterday. That’s activation, and I design backwards from it.</p>'
  +'<p>Every screen standing between a new user and that moment needs a good reason to be there. If it hasn’t got one, I cut it, or I move it to after they’ve seen the value. Try both versions and you’ll feel the difference.</p>'
  +'<p>It’s not only a design call. People who get value early stay longer, pay sooner and bring their colleagues along. That’s where good design starts paying for itself.</p>'
- +'<div class="meas"><span class="lbl">What I watch</span><div><b>Time to value</b><span>How long it takes from the first click to the first useful thing.</span></div><div><b>Activation rate</b><span>How many new users actually get there.</span></div></div></div>'
+ +'</div>'
  +'<div class="xd"><div class="ow"><div class="oh"><span class="oapp"><i></i>Sample reporting tool</span><div class="oseg" role="tablist"><button role="tab" id="tA" aria-selected="true">Account first</button><button role="tab" id="tB" aria-selected="false">Value first</button></div></div>'
  +'<div class="ob"><ol class="xsteps" id="xS"></ol><div class="mwb" id="scr"></div></div>'
  +'<div class="of"><div class="ost"><b>Time to value</b><span id="xT">0:00.0</span></div><div class="ost"><b>Clicks</b><span id="xC">0</span></div><div class="ocmp" id="xG"></div></div></div>'
