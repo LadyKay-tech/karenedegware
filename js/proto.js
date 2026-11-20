@@ -17,7 +17,7 @@
       card: $("scr"), hint: $("xH"), tabA: $("tA"), tabB: $("tB"),
       toast: $("xToast"), toastText: $("xTt"), toastBtn: $("xTb"),
       foot: $("xF"), compare: $("xG"), reset: $("reset"),
-      prog: $("xP"), progText: $("xN"), progBar: $("xB")
+      prog: $("xP"), progText: $("xN"), progBar: $("xB"), notes: $("xNotes")
     };
     const results = {};
     let path = "A";
@@ -40,7 +40,7 @@
         void el.card.offsetWidth;
         el.card.style.animation = "";
         if (!results.A && !results.B && ui.clicks === 0) {
-          const first = el.card.querySelector(".xgo");
+          const first = el.card.querySelector("[data-main], .xgo");
           if (first) first.classList.add("pulse");
         }
       },
@@ -56,6 +56,16 @@
         el.progBar.style.width = Math.max(0, Math.min(1, frac)) * 100 + "%";
       },
       hint(t) { el.hint.textContent = t; },
+      notes(list) {
+        if (!el.notes) return;
+        const key = JSON.stringify(list || []);
+        if (el.notes.dataset.key === key) return;
+        el.notes.dataset.key = key;
+        el.notes.innerHTML = list && list.length
+          ? `<span class="ocl">${path === "A" ? "What goes wrong" : "What’s working"}</span>` +
+            list.map((t) => `<div class="ph-note${path === "B" ? " good" : ""}"><i></i><span>${t}</span></div>`).join("")
+          : "";
+      },
       later(fn, ms) { timers.push(setTimeout(fn, ms)); },
       done(res) {
         if (results[path]) return;
@@ -95,6 +105,7 @@
       el.toast.hidden = true;
       cfg.metrics.forEach((m) => ui.metric(m.k, m.zero));
       ui.progress(null);
+      ui.notes([]);
       ui.hint(results[p] ? "Run it again, or switch approach" : cfg.hints[p]);
       cfg.start(p, ui);
       renderCompare();
