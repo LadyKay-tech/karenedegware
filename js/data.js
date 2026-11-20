@@ -1,7 +1,8 @@
 /*
   Site content that isn't written in the CMS.
   To rename a principle, change its title here. To open one up, give it
-  status "open" and an href to its page.
+  status "open" and an href to its page. "preview" picks the little picture
+  on its file (see PREVIEW in js/folder.js).
 */
 window.KE_DATA = {
   folders: [
@@ -20,16 +21,16 @@ window.KE_DATA = {
   ],
 
   principles: [
-    { slug: "activation", title: "A sign-up is not activation", status: "open", href: "activation/" },
-    { slug: "lead-with-the-outcome", title: "Lead with the outcome", status: "soon" },
-    { slug: "pricing-is-a-decision-about-value", title: "Pricing is a decision about value", status: "soon" },
-    { slug: "design-for-genuine-utility", title: "Design for genuine utility", status: "soon" },
-    { slug: "a-demo-is-proof-of-value", title: "A demo is proof of value", status: "soon" },
-    { slug: "start-with-the-customers-question", title: "Start with the customer’s question", status: "soon" },
-    { slug: "activity-is-not-progress", title: "Activity is not progress", status: "soon" },
-    { slug: "sell-only-what-you-can-deliver", title: "Sell only what the product can deliver", status: "soon" },
-    { slug: "a-feature-request-is-evidence", title: "A feature request is evidence of a need", status: "soon" },
-    { slug: "measure-qualified-demand", title: "Measure qualified demand, not vanity", status: "soon" }
+    { slug: "activation", title: "A sign-up is not activation", area: "Onboarding", preview: "activation", status: "open", href: "activation/" },
+    { slug: "show-the-full-price", title: "Show the full price before the last step", area: "Ecommerce", preview: "checkout", status: "soon" },
+    { slug: "worth-the-interruption", title: "A notification should be worth the interruption", area: "Notifications", preview: "notify", status: "soon" },
+    { slug: "reward-real-progress", title: "Reward real progress, not empty points", area: "Retention", preview: "savings", status: "soon" },
+    { slug: "make-leaving-easy", title: "Make leaving easy, and listen on the way out", area: "Subscriptions", preview: "cancel", status: "soon" },
+    { slug: "upsell-after-success", title: "Upsell after success, not on a schedule", area: "Expansion", preview: "upsell", status: "soon" },
+    { slug: "defaults-are-decisions", title: "Defaults are decisions you make for people", area: "Checkout", preview: "defaults", status: "soon" },
+    { slug: "where-is-my-money", title: "Tell people exactly where their money is", area: "Payments", preview: "status", status: "soon" },
+    { slug: "explain-every-step", title: "Explain why you need each step", area: "Verification", preview: "kyc", status: "soon" },
+    { slug: "let-people-correct-you", title: "Let people correct what you think you know", area: "Personalisation", preview: "recs", status: "soon" }
   ],
 
   p3mo: [

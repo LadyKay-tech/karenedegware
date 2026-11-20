@@ -10,6 +10,54 @@
     doc: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M3.5 1.5h6l3 3v10h-9z"/><path d="M9.5 1.5v3h3"/></svg>'
   };
 
+  /* Little light previews of each prototype, drawn in HTML so they stay crisp */
+  const tick = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.3l2.3 2.2 4.7-5"/></svg>';
+  const PREVIEW = {
+    activation:
+      `<span class="pv-k">Reached first value</span><span class="pv-big">+38%</span>` +
+      `<span class="pv-bars"><b style="height:34%"></b><b style="height:48%"></b><b style="height:42%"></b><b style="height:66%"></b><b class="hi" style="height:92%"></b></span>`,
+    checkout:
+      `<span class="pv-k">Your basket</span>` +
+      `<span class="pv-row"><span>Items</span><span>£48.00</span></span>` +
+      `<span class="pv-row"><span>Delivery</span><span>£3.99</span></span>` +
+      `<span class="pv-row pv-tot"><span>Total</span><span>£51.99</span></span>` +
+      `<span class="pv-btn">Pay £51.99</span>`,
+    notify:
+      `<span class="pv-n dim"><i></i>We miss you!</span>` +
+      `<span class="pv-n dim"><i></i>Time to check in</span>` +
+      `<span class="pv-n hi"><i></i>Parcel at your door</span>`,
+    savings:
+      `<span class="pv-k">Rent fund</span><span class="pv-big">£640 <em>of £900</em></span>` +
+      `<span class="pv-track"><b style="width:71%"></b></span>` +
+      `<span class="pv-k">£40 added this week</span>`,
+    cancel:
+      `<span class="pv-h">Before you go</span>` +
+      `<span class="pv-chips"><span>Too pricey</span><span class="on">Not using it</span></span>` +
+      `<span class="pv-pair"><span class="pv-btn ghost">Pause</span><span class="pv-btn">Cancel</span></span>`,
+    upsell:
+      `<span class="pv-ok">${tick}20 payments sent</span>` +
+      `<span class="pv-k">Send the next batch in one go?</span>` +
+      `<span class="pv-btn">Try bulk payouts</span>`,
+    defaults:
+      `<span class="pv-h">Add to your order</span>` +
+      `<span class="pv-cb"><i></i><span>Gift wrap</span><em>£2</em></span>` +
+      `<span class="pv-cb"><i></i><span>Protection plan</span><em>£6</em></span>` +
+      `<span class="pv-cb on"><i>${tick}</i><span>Email receipt</span><em>Free</em></span>`,
+    status:
+      `<span class="pv-tl done"><i>${tick}</i><span>Sent</span><em>09:12</em></span>` +
+      `<span class="pv-tl done"><i>${tick}</i><span>Bank received</span><em>09:40</em></span>` +
+      `<span class="pv-tl now"><i></i><span>Arrives by</span><em>14:15</em></span>`,
+    kyc:
+      `<span class="pv-k">3 of 4 done</span>` +
+      `<span class="pv-ck done"><i>${tick}</i>Photo ID</span>` +
+      `<span class="pv-ck done"><i>${tick}</i>Address</span>` +
+      `<span class="pv-ck done"><i>${tick}</i>Selfie</span>` +
+      `<span class="pv-ck now"><i></i>Bank details <em>so payouts reach you</em></span>`,
+    recs:
+      `<span class="pv-k">Picked for you</span>` +
+      `<span class="pv-tiles"><span><i></i><u>Not for me</u></span><span><i></i><u>It was a gift</u></span></span>`
+  };
+
   function productDesign() {
     const grid = document.getElementById("files");
     const count = document.getElementById("count");
@@ -19,16 +67,16 @@
     grid.innerHTML = data.principles
       .map((p) => {
         const isOpen = p.status === "open";
-        const sheet =
-          `<span class="sheet" aria-hidden="true"><i></i><i></i><i></i><i></i>` +
-          (isOpen ? `<span class="mini"><b style="height:40%"></b><b style="height:58%"></b><b style="height:50%"></b><b style="height:72%"></b><b style="height:95%"></b></span>` : "") +
-          `</span>`;
-        const label =
-          `<span><span class="dname">${escapeHTML(p.title)}</span><span class="dfile">${escapeHTML(slugify(p.title))}.md</span></span>` +
-          `<span class="dstate cap">${isOpen ? "Open" : "In progress"}</span>`;
+        const pv = `<span class="pv pv-${p.preview || "blank"}" aria-hidden="true">${PREVIEW[p.preview] || ""}</span>`;
+        const meta =
+          `<span class="dmeta">` +
+          (p.area ? `<span class="darea cap">${escapeHTML(p.area)}</span>` : "") +
+          `<span class="dname">${escapeHTML(p.title)}</span>` +
+          `<span class="dfile">${escapeHTML(slugify(p.title))}.md</span></span>` +
+          `<span class="dstate cap">${isOpen ? "Open file" : "Coming soon"}</span>`;
         return isOpen
-          ? `<li><a class="doc open" href="${p.href}">${sheet}${label}</a></li>`
-          : `<li><div class="doc" aria-disabled="true">${sheet}${label}</div></li>`;
+          ? `<li><a class="doc open" href="${p.href}">${pv}${meta}</a></li>`
+          : `<li><div class="doc" aria-disabled="true">${pv}${meta}</div></li>`;
       })
       .join("");
   }
