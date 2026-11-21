@@ -334,3 +334,23 @@ a.doc:hover .shot, a.doc:focus-visible .shot {
 .shot { transform: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, .14), inset 0 0 0 1px rgba(255, 255, 255, .08), 0 24px 36px -14px rgba(0, 0, 0, .8), 0 6px 10px -4px rgba(0, 0, 0, .55); }
 a.doc:hover .shot, a.doc:focus-visible .shot { transform: translateY(-8px); box-shadow: 0 0 0 1px rgba(255, 255, 255, .22), inset 0 0 0 1px rgba(255, 255, 255, .1), 0 34px 44px -14px rgba(0, 0, 0, .85), 0 8px 14px -4px rgba(0, 0, 0, .5); }
 .pv-floor { left: 8%; right: 8%; }
+
+/* Meeqly thumbnail, drawn as a mini Discover screen */
+.live-meeqly { container-type: inline-size; background: #0a0a0a; }
+.mq { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 9cqw 5cqw 0; font-family: Inter, system-ui, sans-serif; color: #fff; text-align: left; }
+.mq-h { font-size: 8.6cqw; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+.mq-s { font-size: 4cqw; color: #b3b3b3; margin-top: 1cqw; }
+.mq-search { display: flex; align-items: center; gap: 2cqw; margin-top: 4cqw; padding: 2.6cqw 3cqw; border-radius: 3cqw; background: #1a1a1a; font-size: 4cqw; color: #8a8a8a; }
+.mq-search i { width: 3.4cqw; height: 3.4cqw; border: .7cqw solid #b3b3b3; border-radius: 50%; }
+.mq-chips { display: flex; gap: 2cqw; margin-top: 3.4cqw; white-space: nowrap; overflow: hidden; }
+.mq-chips em { font-style: normal; font-size: 3.4cqw; padding: 1.6cqw 3cqw; border-radius: 99px; background: #1f1f1f; color: #ddd; }
+.mq-chips em.on { background: #ff0000; color: #fff; font-weight: 600; }
+.mq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3cqw 3cqw; margin-top: 4cqw; }
+.mq-card { display: flex; flex-direction: column; min-width: 0; }
+.mq-cv { position: relative; display: block; aspect-ratio: 1; border-radius: 2cqw; overflow: hidden; background: #222; }
+.mq-cv img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mq-play { position: absolute; left: 50%; top: 50%; width: 11cqw; height: 11cqw; margin: -5.5cqw 0 0 -5.5cqw; border-radius: 50%; background: rgba(0, 0, 0, .8); }
+.mq-play::after { content: ""; position: absolute; left: 42%; top: 31%; border-left: 3.6cqw solid #fff; border-top: 2.2cqw solid transparent; border-bottom: 2.2cqw solid transparent; }
+.mq-card b { font-size: 3.8cqw; font-weight: 600; margin-top: 2cqw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mq-card u { font-size: 3.2cqw; color: #ff3030; text-decoration: underline; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mq > * { flex: none; }

@@ -13,6 +13,22 @@
   /* Two sheets under each file give it thickness */
   
 
+  /* Thumbnails drawn live, so they load the same photos as the product itself */
+  const U = (id, w) => `https://images.unsplash.com/photo-${id}?w=${w}&h=${w}&fit=crop&auto=format&q=70`;
+  const img = (id, fallback, w = 300) => `<img src="${U(id, w)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${root}${fallback}'">`;
+  const LIVE = {
+    meeqly: () => `<span class="mq">
+      <b class="mq-h">Discover New Music</b><span class="mq-s">Find your next favorite artist</span>
+      <span class="mq-search"><i></i>Search music...</span>
+      <span class="mq-chips"><em class="on">All Music</em><em>Afrobeats</em><em>Hip-Hop</em><em>R&amp;B</em></span>
+      <span class="mq-grid">
+        <span class="mq-card"><span class="mq-cv">${img("1563089145-599997674d42", "product-design/products/meeqly/app/demo/covers/c1.jpg")}<i class="mq-play"></i></span><b>Lagos Nights</b><u>Ayo Lumen</u></span>
+        <span class="mq-card"><span class="mq-cv">${img("1620207418302-439b387441b0", "product-design/products/meeqly/app/demo/covers/c7.jpg")}<i class="mq-play"></i></span><b>Moonlight</b><u>Nneka Vibes</u></span>
+        <span class="mq-card"><span class="mq-cv">${img("1620641788421-7a1c342ea42e", "product-design/products/meeqly/app/demo/covers/c2.jpg")}<i class="mq-play"></i></span><b>Golden Hour</b><u>Zara Bloom</u></span>
+        <span class="mq-card"><span class="mq-cv">${img("1509114397022-ed747cca3f65", "product-design/products/meeqly/app/demo/covers/c3.jpg")}<i class="mq-play"></i></span><b>Ori Mi</b><u>Kelechi Wave</u></span>
+      </span></span>`
+  };
+
   /* Little light previews of each prototype, drawn in HTML so they stay crisp */
   const tick = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.3l2.3 2.2 4.7-5"/></svg>';
   const PREVIEW = {
@@ -71,7 +87,9 @@
     grid.innerHTML = items
       .map((p) => {
         const isOpen = p.status === "open";
-        const pv = p.thumb
+        const pv = p.live && LIVE[p.live]
+          ? `<span class="shot live-${p.live}" aria-hidden="true">${LIVE[p.live]()}<i class="shine"></i></span>`
+          : p.thumb
           ? `<span class="shot" aria-hidden="true"><img src="${root}${p.thumb}" alt="" loading="lazy"><i class="shine"></i></span>`
           : `<span class="shot empty" aria-hidden="true"><span>In the works</span><i class="shine"></i></span>`;
         const meta =
