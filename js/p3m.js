@@ -156,13 +156,13 @@
   };
 
   ART.prioritise = function () {
-    const CRIT = [["fit", "Strategic fit", "#6366f1"], ["rev", "Revenue impact", "#10b981"], ["cust", "Customer impact", "#f59e0b"], ["risk", "Delivery risk", "#f43f5e"]];
+    const CRIT = [["fit", "Strategic fit", "#2f3a8f"], ["rev", "Revenue impact", "#5562b8"], ["cust", "Customer impact", "#8d96d4"], ["risk", "Delivery risk", "#c3c8ea"]];
     const CAT = {
-      Customer: ["#ec4899", "#fdf2f8", '<path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c.8-4 4-6 8-6s7.2 2 8 6"/>'],
-      Platform: ["#6366f1", "#eef2ff", '<rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/>'],
-      Sales: ["#10b981", "#ecfdf5", '<path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/>'],
-      People: ["#f59e0b", "#fffbeb", '<path d="M4 6l8-3 8 3-8 3zM8 8v5c0 1.5 2 3 4 3s4-1.5 4-3V8"/>'],
-      Compliance: ["#14b8a6", "#f0fdfa", '<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>'],
+      Customer: ["#3b4150", "#f1f2f5", '<path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c.8-4 4-6 8-6s7.2 2 8 6"/>'],
+      Platform: ["#3b4150", "#f1f2f5", '<rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/>'],
+      Sales: ["#3b4150", "#f1f2f5", '<path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/>'],
+      People: ["#3b4150", "#f1f2f5", '<path d="M4 6l8-3 8 3-8 3zM8 8v5c0 1.5 2 3 4 3s4-1.5 4-3V8"/>'],
+      Compliance: ["#3b4150", "#f1f2f5", '<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>'],
     };
     const W = { fit: 4, rev: 4, cust: 3, risk: 2 };
     let budget = 600, view = "rank";
@@ -183,20 +183,20 @@
     }
     function ring(used, total) {
       const r = 46, C = 2 * Math.PI * r, f = Math.min(1, used / total);
-      return `<svg class="pf-ring" viewBox="0 0 112 112" aria-hidden="true"><circle cx="56" cy="56" r="${r}" stroke="rgba(255,255,255,.18)" stroke-width="12" fill="none"/><circle cx="56" cy="56" r="${r}" stroke="url(#pfg)" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="${C * f} ${C}" transform="rotate(-90 56 56)"/><defs><linearGradient id="pfg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#67e8f9"/><stop offset="1" stop-color="#a7f3d0"/></linearGradient></defs><text x="56" y="61" text-anchor="middle">${Math.round(f * 100)}%</text></svg>`;
+      return `<svg class="pf-ring" viewBox="0 0 112 112" aria-hidden="true"><circle cx="56" cy="56" r="${r}" stroke="rgba(255,255,255,.18)" stroke-width="12" fill="none"/><circle cx="56" cy="56" r="${r}" stroke="url(#pfg)" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="${C * f} ${C}" transform="rotate(-90 56 56)"/><defs><linearGradient id="pfg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c3c8ea"/></linearGradient></defs><text x="56" y="61" text-anchor="middle">${Math.round(f * 100)}%</text></svg>`;
     }
     function matrix(ranked) {
       const Wd = 640, Hd = 330, L = 44, R = 16, T = 16, B = 34;
       const x = (c) => L + (c / 300) * (Wd - L - R), y = (s) => T + (1 - (s - 30) / 70) * (Hd - T - B);
       const mx = x(150), my = y(65);
-      let g = `<rect x="${L}" y="${T}" width="${mx - L}" height="${my - T}" fill="#ecfdf5"/><rect x="${mx}" y="${T}" width="${Wd - R - mx}" height="${my - T}" fill="#eef2ff"/><rect x="${L}" y="${my}" width="${mx - L}" height="${Hd - B - my}" fill="#f8fafc"/><rect x="${mx}" y="${my}" width="${Wd - R - mx}" height="${Hd - B - my}" fill="#fff1f2"/>`;
+      let g = `<rect x="${L}" y="${T}" width="${mx - L}" height="${my - T}" fill="#f1f3f9"/><rect x="${mx}" y="${T}" width="${Wd - R - mx}" height="${my - T}" fill="#f6f6f4"/><rect x="${L}" y="${my}" width="${mx - L}" height="${Hd - B - my}" fill="#f9f9f8"/><rect x="${mx}" y="${my}" width="${Wd - R - mx}" height="${Hd - B - my}" fill="#f6f6f4"/>`;
       g += `<text class="q" x="${L + 10}" y="${T + 20}">Quick wins</text><text class="q" x="${Wd - R - 10}" y="${T + 20}" text-anchor="end">Big bets</text><text class="q" x="${L + 10}" y="${Hd - B - 10}">Fill-ins</text><text class="q" x="${Wd - R - 10}" y="${Hd - B - 10}" text-anchor="end">Think twice</text>`;
       [0, 100, 200, 300].forEach((c) => { g += `<text class="ax" x="${x(c)}" y="${Hd - 12}" text-anchor="middle">£${c}k</text>`; });
       [40, 60, 80, 100].forEach((s) => { g += `<text class="ax" x="${L - 8}" y="${y(s) + 4}" text-anchor="end">${s}</text>`; });
       g += `<text class="ax" x="${(L + Wd) / 2}" y="${Hd}" text-anchor="middle">Cost</text>`;
       const dots = ranked.slice().sort((a, b) => b.c - a.c).map((r) => {
         const col = CAT[r.tag][0], rad = 12 + r.c / 18;
-        return `<g class="pf-dot ${r.in ? "in" : "out"}"><circle cx="${x(r.c)}" cy="${y(r.sc)}" r="${rad}" fill="${r.in ? col : "#fff"}" fill-opacity="${r.in ? 0.88 : 1}" stroke="${col}" stroke-width="${r.in ? 3 : 2}" ${r.in ? "" : 'stroke-dasharray="4 3"'}><title>${esc(r.n)}: score ${r.sc}, ${money(r.c)}</title></circle><text x="${x(r.c)}" y="${y(r.sc) - rad - 6}" text-anchor="middle">${esc(r.short)}</text></g>`;
+        return `<g class="pf-dot ${r.in ? "in" : "out"}"><circle cx="${x(r.c)}" cy="${y(r.sc)}" r="${rad}" fill="${r.in ? "#2f3a8f" : "#fff"}" fill-opacity="${r.in ? 0.85 : 1}" stroke="${r.in ? "#2f3a8f" : "#a3a8b8"}" stroke-width="${r.in ? 3 : 2}" ${r.in ? "" : 'stroke-dasharray="4 3"'}><title>${esc(r.n)}: score ${r.sc}, ${money(r.c)}</title></circle><text x="${x(r.c)}" y="${y(r.sc) - rad - 6}" text-anchor="middle">${esc(r.short)}</text></g>`;
       }).join("");
       return `<svg class="pf-matrix" viewBox="0 0 ${Wd} ${Hd + 6}" role="img" aria-label="Value against cost">${g}${dots}</svg>`;
     }
@@ -217,23 +217,23 @@
     <div class="pf-title"><span class="pf-kicker">Portfolio planner</span><h3>Next year’s investment plan</h3><p>Eight proposals, one budget. Weights are agreed first, then the list funds itself from the top.</p></div>
     <div class="pf-gauge">${ring(used, budget)}<div><b>${money(used)}</b><span>of ${money(budget)} committed</span></div></div>
     <div class="pf-hstats"><div><b>${funded.length}<small>/${P.length}</small></b><span>funded</span></div><div><b>${avg}</b><span>average score</span></div><div><b>${money(budget - used)}</b><span>left over</span></div></div>
-    <div class="pf-mix" title="How the funded budget splits by area">${byCat.map(([k, v]) => `<i style="flex:${v};background:${CAT[k][0]}"><span>${k}</span></i>`).join("")}</div>
+    <div class="pf-mix" title="How the funded budget splits by area">${byCat.map(([k, v]) => `<i style="flex:${v}"><span>${k} · ${money(v)}</span></i>`).join("")}</div>
   </header>
   <div class="pf-body">
     <aside class="pf-panel">
       <h4>Weights</h4><p>Agreed with leadership before anyone sees the scores.</p>
-      ${CRIT.map(([k, n, c]) => `<label class="pf-sl"><span><i style="background:${c}"></i>${n}${k === "risk" ? "&nbsp;<small>(lower is better)</small>" : ""}<b style="color:${c}">${W[k]}</b></span><input type="range" min="0" max="5" step="1" value="${W[k]}" data-k="${k}" style="--c:${c};--p:${W[k] * 20}%"></label>`).join("")}
+      ${CRIT.map(([k, n, c]) => `<label class="pf-sl"><span><i style="background:${c}"></i>${n}${k === "risk" ? "&nbsp;<small>(lower is better)</small>" : ""}<b>${W[k]}</b></span><input type="range" min="0" max="5" step="1" value="${W[k]}" data-k="${k}" style="--c:#2f3a8f;--p:${W[k] * 20}%"></label>`).join("")}
       <h4 class="pf-mt">Budget</h4>
-      <label class="pf-sl"><span>Available this year<b>${money(budget)}</b></span><input type="range" min="200" max="1200" step="20" value="${budget}" data-b style="--c:#4338ca;--p:${((budget - 200) / 1000) * 100}%"></label>
+      <label class="pf-sl"><span>Available this year<b>${money(budget)}</b></span><input type="range" min="200" max="1200" step="20" value="${budget}" data-b style="--c:#2f3a8f;--p:${((budget - 200) / 1000) * 100}%"></label>
       <div class="pf-tip"><b>Tip</b> Push delivery risk up and watch the mobile app drop below the line.</div>
     </aside>
     <section class="pf-main">
       <div class="pf-tabs"><button type="button" data-v="rank" class="${view === "rank" ? "on" : ""}">Ranking</button><button type="button" data-v="matrix" class="${view === "matrix" ? "on" : ""}">Value against cost</button>
         <span class="pf-legend">${CRIT.map(([, n, c]) => `<span><i style="background:${c}"></i>${n}</span>`).join("")}</span></div>
       ${view === "matrix" ? `<div class="pf-mcard">${matrix(ranked)}<p class="pf-cap">Bubble size is cost. Filled bubbles are funded; dashed ones fall below the budget line.</p></div>` : `
-      <ol class="pf-list">${ranked.map((r, i) => `${i === lineAt ? `<li class="pf-line"><span>Budget line · ${money(budget)}</span></li>` : ""}<li class="pf-row ${r.in ? "in" : "out"}" style="--cc:${CAT[r.tag][0]}">
+      <ol class="pf-list">${ranked.map((r, i) => `${i === lineAt ? `<li class="pf-line"><span>Budget line · ${money(budget)}</span></li>` : ""}<li class="pf-row ${r.in ? "in" : "out"}" >
         <span class="pf-rank">${i + 1}</span>${icon(r.tag, 40)}
-        <span class="pf-name"><b>${esc(r.n)}</b><small><em style="color:${CAT[r.tag][0]}">${r.tag}</em> · ${money(r.c)}</small></span>
+        <span class="pf-name"><b>${esc(r.n)}</b><small><em>${r.tag}</em> · ${money(r.c)}</small></span>
         <span class="pf-stack">${r.pt.map((x) => `<i style="width:${x.v}%;background:${x.c}"></i>`).join("")}</span>
         <span class="pf-score"><b>${r.sc}</b><small>/100</small></span>
         <span class="pf-tag">${r.in ? (r.late ? "Funded · fits" : "Funded") : "Not this year"}</span></li>`).join("")}</ol>`}
