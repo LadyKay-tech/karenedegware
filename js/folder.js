@@ -96,7 +96,9 @@
           `<span class="dmeta">` +
           (p.area ? `<span class="darea cap">${escapeHTML(p.area)}</span>` : "") +
           `<span class="dname">${escapeHTML(p.title)}</span>` +
-          `<span class="dfile">${escapeHTML(slugify(p.title))}.md</span></span>` +
+          `<span class="dfile">${escapeHTML(slugify(p.title))}.md</span>` +
+          (p.wide ? `<span class="dwide"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Best on desktop</span>` : "") +
+          `</span>` +
           `<span class="dstate cap">${isOpen ? (p.note || "Open file") : "Coming soon"}</span>`;
         const file = `<span class="pvw"><span class="pv-floor"></span>${pv}</span>`;
         return isOpen

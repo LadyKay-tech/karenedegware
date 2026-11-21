@@ -151,7 +151,7 @@
   try { seen = sessionStorage.getItem("ke-intro") === "1"; sessionStorage.setItem("ke-intro", "1"); } catch (e) { /* storage unavailable */ }
   if (reduced.matches || seen) ready();
   else {
-    setTimeout(ready, 2300);
+    setTimeout(ready, 1400);
     document.getElementById("introMark").addEventListener("click", ready);
   }
 })();

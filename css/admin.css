@@ -123,3 +123,10 @@ textarea { resize: vertical; }
   .arow { grid-template-columns: minmax(0, 1fr); }
   .arow .adate { max-width: none; }
 }
+
+/* CV */
+.acv { display: flex; justify-content: space-between; align-items: center; gap: 16px 24px; flex-wrap: wrap; margin-bottom: 44px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 255, 255, .025); }
+.acv-h { margin: 0 0 4px; font: 300 22px/1.2 "Inter Tight", sans-serif; }
+.acv .amute { margin: 0; font-size: 14px; }
+label.abtn { cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+label.abtn.busy { opacity: .45; pointer-events: none; }

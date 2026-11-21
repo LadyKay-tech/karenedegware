@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /admin/
 Disallow: /notes/_template.html
+Disallow: /tools/

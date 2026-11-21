@@ -29,8 +29,8 @@ window.KE_DATA = {
   /* My products, each with a live preview */
   products: [
     { slug: "meeqly", title: "Meeqly", area: "Music · Mobile app", status: "open", href: "meeqly/", live: "meeqly", note: "Live preview" },
-    { slug: "diva", title: "Diva", area: "AI · Desktop and mobile", status: "open", href: "diva/", thumb: "assets/previews/diva.jpg", note: "Live preview" },
-    { slug: "tiqki", title: "Tiqki", area: "Queues · Web app", status: "open", href: "tiqki/", thumb: "assets/previews/tiqki.jpg", note: "Live preview" }
+    { slug: "duttiva", title: "Duttiva", area: "AI assistant · Desktop", status: "open", href: "duttiva/", thumb: "assets/previews/duttiva.jpg", note: "Live preview", wide: true },
+    { slug: "tiqki", title: "Tiqki", area: "Queues · Web app", status: "open", href: "tiqki/", thumb: "assets/previews/tiqki.jpg", note: "Live preview", wide: true }
   ],
 
   principles: [

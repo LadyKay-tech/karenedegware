@@ -1,3 +1,6 @@
+/* Fonts are served from the site itself: no trip to another server before the page can draw */
+@font-face { font-family: "Inter Tight"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("../assets/fonts/inter-tight.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("../assets/fonts/montserrat.woff2") format("woff2"); }
 /* Shared foundations: tokens, reset, header, footer, small type helpers */
 
 :root {
@@ -86,7 +89,7 @@ body.locked { overflow: hidden; }
 
 /* Footer menu */
 .foot {
-  display: flex; justify-content: center;
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 36px;
   padding: 40px var(--gutter) max(4vw, 36px);
   border-top: 1px solid var(--line);
 }

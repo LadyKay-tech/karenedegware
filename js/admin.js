@@ -171,6 +171,7 @@
 
   async function openList() {
     show("list");
+    loadCV();
     $("postList").innerHTML = '<p class="aempty">Loading…</p>';
     try {
       posts = await readIndex();
@@ -212,6 +213,98 @@
     if (!btn) return;
     const [kind, slug] = btn.dataset.open.split(":");
     openEditor(kind === "draft" ? readDrafts()[slug] : posts.find((p) => p.slug === slug), kind === "draft");
+  });
+
+
+  /* ---------- CV ---------- */
+
+  const CV_FILE = "assets/cv/karen-edegware-cv.pdf";
+  const CV_INFO = "content/cv.json";
+  let cvInfo = null;
+  let cvConfirm = 0;
+
+  const prettyDate = (iso) => {
+    try { return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }); } catch (e) { return iso; }
+  };
+
+  function renderCV() {
+    const state = $("cvState");
+    if (cvInfo && cvInfo.file) {
+      state.textContent = `On the site, updated ${prettyDate(cvInfo.updated)}. Visitors can download it from the footer of every page.`;
+      $("cvView").href = SITE + cvInfo.file + "?v=" + encodeURIComponent(cvInfo.updated || "");
+      $("cvView").hidden = false;
+      $("cvRemove").hidden = false;
+      $("cvPick").textContent = "Replace CV";
+    } else {
+      state.textContent = "Nothing uploaded yet. Once you upload a PDF, a Download CV link appears next to Notes in the footer.";
+      $("cvView").hidden = true;
+      $("cvRemove").hidden = true;
+      $("cvPick").textContent = "Upload CV";
+    }
+  }
+
+  async function loadCV() {
+    try {
+      const text = await readText(CV_INFO);
+      cvInfo = text ? JSON.parse(text) : null;
+    } catch (e) { cvInfo = null; }
+    renderCV();
+  }
+
+  const fileToBase64 = (file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(",")[1] || "");
+    reader.onerror = () => reject(new Error("Couldn’t read that file."));
+    reader.readAsDataURL(file);
+  });
+
+  $("cvFile").addEventListener("change", async (e) => {
+    const file = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if (!file) return;
+    if (!/\.pdf$/i.test(file.name) && file.type !== "application/pdf") { status("Please choose a PDF. Word files open differently on every device, a PDF looks the same everywhere.", { error: true }); return; }
+    if (file.size > 15 * 1024 * 1024) { status("That PDF is over 15 MB. Try exporting it again with smaller images.", { error: true }); return; }
+    $("cvPick").classList.add("busy");
+    status("Uploading your CV…", { sticky: true });
+    try {
+      const base64 = await fileToBase64(file);
+      const info = { file: CV_FILE, name: "Karen-Edegware-CV.pdf", updated: new Date().toISOString() };
+      await commit("Update CV", [
+        { path: CV_FILE, base64 },
+        { path: CV_INFO, text: JSON.stringify(info, null, 2) + "\n" }
+      ]);
+      cvInfo = info;
+      renderCV();
+      status("Done. Your new CV will be live on the site in a minute or two.");
+    } catch (err) {
+      if (err.status === 403 || err.status === 404) status(NO_WRITE, { error: true, sticky: true });
+      else if (err.message !== "unauthorised") status(`The upload didn’t go through: ${escapeHTML(err.message)}`, { error: true });
+    } finally {
+      $("cvPick").classList.remove("busy");
+    }
+  });
+
+  $("cvRemove").addEventListener("click", async () => {
+    const btn = $("cvRemove");
+    if (!btn.dataset.armed) {
+      btn.dataset.armed = "1";
+      btn.textContent = "Click again to take it down";
+      clearTimeout(cvConfirm);
+      cvConfirm = setTimeout(() => { delete btn.dataset.armed; btn.textContent = "Take down"; }, 4000);
+      return;
+    }
+    clearTimeout(cvConfirm);
+    delete btn.dataset.armed;
+    btn.textContent = "Take down";
+    status("Taking your CV down…", { sticky: true });
+    try {
+      await commit("Remove CV", [{ path: CV_FILE, remove: true }, { path: CV_INFO, remove: true }]);
+      cvInfo = null;
+      renderCV();
+      status("Your CV is off the site. The footer link disappears in a minute or two.");
+    } catch (err) {
+      if (err.message !== "unauthorised") status(`That didn’t work: ${escapeHTML(err.message)}`, { error: true });
+    }
   });
 
   /* ---------- editor ---------- */

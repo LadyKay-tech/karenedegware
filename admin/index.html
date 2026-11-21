@@ -4,23 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>Notes editor | Karen Edegware</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Site editor | Karen Edegware</title>
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
   <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
   <link rel="manifest" href="../site.webmanifest">
   <meta name="theme-color" content="#0c0c0c">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500&family=Montserrat:wght@300;400;500;600;700&display=swap">
-  <link rel="stylesheet" href="../css/base.css?v=20261121g">
+  <link rel="preload" href="../assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/base.css?v=20261121p">
   <link rel="stylesheet" href="../css/notes.css?v=20261121g">
-  <link rel="stylesheet" href="../css/admin.css?v=20261121g">
+  <link rel="stylesheet" href="../css/admin.css?v=20261121p">
 </head>
 <body class="admin">
   <header class="abar">
     <a class="logo" href="../" aria-label="Back to the site"><span class="wmk">Karen <b>Edegware</b></span></a>
-    <span class="cap dim">Notes editor</span>
+    <span class="cap dim">Site editor</span>
     <div class="aact" id="session" hidden>
       <a class="pill" href="../notes/" target="_blank" rel="noopener">View notes</a>
       <button class="pill" type="button" id="signOut">Sign out</button>
@@ -45,7 +44,7 @@
         <summary class="cap">How to get a token</summary>
         <ol>
           <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> while signed in to GitHub.</li>
-          <li>Name it <b>Notes editor</b> and pick an expiry date, up to a year.</li>
+          <li>Name it <b>Site editor</b> and pick an expiry date, up to a year.</li>
           <li>Under <b>Repository access</b>, choose <b>Only select repositories</b> and pick <b>karenedegware</b>.</li>
           <li>Under <b>Permissions</b>, open <b>Repository permissions</b> and set <b>Contents</b> to <b>Read and write</b>.</li>
           <li>Click <b>Generate token</b>, copy it, and paste it above.</li>
@@ -56,6 +55,19 @@
 
   <!-- All notes -->
   <main class="awrap" id="viewList" hidden>
+    <section class="acv" aria-labelledby="cvTitle">
+      <div>
+        <h2 class="acv-h" id="cvTitle">CV</h2>
+        <p class="amute" id="cvState">Checking…</p>
+      </div>
+      <div class="aact">
+        <a class="pill" id="cvView" href="#" target="_blank" rel="noopener" hidden>View</a>
+        <button class="pill" type="button" id="cvRemove" hidden>Take down</button>
+        <label class="abtn" for="cvFile" id="cvPick">Upload CV</label>
+        <input id="cvFile" type="file" accept="application/pdf,.pdf" hidden>
+      </div>
+    </section>
+
     <div class="ahead">
       <h1 class="ah">Notes</h1>
       <button class="abtn" type="button" id="newNote">New note</button>
@@ -147,6 +159,6 @@
 
   <script src="../js/core.js?v=20261121g"></script>
   <script src="../js/markdown.js?v=20261121g"></script>
-  <script src="../js/admin.js?v=20261121g"></script>
+  <script src="../js/admin.js?v=20261121p"></script>
 </body>
 </html>

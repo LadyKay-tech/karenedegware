@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Duttiva | Karen Edegware</title>
+  <meta name="description" content="Duttiva, an AI command bar that floats above your other apps. Highlight text, press Ctrl and Space, type a slash command. Live preview.">
+  <meta name="duttiva-ai" content="">
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta name="theme-color" content="#0c0c0c">
+  <link rel="preload" href="../../../assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../css/base.css?v=20261121p">
+  <link rel="stylesheet" href="../../../css/principle.css?v=20261121p">
+  <link rel="stylesheet" href="../../../css/product.css?v=20261121p">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="../../../" aria-label="Karen Edegware, home"><span class="wmk">Karen <b>Edegware</b></span></a>
+    <a class="pill" href="mailto:karenjimmyede@gmail.com">Get in touch</a>
+  </header>
+
+  <main class="page-main reveal" data-reveal>
+    <div class="page-bar">
+      <nav class="crumbs cap" aria-label="Breadcrumb">
+        <a href="../../../">Home</a><span aria-hidden="true">/</span>
+        <a href="../../">Product Design &amp; Philosophy</a><span aria-hidden="true">/</span>
+        <a href="../">Products</a><span aria-hidden="true">/</span>
+        <span>duttiva.md</span>
+      </nav>
+      <a class="pill pbtn" href="../" aria-label="Back to products"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg><span>Back to products</span></a>
+    </div>
+
+    <article class="principle product wide">
+      <div class="phil">
+        <div class="phil-a">
+          <span class="lbl cap">Product · AI assistant · Desktop</span>
+          <h1>Duttiva.</h1>
+          <p>Duttiva started with a small irritation. Every time I wanted AI to help with something I was already writing, I had to leave it to get that help: open a new tab, paste the text in, explain what I wanted, then copy the answer back into the place I started. Duttiva turns that around. It sits above everything else on your screen, and when you highlight some text and press Ctrl and Space, it opens right where you are.</p>
+          <p>From there you type a slash command such as /summarize, /reply or /actionitems, and the answer streams back in a few seconds. There are twenty five of them, which means the everyday jobs never need a prompt written from scratch. When you are done, Escape sends it away and you carry on in the document you never left. If your hands are busy, you can say “Hey Duttiva” and ask out loud instead.</p>
+        </div>
+        <div class="phil-b">
+          <dl class="facts">
+            <div><dt>Role</dt><dd>Product design and build</dd></div>
+            <div><dt>Platform</dt><dd>macOS, Windows and Linux</dd></div>
+            <div><dt>Built with</dt><dd>Electron, React, Tailwind, OpenAI</dd></div>
+            <div><dt>Stage</dt><dd>Working prototype</dd></div>
+          </dl>
+          <h2 class="sub">Decisions that shaped it</h2>
+          <ul class="calls plain">
+            <li>It had to stay out of the way. One shortcut brings it over whatever app you are in and Escape hides it again, so it never becomes one more window to look after.</li>
+            <li>I chose commands over open prompts because most people do not want to learn prompt writing just to get a decent summary. Each common job became a short command that already knows what a good answer looks like.</li>
+            <li>Whatever you have highlighted becomes the input. That single choice is what turns most jobs into two keystrokes, where they used to take a copy, a paste and an explanation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xd">
+        <div class="ow dv-ow">
+          <div class="oh">
+            <div>
+              <b class="otitle">Try Duttiva</b>
+              <span class="ohint">Highlight part of the note, then press Ctrl + Space</span>
+            </div>
+            <span class="pv-wide" title="Duttiva is built to float over a desktop"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Best on a laptop or desktop</span>
+            <div class="pv-acts">
+              <button class="ofs" id="fsBtn" type="button" aria-label="Full screen" aria-pressed="false"><svg class="e" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span class="t">Full screen</span><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            </div>
+          </div>
+          <div class="ocv dv-wrap">
+            <div class="dv-desk" id="desk">
+              <div class="dv-menu"><b>Notes</b><span>File</span><span>Edit</span><span>View</span><i></i>
+                <button type="button" class="dv-mic" id="dvMic" aria-label="Say Hey Duttiva"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Hey Duttiva</span></button>
+                <span class="dv-clock" id="dvClock">9:41</span></div>
+              <div class="dv-notes">
+                <div class="dv-bar"><i></i><i></i><i></i><span id="dvTitle">Launch sync</span></div>
+                <div class="dv-tabs" id="dvTabs" role="tablist" aria-label="Notes"></div>
+                <div class="dv-doc" id="dvDoc" contenteditable="true" spellcheck="false" aria-label="Note you can edit"></div>
+              </div>
+              <div class="dv-hint" id="dvHint"><kbd>Ctrl</kbd><kbd>Space</kbd><span>or</span><button type="button" id="dvSummon">Summon Duttiva</button></div>
+              <div class="dv-heard" id="dvHeard" hidden></div>
+              <div class="dv-toasts" id="dvToasts"></div>
+              <div class="dv-win" id="dvWin" hidden><iframe id="dvFrame" title="Duttiva live preview" src="about:blank" data-src="app/" allow="clipboard-read; clipboard-write; microphone"></iframe></div>
+            </div>
+          </div>
+          <div class="dv-how">
+            <span class="ocl">How to try it</span>
+            <ol>
+              <li>Pick a sample, or tap <b>+ Your own text</b> and paste anything into the note.</li>
+              <li>Highlight the part you want help with. Leave nothing highlighted and Duttiva reads the whole note.</li>
+              <li>Press Ctrl + Space or tap Summon, then type / to see every command.</li>
+              <li>Tap the mic and say “Hey Duttiva, summarise this”, or any other command.</li>
+            </ol>
+            <p class="dv-engine" id="dvEngine" data-mode="offline">
+              <span class="m-offline">This preview runs on a built-in engine that does the real work for summaries, action items, checklists, keywords, hashtags, sentiment, tables, JSON, regex and code review, on any text you give it. Writing jobs such as replying, rewriting or translating need the AI model. They are ready to try on the samples, and if you add your own OpenAI key in Duttiva’s settings (the gear), they will work on anything. The key stays in your browser.</span>
+              <span class="m-relay">This preview is connected to a live AI model, so every command works on any text you give it.</span>
+              <span class="m-key">You are using your own OpenAI key, so every command runs on your account. Remove it any time in Duttiva’s settings.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <a href="../../../notes/">Notes</a>
+  </footer>
+
+  <script src="../../../js/fullscreen.js?v=20261121m"></script>
+  <script src="../../../js/duttiva-desk.js?v=20261121p"></script>
+  <script>
+    (function () {
+      var page = document.querySelector("[data-reveal]");
+      requestAnimationFrame(function () { requestAnimationFrame(function () { page.classList.add("on"); }); });
+    })();
+  </script>
+  <script src="../../../js/foot.js?v=20261121p" defer></script>
+</body>
+</html>
