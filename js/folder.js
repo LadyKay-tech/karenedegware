@@ -22,10 +22,6 @@
       `<span class="pv-row"><span>Delivery and fees</span><span>£6.49</span></span>` +
       `<span class="pv-row pv-tot"><span>Total</span><span>£54.49</span></span>` +
       `<span class="pv-btn">Pay £54.49</span>`,
-    notify:
-      `<span class="pv-n dim"><i></i>We miss you!</span>` +
-      `<span class="pv-n dim"><i></i>Time to check in</span>` +
-      `<span class="pv-n hi"><i></i>Parcel at your door</span>`,
     savings:
       `<span class="pv-k">Rent fund</span><span class="pv-big">£640 <em>of £900</em></span>` +
       `<span class="pv-track"><b style="width:71%"></b></span>` +
@@ -54,9 +50,6 @@
       `<span class="pv-ck done"><i>${tick}</i>Selfie</span>` +
       `<span class="pv-ck now"><i></i>Bank details <em>so payouts reach you</em></span>`,
     soon: `<span class="pv-soon">In the works</span>`,
-    recs:
-      `<span class="pv-k">Picked for you</span>` +
-      `<span class="pv-tiles"><span><i></i><u>Not for me</u></span><span><i></i><u>It was a gift</u></span></span>`
   };
 
   /* Product Design & Philosophy: two folders */
