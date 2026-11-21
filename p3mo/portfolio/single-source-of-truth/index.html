@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Single source of truth | Karen Edegware</title>
+  <meta name="description" content="Why a portfolio needs one source of truth, and the operations dashboard I built to be it.">
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta name="theme-color" content="#0c0c0c">
+  <link rel="preload" href="../../../assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../css/base.css?v=20261121p">
+  <link rel="stylesheet" href="../../../css/principle.css?v=20261121p">
+  <link rel="stylesheet" href="../../../css/product.css?v=20261121u">
+  <link rel="stylesheet" href="../../../css/p3m.css?v=20261121w">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="../../../" aria-label="Karen Edegware, home"><span class="wmk">Karen <b>Edegware</b></span></a>
+    <a class="pill" href="mailto:karenjimmyede@gmail.com">Get in touch</a>
+  </header>
+
+  <main class="page-main reveal" data-reveal>
+    <div class="page-bar">
+      <nav class="crumbs cap" aria-label="Breadcrumb">
+        <a href="../../../">Home</a><span aria-hidden="true">/</span>
+        <a href="../../">P3MO</a><span aria-hidden="true">/</span>
+        <a href="../">Portfolio</a><span aria-hidden="true">/</span>
+        <span>single-source-of-truth.md</span>
+      </nav>
+      <a class="pill pbtn" href="../" aria-label="Back to Portfolio"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg><span>Back to Portfolio</span></a>
+    </div>
+
+    <article class="principle product wide">
+      <div class="phil">
+        <div class="phil-a">
+          <span class="lbl cap">Portfolio · Data and reporting</span>
+          <h1>Single source of truth.</h1>
+          <p>Portfolio decisions are only as good as the information behind them. Before we had a single source of truth, the same pipeline lived in chat messages, personal spreadsheets, OneNote pages and a separate CRM, so every review started with a debate about whose numbers were right instead of what to do about them.</p>
+          <p>Putting every update, stage movement, commitment and blocker into one system changed how the portfolio is managed. Leadership can compare offerings and teams on the same basis, see which opportunities are moving and which have stalled, and shift people or money towards the work that is progressing. Targets, forecasts and reviews all draw on the same records, so a decision made in one meeting still holds in the next.</p>
+          <p>The dashboard here is the Operations Centre I built to be that single source of truth, running with invented data. Change the date or switch teams in the sidebar to see how the same records answer different questions.</p>
+        </div>
+        <div class="phil-b">
+          <dl class="facts">
+            <div><dt>Used for</dt><dd>Every portfolio and leadership decision</dd></div>
+            <div><dt>Replaced</dt><dd>Spreadsheets, OneNote and a separate CRM</dd></div>
+            <div><dt>Updated</dt><dd>Daily, by the teams themselves</dd></div>
+          </dl>
+          <a class="pill p3-more" href="../../../product-design/products/operations-centre/">Try the full Operations Centre <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="xd">
+        <div class="ow p3-ow">
+          <div class="oh">
+            <div>
+              <b class="otitle">One view of the pipeline</b>
+              <span class="ohint">The live product, with invented data</span>
+            </div>
+            <span class="pv-wide" title="This tool is laid out for a wider screen"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Best on a laptop or desktop</span>
+            <div class="pv-acts">
+              <button class="ofs" id="fsBtn" type="button" aria-label="Full screen" aria-pressed="false"><svg class="e" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span class="t">Full screen</span><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            </div>
+          </div>
+          <div class="ocv oc-stage"><div class="oc-screen" id="ocBox"><iframe id="ocFrame" src="../../../product-design/products/operations-centre/app/?embed=1#dashboard" title="One view of the pipeline, Operations Centre demo" loading="lazy"></iframe></div></div>
+        </div>
+        <p class="dv-note">Every name, figure and organisation here is made up.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <a href="../../../notes/">Notes</a>
+  </footer>
+
+  <script src="../../../js/fullscreen.js?v=20261121m"></script>
+  <script>
+    (function () {
+      var box = document.getElementById("ocBox"), frame = document.getElementById("ocFrame"), DESK = 1280;
+      function fit() {
+        var w = box.clientWidth, h = box.clientHeight;
+        if (w >= 640 && w < DESK && !document.querySelector(".ow.fs")) { var s = w / DESK; frame.style.width = DESK + "px"; frame.style.height = Math.round(h / s) + "px"; frame.style.transform = "scale(" + s + ")"; }
+        else { frame.style.width = frame.style.height = frame.style.transform = ""; }
+      }
+      if (window.ResizeObserver) new ResizeObserver(fit).observe(box); else window.addEventListener("resize", fit);
+      fit();
+    })();
+  </script>
+  <script>
+    (function () {
+      var page = document.querySelector("[data-reveal]");
+      requestAnimationFrame(function () { requestAnimationFrame(function () { page.classList.add("on"); }); });
+    })();
+  </script>
+  <script src="../../../js/foot.js?v=20261121p" defer></script>
+</body>
+</html>

@@ -51,7 +51,7 @@ window.KE_DATA = {
   ],
 
   portfolio: [
-    {"slug": "operations-centre", "title": "Operations centre", "area": "Dashboard", "status": "open", "href": "operations-centre/", "thumb": "assets/previews/p3m-operations-centre.jpg", "note": "Open file", "wide": true},
+    {"slug": "single-source-of-truth", "title": "Single source of truth", "area": "Data and reporting", "status": "open", "href": "single-source-of-truth/", "thumb": "assets/previews/p3m-single-source-of-truth.jpg", "note": "Open file", "wide": true},
     {"slug": "what-counts-as-an-update", "title": "What counts as an update", "area": "Pipeline rules", "status": "open", "href": "what-counts-as-an-update/", "thumb": "assets/previews/p3m-what-counts-as-an-update.jpg", "note": "Open file"},
     {"slug": "choosing-what-to-fund", "title": "Choosing what to fund", "area": "Prioritisation", "status": "open", "href": "choosing-what-to-fund/", "thumb": "assets/previews/p3m-choosing-what-to-fund.jpg", "note": "Open file"},
     {"slug": "targets-and-pace", "title": "Targets and pace", "area": "Goals", "status": "open", "href": "targets-and-pace/", "thumb": "assets/previews/p3m-targets-and-pace.jpg", "note": "Open file", "wide": true}

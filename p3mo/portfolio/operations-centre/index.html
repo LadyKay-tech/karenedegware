@@ -1,101 +1,11 @@
 <!DOCTYPE html>
-<html lang="en-GB" data-root="../../../">
+<html lang="en-GB">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Operations centre | Karen Edegware</title>
-  <meta name="description" content="A rebuild of the operations dashboard I designed for running a commercial pipeline, with made-up data.">
-  <link rel="icon" href="../../../favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32.png">
-  <link rel="apple-touch-icon" href="../../../assets/icons/apple-touch-icon.png">
-  <link rel="manifest" href="../../../site.webmanifest">
-  <meta name="theme-color" content="#0c0c0c">
-  <link rel="preload" href="../../../assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../../../assets/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../../../css/base.css?v=20261121p">
-  <link rel="stylesheet" href="../../../css/principle.css?v=20261121p">
-  <link rel="stylesheet" href="../../../css/product.css?v=20261121u">
-  <link rel="stylesheet" href="../../../css/p3m.css?v=20261121v">
+  <meta name="robots" content="noindex">
+  <title>Single source of truth | Karen Edegware</title>
+  <link rel="canonical" href="../single-source-of-truth/">
+  <meta http-equiv="refresh" content="0; url=../single-source-of-truth/">
 </head>
-<body>
-  <header class="top">
-    <a class="logo" href="../../../" aria-label="Karen Edegware, home"><span class="wmk">Karen <b>Edegware</b></span></a>
-    <a class="pill" href="mailto:karenjimmyede@gmail.com">Get in touch</a>
-  </header>
-
-  <main class="page-main reveal" data-reveal>
-    <div class="page-bar">
-      <nav class="crumbs cap" aria-label="Breadcrumb">
-        <a href="../../../">Home</a><span aria-hidden="true">/</span>
-        <a href="../../">P3MO</a><span aria-hidden="true">/</span>
-        <a href="../">Portfolio</a><span aria-hidden="true">/</span>
-        <span>operations-centre.md</span>
-      </nav>
-      <a class="pill pbtn" href="../" aria-label="Back to Portfolio"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg><span>Back to Portfolio</span></a>
-    </div>
-
-    <article class="principle product wide">
-      <div class="phil">
-        <div class="phil-a">
-          <span class="lbl cap">Portfolio · Dashboard</span>
-          <h1>Operations centre.</h1>
-          <p>This is a rebuild of the operations centre I designed to run a commercial pipeline day to day. The figures are made up, but the layout and the logic are the ones I use. It is built around the questions leadership asks every week: how many updates came in, which opportunities moved forward, which ones are stuck and who is holding them up.</p>
-          <p>Every opportunity sits at one of eight stages, from the first conversation to money in the bank, and belongs to an offering with a named owner. A change of stage counts as movement. Anything that has stayed in one stage longer than expected is flagged as stalled, along with the team it is waiting on, whether that is finance, legal, delivery or the client.</p>
-          <p>This is the Operations Centre itself, running with invented data. Change the date at the top, switch teams in the sidebar or add an entry to see how it responds.</p>
-        </div>
-        <div class="phil-b">
-          <dl class="facts">
-            <div><dt>Used for</dt><dd>Weekly leadership reporting</dd></div>
-            <div><dt>Updated</dt><dd>Daily</dd></div>
-            <div><dt>Built with</dt><dd>HTML and JavaScript, later rebuilt in Next.js</dd></div>
-            <div><dt>Data</dt><dd>Made up for this page</dd></div>
-          </dl>
-          <a class="pill p3-more" href="../../../product-design/products/operations-centre/">Try the full Operations Centre <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-
-      <div class="xd">
-        <div class="ow p3-ow">
-          <div class="oh">
-            <div>
-              <b class="otitle">The operations centre</b>
-              <span class="ohint">The live product, with invented data</span>
-            </div>
-            <span class="pv-wide" title="This tool is laid out for a wider screen"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Best on a laptop or desktop</span>
-            <div class="pv-acts">
-              <button class="ofs" id="fsBtn" type="button" aria-label="Full screen" aria-pressed="false"><svg class="e" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span class="t">Full screen</span><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
-            </div>
-          </div>
-          <div class="ocv oc-stage"><div class="oc-screen" id="ocBox"><iframe id="ocFrame" src="../../../product-design/products/operations-centre/app/?embed=1#dashboard" title="The operations centre, Operations Centre demo" loading="lazy"></iframe></div></div>
-        </div>
-        <p class="dv-note">Every name, figure and organisation here is made up.</p>
-      </div>
-    </article>
-  </main>
-
-  <footer class="foot">
-    <a href="../../../notes/">Notes</a>
-  </footer>
-
-  <script src="../../../js/fullscreen.js?v=20261121m"></script>
-  <script>
-    (function () {
-      var box = document.getElementById("ocBox"), frame = document.getElementById("ocFrame"), DESK = 1280;
-      function fit() {
-        var w = box.clientWidth, h = box.clientHeight;
-        if (w >= 640 && w < DESK && !document.querySelector(".ow.fs")) { var s = w / DESK; frame.style.width = DESK + "px"; frame.style.height = Math.round(h / s) + "px"; frame.style.transform = "scale(" + s + ")"; }
-        else { frame.style.width = frame.style.height = frame.style.transform = ""; }
-      }
-      if (window.ResizeObserver) new ResizeObserver(fit).observe(box); else window.addEventListener("resize", fit);
-      fit();
-    })();
-  </script>
-  <script>
-    (function () {
-      var page = document.querySelector("[data-reveal]");
-      requestAnimationFrame(function () { requestAnimationFrame(function () { page.classList.add("on"); }); });
-    })();
-  </script>
-  <script src="../../../js/foot.js?v=20261121p" defer></script>
-</body>
+<body><a href="../single-source-of-truth/">This page has moved</a></body>
 </html>
