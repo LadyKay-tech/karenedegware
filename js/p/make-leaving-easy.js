@@ -1,43 +1,74 @@
-/* Make leaving easy, and listen on the way out: cancelling a music subscription */
+/* Make leaving easy, and listen on the way out: cancelling Premium in a made-up music app */
 (function () {
   "use strict";
-  const { go, ghost, link, row, btns } = KEProto.h;
+  const { icon, av, btn, main, cover } = KEPhone;
   const REASONS = ["Too pricey", "Not using it enough", "Found another app", "Just need a break"];
+  const TABS = [["Home", "home"], ["Search", "search"], ["Library", "library"], ["Premium", "spark"]];
 
-  const account = (manage) =>
-    "<h4>Account</h4>" + row("Profile", "Femi Ade") + row("Plan", "Premium, £9.99 a month") +
-    row("Notifications", "On") + row("Help", "") + manage;
+  const tabs = (active) => `<nav class="ap-tabs mu-tabs">${TABS.map(([l, ic]) => `<span class="${l === active ? "on" : ""}">${icon(ic)}<em>${l}</em></span>`).join("")}</nav>`;
+  const player = () => `<div class="mu-player">${cover(5)}<div><b>Midnight Drive</b><span>Lumen</span></div>${icon("heart")}<span class="mu-play">${icon("play")}</span></div>`;
+  const back = (t) => `<div class="ap-top mu-top"><span class="ap-ib">${icon("back")}</span><b>${t}</b></div>`;
+  const rows = (list) => `<div class="mu-list">${list.map(([a, b]) => `<div class="mu-row"><span><b>${a}</b>${b ? `<em>${b}</em>` : ""}</span>${icon("chev")}</div>`).join("")}</div>`;
+  const plan = () => `<div class="mu-plan"><span class="mu-pill">Your plan</span><b>Premium Individual</b><span>£11.99 a month · Next payment 30 November</span><div class="mu-perks"><span>${icon("dl")}Downloads</span><span>${icon("note")}No ads</span><span>${icon("spark")}Lossless</span></div></div>`;
+  const me = () => `<div class="mu-me">${av("FA", "f")}<div><b>Femi Ade</b><span>femi.ade@mail.com</span></div></div>`;
+
+  const home = () => `<div class="scr mu"><div class="mu-head"><button type="button" class="av mu-av" data-act="acct" data-main>FA</button><div class="mu-chips"><span class="on">All</span><span>Music</span><span>Podcasts</span></div></div>
+    <div class="ap-body" style="gap:12px">
+      <div class="mu-grid">${["Liked Songs", "Afro Chill", "Daily Mix 1", "Focus Flow", "Gym Hits", "Late Nights"].map((n, i) => `<div class="mu-tile">${cover(i)}<b>${n}</b></div>`).join("")}</div>
+      <span class="mu-h">Made for Femi</span>
+      <div class="mu-cards">${[["Discover Weekly", 1], ["Release Radar", 2], ["On Repeat", 6]].map(([n, i]) => `<div>${cover(i, n.split(" ")[0])}<span>${n}</span></div>`).join("")}</div>
+      <span class="mu-h">Recently played</span>
+      <div class="mu-cards">${[["Sunday Slow", 3], ["Highlife Gold", 7], ["Run Club", 0]].map(([n, i]) => `<div>${cover(i)}<span>${n}</span></div>`).join("")}</div>
+    </div>${player()}${tabs("Home")}</div>`;
 
   const A = [
-    () => account(`<div class="xspacer"></div>${link("Manage plan", "next")}`),
-    () => '<h4>Premium</h4><p class="sm">Ad free listening, offline downloads, better sound.</p>' +
-      btns(go("Change plan", "decoy")) + `<div class="xspacer"></div>${link("Other options", "next")}`,
-    () => '<h4>Are you sure?</h4><p class="sm">You’ll lose 2,341 saved songs and every playlist you’ve made.</p>' +
-      btns(go("Keep Premium", "back"), ghost("Continue", "next")),
-    () => '<div class="xoffer">Wait. 50% off for 3 months?</div><p class="sm">Only £4.99 a month. Offer ends today.</p>' +
-      btns(go("Claim offer", "decoy")) + `<div class="xspacer"></div>${link("No thanks, continue", "next")}`,
-    () => '<h4>To cancel, please call us</h4><p class="sm">0800 123 4567<br>Monday to Friday, 9am to 5pm</p>' + go("OK", "finish")
+    home,
+    () => `<div class="scr mu">${back("Account")}<div class="ap-body">${me()}
+      ${rows([["Profile", ""], ["Plan", "Premium Individual"], ["Notifications", ""], ["Storage", "2,341 songs downloaded"], ["Privacy", ""], ["Help", ""]])}
+      <div style="flex:1"></div>${btn("Manage plan", "next", "mu-tiny")}</div></div>`,
+    () => `<div class="scr mu">${back("Premium")}<div class="ap-body">${plan()}
+      ${main("Change plan", "decoy", "mu")}<div style="flex:1"></div>${btn("Other options", "next", "mu-tiny")}</div></div>`,
+    () => `<div class="scr mu"><div class="mu-fade">${[0, 1, 2, 3, 4, 5].map((i) => cover(i)).join("")}</div><div class="ap-body" style="justify-content:flex-end">
+      <h3 class="mu-big">Are you sure?</h3><p class="mu-p">You’ll lose 2,341 downloaded songs, your offline playlists and lossless audio.</p>
+      ${main("Keep Premium", "back", "mu")}${btn("Continue", "next", "mu-text")}</div></div>`,
+    () => `<div class="scr mu"><div class="ap-body" style="justify-content:center">
+      <div class="mu-offer"><span class="mu-pill">Just for you</span><b>Stay for £5.99 a month</b><span>Half price for 3 months. Offer ends today.</span></div>
+      ${main("Claim offer", "decoy", "mu")}<div style="height:40px"></div>${btn("No thanks", "next", "mu-tiny")}</div></div>`,
+    () => `<div class="scr mu">${back("Cancel Premium")}<div class="ap-body" style="justify-content:center;text-align:center;align-items:center">
+      <span class="mu-icon">${icon("info")}</span><h3 class="mu-big" style="font-size:20px">To cancel, please call us</h3><p class="mu-p">0800 123 4567<br>Monday to Friday, 9am to 5pm</p>
+      <div style="flex:1"></div>${main("OK", "finish", "mu")}</div></div>`
   ];
+
   const B = [
-    () => account(go("Manage plan", "next")),
-    () => '<h4>Premium</h4><p class="sm">Ad free listening, offline downloads, better sound.</p>' +
-      btns(ghost("Change plan", "decoy"), ghost("Cancel plan", "next")),
-    (ui) => '<h4>Sorry to see you go</h4><p class="sm">What’s the main reason? It helps us get better.</p>' +
-      `<div class="xchips">${REASONS.map((r) => `<button type="button" data-act="pick" data-r="${r}" class="${ui.s.reason === r ? "on" : ""}">${r}</button>`).join("")}</div>` +
-      (ui.s.reason === "Just need a break" ? '<p class="xmsg">You can pause for up to 3 months and keep everything.</p>' : "") +
-      btns(go("Cancel plan", "finish"), ghost("Pause for a month instead", "pause"))
+    home,
+    () => `<div class="scr mu">${back("Account")}<div class="ap-body">${me()}
+      <div class="mu-list"><div class="mu-row"><span><b>Plan</b><em>Premium Individual · £11.99 a month</em></span><button type="button" class="mu-manage" data-act="next" data-main>Manage</button></div></div>
+      ${rows([["Profile", ""], ["Notifications", ""], ["Storage", "2,341 songs downloaded"], ["Privacy", ""], ["Help", ""]])}</div></div>`,
+    () => `<div class="scr mu">${back("Premium")}<div class="ap-body">${plan()}
+      <div class="mu-two">${btn("Change plan", "decoy", "mu-line")}${btn("Cancel Premium", "next", "mu-line", "data-main")}</div></div></div>`,
+    (ui) => `<div class="scr mu">${back("Premium")}<div class="ap-body">${plan()}</div>
+      <div class="ap-scrim"></div><div class="ap-sheet mu-sheet"><i class="ap-grab"></i><b style="font-size:16px">Sorry to see you go</b><p class="mu-p" style="margin:0">What’s the main reason? It helps us get better.</p>
+      <div class="mu-reasons">${REASONS.map((r) => `<button type="button" data-act="pick" data-r="${r}" class="${ui.s.reason === r ? "on" : ""}">${r}</button>`).join("")}</div>
+      ${ui.s.reason === "Just need a break" ? '<p class="mu-tip">You can pause for up to 3 months and keep everything.</p>' : ""}
+      ${main("Cancel Premium", "finish", "mu")}${btn("Pause for a month instead", "pause", "mu-text")}</div></div>`
   ];
   const PATHS = { A, B };
+  const NOTES = {
+    A: [["Femi wants to cancel. Watch where the way out is"], ["No cancel option. Just a faint link at the bottom"], ["The big button changes his plan. Leaving is hidden again"], ["Guilt first, and the bright button sends him back to the start"], ["A discount when he’s already said no"], ["After all that, a phone number during working hours"]],
+    B: [["Same app. This time the exit is easy to find"], ["The plan has a clear Manage button"], ["Cancel sits beside Change, equally easy"], ["One honest question, and a pause for anyone who just needs a break"]]
+  };
 
   const show = (ui, p) => {
     ui.screen(PATHS[p][ui.s.i](ui));
     ui.metric("clicks", ui.clicks);
+    ui.notes(NOTES[p][ui.s.i]);
   };
+  const end = (cls, ic, title, sub) => `<div class="scr mu"><div class="ap-body"><div class="ap-success"><span class="tick ${cls}">${icon(ic)}</span><div class="ap-h" style="color:#fff">${title}</div><p class="mu-p">${sub}</p></div></div></div>`;
 
   KEProto({
     names: { A: "The maze", B: "One clear exit" },
     hints: {
-      A: "Femi wants to cancel. Find the way out",
+      A: "Femi wants to cancel Premium. Tap his picture and find the way out",
       B: "Same app, same plan. Cancel again",
       after: "Now try it the other way"
     },
@@ -50,23 +81,25 @@
       value: (r) => r.clicks,
       text: (r) => `${r.clicks} clicks${r.learnt === "Unknown" ? ", no reason" : r.learnt === "Paused instead" ? ", paused" : r.learnt === "Skipped the question" ? "" : ", told you why"}`
     },
-    start(p, ui) { ui.s.i = 0; show(ui, p); },
+    start(p, ui) { ui.s.i = 0; ui.s.reason = ""; show(ui, p); },
     act(name, el, ui, p) {
-      if (name === "next") { ui.s.i++; show(ui, p); return; }
+      if (name === "acct" || name === "next") { ui.s.i++; show(ui, p); return; }
       if (name === "back") { ui.s.i = 0; show(ui, p); ui.hint("Back to the start. Keep looking"); return; }
-      if (name === "decoy") { ui.metric("clicks", ui.clicks); el.classList.add("xshake"); return; }
+      if (name === "decoy") { ui.metric("clicks", ui.clicks); el.classList.add("xshake"); setTimeout(() => el.classList.remove("xshake"), 400); return; }
       if (name === "pick") { ui.s.reason = el.dataset.r; ui.update(PATHS[p][ui.s.i](ui)); ui.metric("clicks", ui.clicks); return; }
       ui.metric("clicks", ui.clicks);
       if (p === "A") {
-        ui.screen('<div class="xdone"><h4>Still subscribed</h4><p class="sm">Femi will have to ring during working hours. Until then, he keeps paying.</p></div>');
+        ui.screen(end("wait", "clock", "Still subscribed", "Femi will have to ring during working hours. Until then, he keeps paying."));
+        ui.notes(["He’s still paying, and he won’t be back"]);
         ui.done({ clicks: ui.clicks, learnt: "Unknown", toast: `${ui.clicks} clicks and a phone number. Nobody learnt why Femi wanted to leave.` });
         return;
       }
       const learnt = name === "pause" ? "Paused instead" : ui.s.reason || "Skipped the question";
       ui.metric("learnt", learnt);
       ui.screen(name === "pause"
-        ? `<div class="xdone"><span class="xok">${KEProto.h.tick}</span><h4>Paused until 20 December</h4><p class="sm">Nothing is charged meanwhile. Your playlists are safe.</p></div>`
-        : `<div class="xdone"><span class="xok">${KEProto.h.tick}</span><h4>Plan cancelled</h4><p class="sm">Premium runs until 30 November. Your playlists stay saved if you come back.</p></div>`);
+        ? end("mu-tick", "check", "Paused until 20 December", "Nothing is charged meanwhile. Your downloads and playlists are safe.")
+        : end("mu-tick", "check", "Premium cancelled", "You keep Premium until 30 November. Your playlists stay put if you come back."));
+      ui.notes(name === "pause" ? ["He stayed, on his own terms"] : ["He leaves on good terms, and you learn why"]);
       ui.done({
         clicks: ui.clicks, learnt,
         toast: name === "pause" ? `${ui.clicks} clicks. Femi stayed, on his own terms.` : `${ui.clicks} clicks. Femi left on good terms${ui.s.reason ? `, and told you why: ${ui.s.reason.toLowerCase()}` : ""}.`

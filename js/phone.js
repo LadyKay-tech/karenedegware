@@ -36,6 +36,22 @@
     sheet: '<rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="M4 9h16M4 14.5h16M10 3.5v17"/>',
     spark: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>',
     round: '<path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+    play: '<path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="none"/>',
+    pause: '<path d="M8 5v14M16 5v14" stroke-width="3"/>',
+    heart: '<path d="M12 20s-7.5-4.6-7.5-10A4.5 4.5 0 0 1 12 7.3 4.5 4.5 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/>',
+    library: '<path d="M5 4v16M10 4v16M14.5 4.5l5 15"/>',
+    bag: '<path d="M5 8h14l-1 12H6z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>',
+    pin: '<path d="M12 21s7-6.1 7-11.5a7 7 0 0 0-14 0C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    truck: '<path d="M3 6h11v10H3zM14 9h4l3 3.5V16h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/>',
+    tag: '<path d="M3.5 12.5V4.5h8l9 9-8 8z"/><circle cx="8" cy="9" r="1.4"/>',
+    mail: '<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m4 7 8 6 8-6"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    down: '<path d="m6 9 6 6 6-6"/>',
+    file: '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/>',
+    trend: '<path d="M4 16l5-5 4 3 7-7M15 7h5v5"/>',
+    note: '<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
+    dl: '<circle cx="12" cy="12" r="9"/><path d="M12 7.5v8M8.5 12.5 12 16l3.5-3.5"/>',
     trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4.5a3 3 0 0 0 3.5 4M16 6h3.5a3 3 0 0 1-3.5 4M12 13v4M8.5 20h7"/>'
   };
   const icon = (n, cls = "") =>
@@ -58,5 +74,23 @@
   };
   const toast = (text) => `<div class="ap-toast">${text}</div>`;
 
-  window.KEPhone = { icon, av, tabs, top, btn, main, row, banner, sheet, ring, toast };
+  /* A trainer, drawn for the shop prototype */
+  const shoe = (c1 = "#e9a99b", c2 = "#c8705d") =>
+    `<svg class="ap-shoe" viewBox="0 0 240 140" aria-hidden="true"><defs><linearGradient id="shU" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>
+      <ellipse cx="122" cy="128" rx="104" ry="8" fill="rgba(0,0,0,.12)"/>
+      <path d="M22 104c0-14 8-22 22-26l46-14c10-3 16-14 22-26l6-10c4-6 12-7 17-2l14 13c10 9 22 14 36 17l18 4c14 3 22 14 22 28v6H22z" fill="url(#shU)"/>
+      <path d="M22 104h203v6c0 6-4 10-10 10H34c-7 0-12-5-12-12z" fill="#fff"/>
+      <path d="M22 112h203" stroke="#e8e4dc" stroke-width="3"/>
+      <path d="M58 88c26-4 52-16 74-36" stroke="rgba(255,255,255,.75)" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M108 44l12 9M114 36l12 9M120 28l12 9" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="196" cy="86" r="4" fill="rgba(255,255,255,.6)"/></svg>`;
+
+  /* Album and playlist cover art: soft gradients with a shape */
+  const COVERS = [["#ff6a88", "#ff99ac"], ["#5a4bf0", "#9d8cff"], ["#0f9b8e", "#5fd3bc"], ["#f7971e", "#ffd200"], ["#1f1c2c", "#928dab"], ["#e94057", "#8a2387"], ["#2b5876", "#4e4376"], ["#ee9ca7", "#ffdde1"]];
+  const cover = (i, label = "") => {
+    const [a, b] = COVERS[i % COVERS.length];
+    return `<span class="cv" style="background:linear-gradient(135deg,${a},${b})">${label ? `<em>${label}</em>` : ""}<i class="cv-s${i % 3}"></i></span>`;
+  };
+
+  window.KEPhone = { icon, av, tabs, top, btn, main, row, banner, sheet, ring, toast, shoe, cover };
 })();
