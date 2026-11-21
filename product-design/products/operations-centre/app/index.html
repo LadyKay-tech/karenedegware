@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Operations Centre</title>
+  <link rel="stylesheet" href="app.css?v=1">
+</head>
+<body>
+  <div class="oc" id="oc">
+    <aside class="side" id="side">
+      <div class="brand">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4M4 12h4M16 12h4"/></svg></span>
+        <span class="bname"><b>Operations Centre</b><small>Demo workspace</small></span>
+        <button class="collapse" id="collapse" type="button" aria-label="Collapse menu"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+      </div>
+      <div class="who">
+        <label for="profile" class="cap">Viewing as</label>
+        <select id="profile"></select>
+      </div>
+      <nav class="nav" id="nav"></nav>
+      <div class="sfoot">
+        <span class="cap">Session</span>
+        <b id="sessDate"></b>
+        <span class="live">Live</span>
+        <button type="button" class="ghost" id="resetBtn">Reset demo data</button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="bar">
+        <button class="menu" id="menu" type="button" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <div class="btitle"><h1 id="title">Dashboard</h1><p id="subtitle"></p></div>
+        <div class="bact">
+          <label class="datebox"><input type="date" id="viewDate" aria-label="View date"></label>
+          <span class="hist" id="hist" hidden>Historical</span>
+          <button type="button" class="btn" id="addBtn"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Add entry</span></button>
+        </div>
+      </header>
+      <main class="view" id="view"></main>
+    </div>
+  </div>
+
+  <div class="modal" id="modal" hidden></div>
+  <div class="present" id="present" hidden></div>
+  <div class="toasts" id="toasts"></div>
+
+  <script src="app.js?v=1"></script>
+</body>
+</html>

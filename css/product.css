@@ -173,3 +173,13 @@
 @media (hover: none) { .dv-hint kbd, .dv-hint > span { display: none; } }
 .ow.fs .dv-how { display: none; }
 .ow.fs.dv-ow .dv-win { inset: 34px 0 0 0; width: auto; height: auto; }
+
+/* Operations Centre: one large screen */
+.oc-stage { padding: 18px !important; background: linear-gradient(#efede8, #e8e6e0) !important; display: block !important; }
+.oc-screen { position: relative; height: 800px; border-radius: 14px; overflow: hidden; background: #f3f4f7; box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 24px 50px -28px rgba(0, 0, 0, .45); }
+.oc-screen iframe { display: block; width: 100%; height: 100%; border: 0; transform-origin: 0 0; }
+@media (max-width: 600px) { .oc-stage { padding: 10px !important; } .oc-screen { height: 700px; } }
+.ow.fs .oc-stage { flex: 1; min-height: 0; padding: 0 !important; }
+.ow.fs .oc-screen { height: 100%; border-radius: 0; box-shadow: none; }
+.ow.fs.oc-ow .tq-try { display: none; }
+.p3-more { display: inline-flex; margin-top: 22px; }

@@ -30,7 +30,8 @@ window.KE_DATA = {
   products: [
     { slug: "meeqly", title: "Meeqly", area: "Music · Mobile app", status: "open", href: "meeqly/", live: "meeqly", note: "Live preview" },
     { slug: "duttiva", title: "Duttiva", area: "AI assistant · Desktop", status: "open", href: "duttiva/", thumb: "assets/previews/duttiva.jpg", note: "Live preview", wide: true },
-    { slug: "tiqki", title: "Tiqki", area: "Queues · Web app", status: "open", href: "tiqki/", thumb: "assets/previews/tiqki.jpg", note: "Live preview", wide: true }
+    { slug: "tiqki", title: "Tiqki", area: "Queues · Web app", status: "open", href: "tiqki/", thumb: "assets/previews/tiqki.jpg", note: "Live preview", wide: true },
+    { slug: "operations-centre", title: "Operations Centre", area: "Pipeline operations · Web", status: "open", href: "operations-centre/", thumb: "assets/previews/operations-centre.jpg", note: "Live demo", wide: true }
   ],
 
   principles: [
