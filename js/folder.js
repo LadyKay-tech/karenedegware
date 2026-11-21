@@ -62,13 +62,13 @@
     soon: `<span class="pv-soon">In the works</span>`,
   };
 
-  /* Product Design & Philosophy: two folders */
-  function designFolders() {
+  /* A row of plain folders: Product Design & Philosophy, and P3MO */
+  function folderRow(list, counts) {
     const grid = document.getElementById("files");
-    document.getElementById("count").textContent = `${data.design.length} folders`;
-    const counts = { products: data.products.length, philosophy: data.principles.length };
+    document.getElementById("count").textContent = `${list.length} folders`;
     grid.classList.add("fgrid");
-    grid.innerHTML = data.design
+    if (list.length === 3) grid.classList.add("three");
+    grid.innerHTML = list
       .map((f) => {
         const n = counts[f.id] || 0;
         return `<li><a class="fold" href="${f.path}">${plainFolderSVG(n)}<span class="dmeta"><span class="dname">${escapeHTML(f.name)}</span>` +
@@ -76,6 +76,7 @@
       })
       .join("");
   }
+  const designFolders = () => folderRow(data.design, { products: data.products.length, philosophy: data.principles.length });
 
   /* A grid of paper files, used for principles and products */
   function fileGrid(items, label) {
@@ -108,21 +109,6 @@
       .join("");
   }
 
-  function p3mo() {
-    const grid = document.getElementById("files");
-    const items = data.p3mo;
-    const span = items.length % 4 !== 0;
-    grid.innerHTML = items
-      .map((f) => {
-        if (f.type === "note") {
-          const name = slugify(f.text).split("-").slice(0, 4).join("-") + ".md";
-          return `<article class="file note${f.lead && span ? " lead" : ""}"><span class="ftype">${ICON.note}${escapeHTML(name)}</span><p>${escapeHTML(f.text)}</p></article>`;
-        }
-        return `<article class="file"><span class="ftype">${ICON.doc}Document</span><h3>${escapeHTML(f.name)}</h3><span class="soon">Opens soon</span></article>`;
-      })
-      .join("");
-  }
-
   /*
     Balanced rows: work out how many files fit across, then spread them evenly
     over the rows, so 8 files sit 4 and 4 rather than 6 and 2.
@@ -145,8 +131,10 @@
   if (id === "product-design") designFolders();
   if (id === "philosophy") fileGrid(data.principles, "");
   if (id === "products") fileGrid(data.products.map((p) => Object.assign({ preview: "soon" }, p)), "coming soon");
-  if (id === "p3mo") p3mo();
-  if (id === "philosophy" || id === "products") {
+  const P3M = ["portfolio", "programmes", "projects"];
+  if (id === "p3mo") folderRow(data.p3m, Object.fromEntries(P3M.map((k) => [k, (data[k] || []).length])));
+  if (P3M.includes(id)) fileGrid(data[id], "");
+  if (id === "philosophy" || id === "products" || P3M.includes(id)) {
     const g = document.getElementById("files");
     g.classList.add("balanced");
     balance(g);
@@ -168,7 +156,7 @@
   }
 
   /* Escape closes the folder: subfolders go up one level, top folders go home */
-  const sub = id === "philosophy" || id === "products";
+  const sub = id === "philosophy" || id === "products" || P3M.includes(id);
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape" || document.querySelector(".ow.fs")) return;
     window.location.href = sub ? "../" : root || "./";

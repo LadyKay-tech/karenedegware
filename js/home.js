@@ -6,7 +6,8 @@
 
   /* Folders */
   const foldersEl = document.getElementById("folders");
-  const meta = { "product-design": window.KE_DATA.principles.length + " files", p3mo: window.KE_DATA.p3mo.length + " files" };
+  const D = window.KE_DATA;
+  const meta = { "product-design": D.design.length + " folders", p3mo: (D.p3m || []).length + " folders" };
   foldersEl.innerHTML = window.KE_DATA.folders
     .map(
       (f) =>

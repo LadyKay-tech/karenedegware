@@ -42,13 +42,28 @@ window.KE_DATA = {
     { slug: "explain-every-step", title: "Explain why you need each step", area: "Verification", preview: "kyc", status: "open", href: "explain-every-step/", thumb: "assets/previews/explain-every-step.jpg" }
   ],
 
-  p3mo: [
-    { type: "note", lead: true, text: "Every metric needs an owner, a period and a decision it informs." },
-    { type: "note", text: "Agree the owner, the date and the decision, in writing." },
-    { type: "note", text: "Prove repeatable delivery before you scale." },
-    { type: "doc", name: "Operating manual" },
-    { type: "doc", name: "PMO maturity check" },
-    { type: "doc", name: "Operating toolkit" },
-    { type: "doc", name: "Pipeline governance" }
+/* P3MO: three folders, each with working files */
+  p3m: [
+    {"id": "portfolio", "name": "Portfolio", "path": "portfolio/", "note": "How work is chosen and tracked"},
+    {"id": "programmes", "name": "Programmes", "path": "programmes/", "note": "How related work is run together"},
+    {"id": "projects", "name": "Projects", "path": "projects/", "note": "How a single project is delivered"}
+  ],
+
+  portfolio: [
+    {"slug": "operations-centre", "title": "Operations centre", "area": "Dashboard", "status": "open", "href": "operations-centre/", "thumb": "assets/previews/p3m-operations-centre.jpg", "note": "Open file", "wide": true},
+    {"slug": "what-counts-as-an-update", "title": "What counts as an update", "area": "Pipeline rules", "status": "open", "href": "what-counts-as-an-update/", "thumb": "assets/previews/p3m-what-counts-as-an-update.jpg", "note": "Open file"},
+    {"slug": "choosing-what-to-fund", "title": "Choosing what to fund", "area": "Prioritisation", "status": "open", "href": "choosing-what-to-fund/", "thumb": "assets/previews/p3m-choosing-what-to-fund.jpg", "note": "Open file"}
+  ],
+
+  programmes: [
+    {"slug": "operating-rhythm", "title": "The operating rhythm", "area": "Governance", "status": "open", "href": "operating-rhythm/", "thumb": "assets/previews/p3m-operating-rhythm.jpg", "note": "Open file"},
+    {"slug": "ninety-day-commitments", "title": "90-day commitments", "area": "Programme plan", "status": "open", "href": "ninety-day-commitments/", "thumb": "assets/previews/p3m-ninety-day-commitments.jpg", "note": "Open file"},
+    {"slug": "who-does-what", "title": "Who does what", "area": "Roles", "status": "open", "href": "who-does-what/", "thumb": "assets/previews/p3m-who-does-what.jpg", "note": "Open file", "wide": true}
+  ],
+
+  projects: [
+    {"slug": "status-report", "title": "One-page status report", "area": "Reporting", "status": "open", "href": "status-report/", "thumb": "assets/previews/p3m-status-report.jpg", "note": "Open file"},
+    {"slug": "raid-log", "title": "RAID log", "area": "Risks and issues", "status": "open", "href": "raid-log/", "thumb": "assets/previews/p3m-raid-log.jpg", "note": "Open file"},
+    {"slug": "after-action-review", "title": "After action review", "area": "Client meetings", "status": "open", "href": "after-action-review/", "thumb": "assets/previews/p3m-after-action-review.jpg", "note": "Open file"}
   ]
 };

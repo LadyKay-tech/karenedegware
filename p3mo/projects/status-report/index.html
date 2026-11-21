@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One-page status report | Karen Edegware</title>
+  <meta name="description" content="The one-page weekly status report I use for every project.">
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta name="theme-color" content="#0c0c0c">
+  <link rel="preload" href="../../../assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../css/base.css?v=20261121p">
+  <link rel="stylesheet" href="../../../css/principle.css?v=20261121p">
+  <link rel="stylesheet" href="../../../css/product.css?v=20261121p">
+  <link rel="stylesheet" href="../../../css/p3m.css?v=20261121r">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="../../../" aria-label="Karen Edegware, home"><span class="wmk">Karen <b>Edegware</b></span></a>
+    <a class="pill" href="mailto:karenjimmyede@gmail.com">Get in touch</a>
+  </header>
+
+  <main class="page-main reveal" data-reveal>
+    <div class="page-bar">
+      <nav class="crumbs cap" aria-label="Breadcrumb">
+        <a href="../../../">Home</a><span aria-hidden="true">/</span>
+        <a href="../../">P3MO</a><span aria-hidden="true">/</span>
+        <a href="../">Projects</a><span aria-hidden="true">/</span>
+        <span>status-report.md</span>
+      </nav>
+      <a class="pill pbtn" href="../" aria-label="Back to Projects"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg><span>Back to Projects</span></a>
+    </div>
+
+    <article class="principle product wide">
+      <div class="phil">
+        <div class="phil-a">
+          <span class="lbl cap">Projects · Reporting</span>
+          <h1>One-page status report.</h1>
+          <p>A status report should tell a busy reader three things in under a minute: whether the project is on track, what is blocking it and what decision is needed from them. Anything beyond that belongs in an appendix.</p>
+          <p>I use the same one-page format for every project so leaders always know where to look. Each area gets a red, amber or green rating with a one-line reason, the overall rating follows from those, and every blocker names the team that holds it. Change the ratings to see how the summary at the top responds.</p>
+        </div>
+        <div class="phil-b">
+          <dl class="facts">
+            <div><dt>Used for</dt><dd>Weekly project updates</dd></div>
+            <div><dt>Audience</dt><dd>Sponsors and leadership</dd></div>
+            <div><dt>Length</dt><dd>One page</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="xd">
+        <div class="ow p3-ow">
+          <div class="oh">
+            <div>
+              <b class="otitle">Weekly status</b>
+              <span class="ohint">Click a rating to change it</span>
+            </div>
+            
+            <div class="pv-acts">
+              <button class="ofs" id="fsBtn" type="button" aria-label="Full screen" aria-pressed="false"><svg class="e" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span class="t">Full screen</span><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            </div>
+          </div>
+          <div class="ocv p3-cv"><div class="p3" id="art" data-art="status"></div></div>
+        </div>
+        <p class="dv-note">Every name, figure and organisation here is made up.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <a href="../../../notes/">Notes</a>
+  </footer>
+
+  <script src="../../../js/fullscreen.js?v=20261121m"></script>
+  <script src="../../../js/p3m.js?v=20261121r"></script>
+  <script>
+    (function () {
+      var page = document.querySelector("[data-reveal]");
+      requestAnimationFrame(function () { requestAnimationFrame(function () { page.classList.add("on"); }); });
+    })();
+  </script>
+  <script src="../../../js/foot.js?v=20261121p" defer></script>
+</body>
+</html>

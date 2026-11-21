@@ -238,8 +238,13 @@ a.doc:hover .dstate::after { transform: translateX(4px); }
 .psvg { max-width: 250px; }
 .fold .dname { font-size: 18px; }
 .fold .dfile { margin-top: 6px; }
+.fgrid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 700px) {
   .fgrid { gap: 8px; }
+  .fgrid.three { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .fgrid.three .fold { flex-direction: row; text-align: left; justify-content: flex-start; padding: 14px 16px; }
+  .fgrid.three .fold .dmeta { justify-items: start; }
+  .fgrid.three .psvg { max-width: 92px; }
   .fold { padding: 18px 6px; gap: 12px; }
   .psvg { max-width: 150px; }
   .fold .dname { font-size: 14px; }

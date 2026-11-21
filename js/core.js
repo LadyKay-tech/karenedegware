@@ -84,9 +84,7 @@
       ];
     }
     if (id === "p3mo") {
-      return (data.p3mo || []).map((f) =>
-        f.type === "note" ? slugify(f.text).split("-").slice(0, 4).join("-") + ".md" : slugify(f.name) + ".pdf"
-      );
+      return ["portfolio", "programmes", "projects"].flatMap((k) => [k + "/", ...(data[k] || []).map((p) => k + "/" + slugify(p.title) + ".md")]);
     }
     return [];
   }
