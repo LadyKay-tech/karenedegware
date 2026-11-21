@@ -11,7 +11,7 @@
   };
 
   /* Two sheets under each file give it thickness */
-  const STACK = '<span class="pv-stack"><i></i><i></i></span>';
+  
 
   /* Little light previews of each prototype, drawn in HTML so they stay crisp */
   const tick = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.3l2.3 2.2 4.7-5"/></svg>';
@@ -72,8 +72,8 @@
       .map((p) => {
         const isOpen = p.status === "open";
         const pv = p.thumb
-          ? `<span class="pv pv-shot" aria-hidden="true">${STACK}<span class="pvi"><img src="${root}${p.thumb}" alt="" loading="lazy"></span></span>`
-          : `<span class="pv pv-${p.preview || "blank"}" aria-hidden="true">${STACK}<span class="pvi"><span class="pv-doc"><i></i><i></i></span>${PREVIEW[p.preview] || ""}<span class="pv-doc pv-end"><i></i><i></i><i></i></span></span></span>`;
+          ? `<span class="shot" aria-hidden="true"><img src="${root}${p.thumb}" alt="" loading="lazy"><i class="shine"></i></span>`
+          : `<span class="shot empty" aria-hidden="true"><span>In the works</span><i class="shine"></i></span>`;
         const meta =
           `<span class="dmeta">` +
           (p.area ? `<span class="darea cap">${escapeHTML(p.area)}</span>` : "") +
