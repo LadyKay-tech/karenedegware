@@ -202,3 +202,35 @@ a.doc:hover .dstate::after { transform: translateX(4px); }
   .dname { font-size: 13px; }
   .dfile { display: none; }
 }
+
+/* Folders inside a folder */
+.fgrid { grid-template-columns: repeat(auto-fill, minmax(200px, 240px)); gap: 28px 22px; }
+.fold {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 14px 12px 14px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  transition: background .3s, border-color .3s, transform .4s var(--ease);
+}
+.fold:hover, .fold:focus-visible { background: rgba(255, 255, 255, .04); border-color: var(--line-strong); transform: translateY(-3px); outline: none; }
+.psvg { display: block; width: 100%; max-width: 200px; height: auto; overflow: visible; }
+.psvg .pp, .psvg .pfront { transition: transform .5s var(--ease); transform-box: fill-box; }
+.psvg .pfront { transform-origin: 50% 100%; }
+.fold:hover .psvg .pp, .fold:focus-visible .psvg .pp { transform: translateY(-9px); }
+.fold:hover .psvg .pfront, .fold:focus-visible .psvg .pfront { transform: scaleY(.93) skewX(-2deg); }
+.fold .dname { font-size: 16px; }
+.fold .dfile { overflow-wrap: normal; }
+@media (max-width: 700px) {
+  .fgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 10px; }
+  .fold { padding: 10px 6px; }
+  .fold .dname { font-size: 14px; }
+  .fold .dfile { display: block; }
+}
+
+/* Products not added yet */
+.pv-soon {
+  justify-content: center; margin: auto 0;
+  padding: .5em .8em; border-radius: 99px;
+  box-shadow: inset 0 0 0 1px #cfc9bd;
+  color: var(--p-mute); font-weight: 500; letter-spacing: .02em;
+}

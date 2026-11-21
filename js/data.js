@@ -20,6 +20,19 @@ window.KE_DATA = {
     }
   ],
 
+  /* Inside Product Design & Philosophy: two plain folders */
+  design: [
+    { id: "products", name: "Products", path: "products/", note: "Things I’ve designed and built" },
+    { id: "philosophy", name: "Design Philosophy", path: "philosophy/", note: "Principles, each with a prototype" }
+  ],
+
+  /* My products. Placeholders until the real ones are added. */
+  products: [
+    { slug: "product-one", title: "Product one", area: "Product", status: "soon" },
+    { slug: "product-two", title: "Product two", area: "Product", status: "soon" },
+    { slug: "product-three", title: "Product three", area: "Product", status: "soon" }
+  ],
+
   principles: [
     { slug: "activation", title: "A sign-up is not activation", area: "Onboarding", preview: "activation", status: "open", href: "activation/" },
     { slug: "show-the-full-price", title: "Show the full price before the last step", area: "Ecommerce", preview: "checkout", status: "open", href: "show-the-full-price/" },

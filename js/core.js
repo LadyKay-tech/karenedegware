@@ -48,10 +48,41 @@
 <g class="tab"><rect x="102.5" y="52" width="15" height="11" rx="3" fill="url(#${u}m)"/><rect x="105.5" y="61" width="9" height="19" rx="4.5" fill="url(#${u}m)"/><rect x="107.8" y="64" width="4.4" height="12" rx="2.2" fill="#1a1a1c"/></g></svg>`;
   }
 
+  /* A plain (already unzipped) glass folder, used for folders inside a folder */
+  function plainFolderSVG(count = 3) {
+    const u = "p" + uid++;
+    const front = "M8 60q0-10 10-10h164q10 0 10 10v74q0 12-12 12H20q-12 0-12-12z";
+    const sheets = Array.from({ length: Math.min(3, Math.max(1, count)) }, (_, i) => {
+      const r = [-2.2, 1.6, -0.6][i];
+      const y = 24 + i * 3;
+      return `<rect class="ps ps${i}" x="${26 + i * 3}" y="${y}" width="${148 - i * 6}" height="96" rx="4" fill="url(#${u}p${i})" transform="rotate(${r} 100 80)"/>`;
+    }).join("");
+    return `<svg class="psvg" viewBox="0 0 200 160" aria-hidden="true"><defs>
+<linearGradient id="${u}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".13"/><stop offset="1" stop-color="#fff" stop-opacity=".03"/></linearGradient>
+<linearGradient id="${u}f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a5a62" stop-opacity=".7"/><stop offset=".3" stop-color="#2c2c31" stop-opacity=".78"/><stop offset="1" stop-color="#111114" stop-opacity=".9"/></linearGradient>
+<linearGradient id="${u}e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".5" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".3"/></linearGradient>
+<linearGradient id="${u}s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset=".52" stop-color="#fff" stop-opacity=".14"/><stop offset=".62" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<linearGradient id="${u}p0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a39e94"/><stop offset="1" stop-color="#8b867c"/></linearGradient>
+<linearGradient id="${u}p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4cfc5"/><stop offset="1" stop-color="#bdb7ac"/></linearGradient>
+<linearGradient id="${u}p2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f3ec"/><stop offset="1" stop-color="#ddd8ce"/></linearGradient>
+<radialGradient id="${u}sh"><stop offset="0" stop-color="#000" stop-opacity=".85"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+<ellipse cx="100" cy="150" rx="92" ry="8" fill="url(#${u}sh)"/>
+<path d="M8 26q0-12 12-12h46q6 0 10 4l8 8h96q12 0 12 12v96q0 12-12 12H20q-12 0-12-12z" fill="url(#${u}b)" stroke="rgba(255,255,255,.2)"/>
+<g class="pp">${sheets}</g>
+<g class="pfront"><path d="${front}" fill="url(#${u}f)" stroke="url(#${u}e)"/><path d="${front}" fill="url(#${u}s)"/><path d="M11 56q2-6 9-6h160q7 0 9 6" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.3"/></g></svg>`;
+  }
+
   /* File names shown in the extraction log for a folder */
   function folderLog(id) {
     const data = window.KE_DATA || {};
-    if (id === "product-design") return (data.principles || []).map((p) => slugify(p.title) + ".md");
+    if (id === "product-design") {
+      return [
+        "products/",
+        ...(data.products || []).map((p) => "products/" + slugify(p.title) + ".md"),
+        "design-philosophy/",
+        ...(data.principles || []).map((p) => "design-philosophy/" + slugify(p.title) + ".md")
+      ];
+    }
     if (id === "p3mo") {
       return (data.p3mo || []).map((f) =>
         f.type === "note" ? slugify(f.text).split("-").slice(0, 4).join("-") + ".md" : slugify(f.name) + ".pdf"
@@ -145,6 +176,25 @@
     return run;
   }
 
+  /*
+    True when the folder should open without the unzip: a refresh, the back or
+    forward button, or arriving from somewhere inside the same folder.
+  */
+  function quietEntry(folder) {
+    let type = "";
+    try {
+      const nav = performance.getEntriesByType("navigation")[0];
+      type = nav ? nav.type : performance.navigation && performance.navigation.type === 1 ? "reload" : "";
+    } catch (e) { /* not supported */ }
+    if (type === "reload" || type === "back_forward") return true;
+    try {
+      const ref = new URL(document.referrer);
+      const here = new URL(root + folder.path, location.href);
+      if (ref.origin === location.origin && ref.pathname.startsWith(here.pathname)) return true;
+    } catch (e) { /* no referrer */ }
+    return false;
+  }
+
   /* On a folder page: extract first unless we've just come from the home page */
   async function enterFolder(id) {
     const folder = (window.KE_DATA.folders || []).find((f) => f.id === id);
@@ -152,7 +202,7 @@
     let came = null;
     try { came = sessionStorage.getItem("ke-extracted"); sessionStorage.removeItem("ke-extracted"); } catch (e) { /* storage unavailable */ }
     let run = null;
-    if (folder && came !== id) run = await extract({ zip: folder.zip, files: folderLog(id) });
+    if (folder && came !== id && !quietEntry(folder)) run = await extract({ zip: folder.zip, files: folderLog(id) });
     if (content) requestAnimationFrame(() => requestAnimationFrame(() => content.classList.add("on")));
     if (run) await run.close();
   }
@@ -164,5 +214,5 @@
     document.body.classList.remove("locked");
   });
 
-  window.KE = { root, reduced, wait, escapeHTML, slugify, folderSVG, folderLog, extract, openFolder, enterFolder };
+  window.KE = { root, reduced, wait, escapeHTML, slugify, folderSVG, plainFolderSVG, folderLog, extract, openFolder, enterFolder };
 })();

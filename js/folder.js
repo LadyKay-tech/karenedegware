@@ -1,7 +1,7 @@
 /* Folder pages: build the file view, then play the extraction before showing it */
 (function () {
   "use strict";
-  const { escapeHTML, slugify, enterFolder, root } = window.KE;
+  const { escapeHTML, slugify, enterFolder, root, plainFolderSVG } = window.KE;
   const id = document.body.dataset.folder;
   const data = window.KE_DATA;
 
@@ -53,18 +53,35 @@
       `<span class="pv-ck done"><i>${tick}</i>Address</span>` +
       `<span class="pv-ck done"><i>${tick}</i>Selfie</span>` +
       `<span class="pv-ck now"><i></i>Bank details <em>so payouts reach you</em></span>`,
+    soon: `<span class="pv-soon">In the works</span>`,
     recs:
       `<span class="pv-k">Picked for you</span>` +
       `<span class="pv-tiles"><span><i></i><u>Not for me</u></span><span><i></i><u>It was a gift</u></span></span>`
   };
 
-  function productDesign() {
+  /* Product Design & Philosophy: two folders */
+  function designFolders() {
+    const grid = document.getElementById("files");
+    document.getElementById("count").textContent = `${data.design.length} folders`;
+    const counts = { products: data.products.length, philosophy: data.principles.length };
+    grid.classList.add("fgrid");
+    grid.innerHTML = data.design
+      .map((f) => {
+        const n = counts[f.id] || 0;
+        return `<li><a class="fold" href="${f.path}">${plainFolderSVG(n)}<span class="dmeta"><span class="dname">${escapeHTML(f.name)}</span>` +
+          `<span class="dfile">${n} ${n === 1 ? "file" : "files"} · ${escapeHTML(f.note)}</span></span></a></li>`;
+      })
+      .join("");
+  }
+
+  /* A grid of paper files, used for principles and products */
+  function fileGrid(items, label) {
     const grid = document.getElementById("files");
     const count = document.getElementById("count");
-    const open = data.principles.filter((p) => p.status === "open").length;
-    count.textContent = `${data.principles.length} files, ${open} open`;
+    const open = items.filter((p) => p.status === "open").length;
+    count.textContent = `${items.length} files${open ? `, ${open} open` : `, ${label}`}`;
 
-    grid.innerHTML = data.principles
+    grid.innerHTML = items
       .map((p) => {
         const isOpen = p.status === "open";
         const pv = `<span class="pv pv-${p.preview || "blank"}" aria-hidden="true"><span class="pvi"><span class="pv-doc"><i></i><i></i></span>${PREVIEW[p.preview] || ""}<span class="pv-doc pv-end"><i></i><i></i><i></i></span></span></span>`;
@@ -96,11 +113,16 @@
       .join("");
   }
 
-  if (id === "product-design") productDesign();
+  if (id === "product-design") designFolders();
+  if (id === "philosophy") fileGrid(data.principles, "");
+  if (id === "products") fileGrid(data.products.map((p) => Object.assign({ preview: "soon" }, p)), "coming soon");
   if (id === "p3mo") p3mo();
 
+  /* Escape closes the folder: subfolders go up one level, top folders go home */
+  const sub = id === "philosophy" || id === "products";
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") window.location.href = root || "./";
+    if (e.key !== "Escape" || document.querySelector(".ow.fs")) return;
+    window.location.href = sub ? "../" : root || "./";
   });
 
   enterFolder(id);
