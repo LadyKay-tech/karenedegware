@@ -252,3 +252,7 @@ a.doc:hover .dstate::after { transform: translateX(4px); }
 @media (max-width: 700px) {
   .bgrid.balanced { gap: 16px 8px; }
 }
+
+/* A file whose preview is a real screenshot */
+.pv-shot .pvi { padding: 9% 9% 9%; }
+.pv-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .12), 0 6px 14px -8px rgba(0, 0, 0, .5); }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meeqly | Karen Edegware</title>
+  <meta name="description" content="Meeqly, a talent discovery app for new music where listeners vote once a day and weekly winners rise. Live preview.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta name="theme-color" content="#0c0c0c">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500&family=Montserrat:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../../../css/base.css?v=20261121g">
+  <link rel="stylesheet" href="../../../css/principle.css?v=20261121g">
+  <link rel="stylesheet" href="../../../css/phone.css?v=20261121g">
+  <link rel="stylesheet" href="../../../css/product.css?v=20261121g">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="../../../" aria-label="Karen Edegware, home"><span class="wmk">Karen <b>Edegware</b></span></a>
+    <a class="pill" href="mailto:karenjimmyede@gmail.com">Get in touch</a>
+  </header>
+
+  <main class="page-main reveal" data-reveal>
+    <div class="page-bar">
+      <nav class="crumbs cap" aria-label="Breadcrumb">
+        <a href="../../../">Home</a><span aria-hidden="true">/</span>
+        <a href="../../">Product Design &amp; Philosophy</a><span aria-hidden="true">/</span>
+        <a href="../">Products</a><span aria-hidden="true">/</span>
+        <span>meeqly.md</span>
+      </nav>
+      <a class="pill pbtn" href="../" aria-label="Back to products"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg><span>Back to products</span></a>
+    </div>
+
+    <article class="principle product">
+      <div class="phil">
+        <span class="lbl cap">Product · Music · Mobile app</span>
+        <h1>Meeqly.</h1>
+        <p>Meeqly is a talent discovery app for new music. Upcoming artists upload a 60 second clip, listeners vote once a day, and every week the songs with the most votes win. The monthly winner gets a studio session.</p>
+        <p>Plenty of good artists never get past their own followers. Meeqly gives them a fair stage: the same 60 seconds as everyone else, in front of people who came to listen, with the public deciding who rises.</p>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Product design and build</dd></div>
+          <div><dt>Platform</dt><dd>iOS and Android, with this web preview</dd></div>
+          <div><dt>Built with</dt><dd>React Native, Expo, Supabase, Node.js</dd></div>
+          <div><dt>Stage</dt><dd>MVP</dd></div>
+        </dl>
+        <h2 class="sub">Decisions that shaped it</h2>
+        <ul class="calls">
+          <li><b>One vote a day.</b> Scarcity makes a vote mean something, keeps spam out, and gives listeners a reason to come back tomorrow.</li>
+          <li><b>Sixty seconds, for everyone.</b> A level stage for artists, and a quick judgement for listeners scrolling between other things.</li>
+          <li><b>A Hall of Fame.</b> Winning lasts longer than a week, so every winner becomes a reason for the next artist to enter.</li>
+        </ul>
+      </div>
+
+      <div class="xd">
+        <div class="ow">
+          <div class="oh">
+            <div>
+              <b class="otitle">Meeqly, running live</b>
+              <span class="ohint">Sample artists and music made for this page</span>
+            </div>
+            <div class="pv-acts">
+              <a class="pv-btn" href="app/" target="_blank" rel="noopener">Open in a new tab <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+              <button class="pv-btn" type="button" id="pvReset">Reset</button>
+              <button class="ofs" id="fsBtn" type="button" aria-label="Full screen" aria-pressed="false"><svg class="e" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span class="t">Full screen</span><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            </div>
+          </div>
+          <div class="ocv ocv-phone pv-live">
+            <div class="app app-live"><iframe id="pvFrame" src="app/" title="Meeqly live preview" allow="autoplay" loading="lazy"></iframe></div>
+            <aside class="ph-notes">
+              <span class="ocl">Things to try</span>
+              <div class="ph-note good"><i></i><span>Tap a heart to vote. You get one vote a day, just like the real thing</span></div>
+              <div class="ph-note good"><i></i><span>Tap a cover to open the track and play the clip</span></div>
+              <div class="ph-note good"><i></i><span>Open Winners for the Hall of Fame</span></div>
+              <div class="ph-note good"><i></i><span>Try Upload to see the artist side</span></div>
+              <p class="pv-small">Votes and uploads stay in your browser. Reset starts it fresh.</p>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <a href="../../../notes/">Notes</a>
+  </footer>
+
+  <script src="../../../js/fullscreen.js?v=20261121g"></script>
+  <script>
+    (function () {
+      var page = document.querySelector("[data-reveal]");
+      requestAnimationFrame(function () { requestAnimationFrame(function () { page.classList.add("on"); }); });
+      var frame = document.getElementById("pvFrame");
+      document.getElementById("pvReset").addEventListener("click", function () {
+        try {
+          var w = frame.contentWindow;
+          if (w && w.localStorage) w.localStorage.clear();
+        } catch (e) { /* ignore */ }
+        frame.src = "app/?t=" + Date.now();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+/* Product pages: write-up on the left, the real product running on the right */
+.product .phil h2.sub { margin: 30px 0 12px; font: 500 12px/1.3 Montserrat, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; margin: 26px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); max-width: 46ch; }
+.facts dt { font: 500 10.5px/1.3 Montserrat, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
+.facts dd { margin: 0; color: var(--ink); font-size: 14px; line-height: 1.45; }
+.calls { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; max-width: 44ch; }
+.calls li { color: #bebab3; font-size: 15px; line-height: 1.6; font-weight: 300; padding-left: 16px; position: relative; }
+.calls li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
+.calls b { color: var(--ink); font-weight: 500; }
+
+.pv-acts { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pv-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 12px; border-radius: 99px; background: #fff; color: #1a1a1a; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .14); font-size: 12.5px; font-weight: 500; white-space: nowrap; }
+.pv-btn:hover { box-shadow: inset 0 0 0 1px #1a1a1a; }
+.pv-btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.app-live { width: 375px; height: 740px; background: #0a0a0a; }
+.app-live iframe { display: block; width: 100%; height: 100%; border: 0; background: #0a0a0a; }
+.pv-small { margin: 4px 0 0; font-size: 12px; color: #8a867f; line-height: 1.5; }
+@container (max-width: 600px) {
+  .app-live { width: 100%; max-width: 390px; height: 700px; }
+  .pv-acts .pv-btn:first-child { display: none; }
+}
+.ow.fs .app-live { width: 100%; height: 100%; max-width: none; }
+.ow.fs .pv-acts .pv-btn { display: none; }
+@media (max-width: 900px) {
+  .product .phil { position: static; }
+}
+.ow.fs .pv-acts { margin-left: auto; }

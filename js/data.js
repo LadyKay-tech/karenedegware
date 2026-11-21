@@ -28,7 +28,7 @@ window.KE_DATA = {
 
   /* My products. Placeholders until the real ones are added. */
   products: [
-    { slug: "product-one", title: "Product one", area: "Product", status: "soon" },
+    { slug: "meeqly", title: "Meeqly", area: "Music · Mobile app", status: "open", href: "meeqly/", thumb: "assets/products/meeqly.jpg", note: "Live preview" },
     { slug: "product-two", title: "Product two", area: "Product", status: "soon" },
     { slug: "product-three", title: "Product three", area: "Product", status: "soon" }
   ],

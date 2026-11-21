@@ -68,13 +68,15 @@
     grid.innerHTML = items
       .map((p) => {
         const isOpen = p.status === "open";
-        const pv = `<span class="pv pv-${p.preview || "blank"}" aria-hidden="true"><span class="pvi"><span class="pv-doc"><i></i><i></i></span>${PREVIEW[p.preview] || ""}<span class="pv-doc pv-end"><i></i><i></i><i></i></span></span></span>`;
+        const pv = p.thumb
+          ? `<span class="pv pv-shot" aria-hidden="true"><span class="pvi"><img src="${root}${p.thumb}" alt="" loading="lazy"></span></span>`
+          : `<span class="pv pv-${p.preview || "blank"}" aria-hidden="true"><span class="pvi"><span class="pv-doc"><i></i><i></i></span>${PREVIEW[p.preview] || ""}<span class="pv-doc pv-end"><i></i><i></i><i></i></span></span></span>`;
         const meta =
           `<span class="dmeta">` +
           (p.area ? `<span class="darea cap">${escapeHTML(p.area)}</span>` : "") +
           `<span class="dname">${escapeHTML(p.title)}</span>` +
           `<span class="dfile">${escapeHTML(slugify(p.title))}.md</span></span>` +
-          `<span class="dstate cap">${isOpen ? "Open file" : "Coming soon"}</span>`;
+          `<span class="dstate cap">${isOpen ? (p.note || "Open file") : "Coming soon"}</span>`;
         return isOpen
           ? `<li><a class="doc open" href="${p.href}">${pv}${meta}</a></li>`
           : `<li><div class="doc" aria-disabled="true">${pv}${meta}</div></li>`;
