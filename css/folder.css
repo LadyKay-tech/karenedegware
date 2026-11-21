@@ -234,3 +234,17 @@ a.doc:hover .dstate::after { transform: translateX(4px); }
   box-shadow: inset 0 0 0 1px #cfc9bd;
   color: var(--p-mute); font-weight: 500; letter-spacing: .02em;
 }
+
+/* Two folders share the full width */
+.fgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.fold { align-items: center; text-align: center; padding: 34px 20px 30px; gap: 16px; }
+.fold .dmeta { display: grid; justify-items: center; }
+.psvg { max-width: 250px; }
+.fold .dname { font-size: 18px; }
+.fold .dfile { margin-top: 6px; }
+@media (max-width: 700px) {
+  .fgrid { gap: 8px; }
+  .fold { padding: 18px 6px; gap: 12px; }
+  .psvg { max-width: 150px; }
+  .fold .dname { font-size: 14px; }
+}
