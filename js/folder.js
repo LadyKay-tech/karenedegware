@@ -135,7 +135,7 @@
   /* Files tilt gently toward the cursor */
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && window.matchMedia("(hover: hover)").matches) {
     document.addEventListener("pointermove", (e) => {
-      const doc = e.target.closest && e.target.closest("a.doc, a.fold");
+      const doc = e.target.closest && e.target.closest("a.fold");
       document.querySelectorAll(".tilting").forEach((d) => { if (d !== doc) { d.classList.remove("tilting"); d.style.removeProperty("--rx"); d.style.removeProperty("--ry"); } });
       if (!doc) return;
       const r = doc.getBoundingClientRect();
