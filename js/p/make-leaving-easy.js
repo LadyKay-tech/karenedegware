@@ -6,7 +6,7 @@
   const TABS = [["Home", "home"], ["Search", "search"], ["Library", "library"], ["Premium", "spark"]];
 
   const tabs = (active) => `<nav class="ap-tabs mu-tabs">${TABS.map(([l, ic]) => `<span class="${l === active ? "on" : ""}">${icon(ic)}<em>${l}</em></span>`).join("")}</nav>`;
-  const player = () => `<div class="mu-player">${cover(5)}<div><b>Midnight Drive</b><span>Lumen</span></div>${icon("heart")}<span class="mu-play">${icon("play")}</span></div>`;
+  const player = () => `<div class="mu-player">${cover("midnight")}<div><b>Midnight Drive</b><span>Lumen</span></div>${icon("heart")}<span class="mu-play">${icon("play")}</span></div>`;
   const back = (t) => `<div class="ap-top mu-top"><span class="ap-ib">${icon("back")}</span><b>${t}</b></div>`;
   const rows = (list) => `<div class="mu-list">${list.map(([a, b]) => `<div class="mu-row"><span><b>${a}</b>${b ? `<em>${b}</em>` : ""}</span>${icon("chev")}</div>`).join("")}</div>`;
   const plan = () => `<div class="mu-plan"><span class="mu-pill">Your plan</span><b>Premium Individual</b><span>£11.99 a month · Next payment 30 November</span><div class="mu-perks"><span>${icon("dl")}Downloads</span><span>${icon("note")}No ads</span><span>${icon("spark")}Lossless</span></div></div>`;
@@ -14,11 +14,11 @@
 
   const home = () => `<div class="scr mu"><div class="mu-head"><button type="button" class="av mu-av" data-act="acct" data-main>FA</button><div class="mu-chips"><span class="on">All</span><span>Music</span><span>Podcasts</span></div></div>
     <div class="ap-body" style="gap:12px">
-      <div class="mu-grid">${["Liked Songs", "Afro Chill", "Daily Mix 1", "Focus Flow", "Gym Hits", "Late Nights"].map((n, i) => `<div class="mu-tile">${cover(i)}<b>${n}</b></div>`).join("")}</div>
+      <div class="mu-grid">${[["Liked Songs", "liked"], ["Afro Chill", "afro"], ["Daily Mix 1", "daily"], ["Focus Flow", "focus"], ["Gym Hits", "gym"], ["Late Nights", "late"]].map(([n, k]) => `<div class="mu-tile">${cover(k)}<b>${n}</b></div>`).join("")}</div>
       <span class="mu-h">Made for Femi</span>
-      <div class="mu-cards">${[["Discover Weekly", 1], ["Release Radar", 2], ["On Repeat", 6]].map(([n, i]) => `<div>${cover(i, n.split(" ")[0])}<span>${n}</span></div>`).join("")}</div>
+      <div class="mu-cards">${[["Discover Weekly", "discover", "Your weekly mixtape"], ["Release Radar", "radar", "New from artists you follow"], ["On Repeat", "repeat", "Songs you can’t stop playing"]].map(([n, k, d]) => `<div>${cover(k)}<b>${n}</b><span>${d}</span></div>`).join("")}</div>
       <span class="mu-h">Recently played</span>
-      <div class="mu-cards">${[["Sunday Slow", 3], ["Highlife Gold", 7], ["Run Club", 0]].map(([n, i]) => `<div>${cover(i)}<span>${n}</span></div>`).join("")}</div>
+      <div class="mu-cards">${[["Sunday Slow", "sunday", "Playlist · 42 songs"], ["Highlife Gold", "highlife", "Playlist · 58 songs"], ["Run Club", "run", "Playlist · 2h 10m"]].map(([n, k, d]) => `<div>${cover(k)}<b>${n}</b><span>${d}</span></div>`).join("")}</div>
     </div>${player()}${tabs("Home")}</div>`;
 
   const A = [
@@ -28,7 +28,7 @@
       <div style="flex:1"></div>${btn("Manage plan", "next", "mu-tiny")}</div></div>`,
     () => `<div class="scr mu">${back("Premium")}<div class="ap-body">${plan()}
       ${main("Change plan", "decoy", "mu")}<div style="flex:1"></div>${btn("Other options", "next", "mu-tiny")}</div></div>`,
-    () => `<div class="scr mu"><div class="mu-fade">${[0, 1, 2, 3, 4, 5].map((i) => cover(i)).join("")}</div><div class="ap-body" style="justify-content:flex-end">
+    () => `<div class="scr mu"><div class="mu-fade">${["liked", "afro", "late", "discover", "highlife", "sunday"].map((k) => cover(k)).join("")}</div><div class="ap-body" style="justify-content:flex-end">
       <h3 class="mu-big">Are you sure?</h3><p class="mu-p">You’ll lose 2,341 downloaded songs, your offline playlists and lossless audio.</p>
       ${main("Keep Premium", "back", "mu")}${btn("Continue", "next", "mu-text")}</div></div>`,
     () => `<div class="scr mu"><div class="ap-body" style="justify-content:center">

@@ -85,11 +85,59 @@
       <path d="M108 44l12 9M114 36l12 9M120 28l12 9" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
       <circle cx="196" cy="86" r="4" fill="rgba(255,255,255,.6)"/></svg>`;
 
-  /* Album and playlist cover art: soft gradients with a shape */
-  const COVERS = [["#ff6a88", "#ff99ac"], ["#5a4bf0", "#9d8cff"], ["#0f9b8e", "#5fd3bc"], ["#f7971e", "#ffd200"], ["#1f1c2c", "#928dab"], ["#e94057", "#8a2387"], ["#2b5876", "#4e4376"], ["#ee9ca7", "#ffdde1"]];
-  const cover = (i, label = "") => {
-    const [a, b] = COVERS[i % COVERS.length];
-    return `<span class="cv" style="background:linear-gradient(135deg,${a},${b})">${label ? `<em>${label}</em>` : ""}<i class="cv-s${i % 3}"></i></span>`;
+  /* Album and playlist cover art: original illustrated covers with a fine grain */
+  let cvId = 0;
+  const T = (x, y, txt, size, opts = "") => `<text x="${x}" y="${y}" font-family="Inter Tight,Inter,system-ui,sans-serif" font-size="${size}" ${opts}>${txt}</text>`;
+  const ART = {
+    liked: (u) => `<defs><linearGradient id="${u}a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3d1fd1"/><stop offset="1" stop-color="#b9d3ff"/></linearGradient></defs>
+      <rect width="100" height="100" fill="url(#${u}a)"/><path d="M50 72S28 58.5 28 43a11 11 0 0 1 22-4.5A11 11 0 0 1 72 43c0 15.5-22 29-22 29z" fill="#fff"/>`,
+    afro: (u) => `<defs><linearGradient id="${u}a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb36b"/><stop offset=".45" stop-color="#ff5f6d"/><stop offset="1" stop-color="#5b1f5f"/></linearGradient></defs>
+      <rect width="100" height="100" fill="url(#${u}a)"/><circle cx="50" cy="60" r="24" fill="#ffe08a"/>
+      <g fill="#ff7a6a"><rect x="20" y="58" width="60" height="2.4"/><rect x="20" y="64" width="60" height="3"/><rect x="20" y="71" width="60" height="3.6"/></g>
+      <path d="M0 78q25-6 50 0t50 0v22H0z" fill="#3a1640"/><path d="M72 78c-1-12 1-22 4-30m0 0c-6-1-11 2-14 6m14-6c5-3 11-2 14 2m-14-2c-2-5-7-7-12-6m12 6c3-5 9-6 13-4" stroke="#3a1640" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      ${T(8, 16, "Afro Chill", 9, 'font-weight="800" fill="#fff"')}`,
+    daily: (u) => `<rect width="100" height="100" fill="#0f8f83"/><circle cx="74" cy="30" r="34" fill="#13a594"/><circle cx="74" cy="30" r="20" fill="#5fd3bc"/>
+      <rect x="0" y="0" width="100" height="100" fill="none"/>${T(8, 18, "Daily Mix", 8, 'font-weight="700" fill="#e9fffb"')}${T(6, 92, "01", 40, 'font-weight="800" fill="#fff" letter-spacing="-2"')}`,
+    focus: (u) => `<defs><radialGradient id="${u}a" cx=".5" cy=".55" r=".7"><stop offset="0" stop-color="#fff4dc"/><stop offset="1" stop-color="#e7c08f"/></radialGradient></defs>
+      <rect width="100" height="100" fill="url(#${u}a)"/>${[10, 18, 26, 34, 42, 50].map((r, i) => `<circle cx="50" cy="55" r="${r}" fill="none" stroke="#b9773e" stroke-opacity="${0.55 - i * 0.07}" stroke-width="1.2"/>`).join("")}
+      <circle cx="50" cy="55" r="5" fill="#b9773e"/>${T(8, 16, "focus flow", 8.5, 'font-weight="600" fill="#6b3f17"')}`,
+    gym: (u) => `<rect width="100" height="100" fill="#141414"/><g transform="rotate(-24 50 50)"><rect x="-20" y="30" width="140" height="12" fill="#ff3b3b"/><rect x="-20" y="46" width="140" height="7" fill="#ff7a3d"/><rect x="-20" y="57" width="140" height="4" fill="#ffc23d"/></g>
+      ${T(8, 90, "GYM", 30, 'font-weight="900" font-style="italic" fill="#fff" letter-spacing="-1"')}`,
+    late: (u) => `<defs><linearGradient id="${u}a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#090d2e"/><stop offset="1" stop-color="#43207a"/></linearGradient></defs>
+      <rect width="100" height="100" fill="url(#${u}a)"/>${[[14, 14], [30, 26], [82, 12], [62, 22], [90, 36], [8, 40]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r=".9" fill="#fff"/>`).join("")}
+      <circle cx="70" cy="30" r="12" fill="#f8e7bf"/><circle cx="75" cy="26" r="11" fill="#13163f"/>
+      <path d="M0 100V70h10v-8h8v12h7V58h10v16h6v-9h9v-12h10v24h7v-6h9v-14h10v18h7v-8h7v41z" fill="#0b0b1e"/>
+      ${[[30, 64], [32, 70], [52, 58], [54, 66], [74, 62], [82, 74], [14, 74]].map(([x, y]) => `<rect x="${x}" y="${y}" width="1.8" height="1.8" fill="#ffd27a"/>`).join("")}`,
+    discover: (u) => `<defs><linearGradient id="${u}a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4b3be8"/><stop offset="1" stop-color="#d061ff"/></linearGradient></defs>
+      <rect width="100" height="100" fill="url(#${u}a)"/><g fill="#fff" fill-opacity=".35">${Array.from({ length: 22 }, (_, i) => { const h = 6 + Math.abs(Math.sin(i * 1.7)) * 26; return `<rect x="${6 + i * 4}" y="${52 - h / 2}" width="2.4" height="${h}" rx="1.2"/>`; }).join("")}</g>
+      ${T(8, 82, "Discover", 15, 'font-weight="800" fill="#fff" letter-spacing="-.5"')}${T(8, 93, "Weekly", 9, 'font-weight="600" fill="#f1e6ff"')}`,
+    radar: (u) => `<defs><linearGradient id="${u}a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d2a33"/><stop offset="1" stop-color="#1f5560"/></linearGradient><linearGradient id="${u}b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5fd3bc" stop-opacity="0"/><stop offset="1" stop-color="#5fd3bc" stop-opacity=".7"/></linearGradient></defs>
+      <rect width="100" height="100" fill="url(#${u}a)"/>${[12, 22, 32, 42].map((r) => `<circle cx="50" cy="44" r="${r}" fill="none" stroke="#5fd3bc" stroke-opacity=".35"/>`).join("")}
+      <path d="M50 44L92 44A42 42 0 0 0 79.7 14.3z" fill="url(#${u}b)"/><circle cx="72" cy="30" r="2.4" fill="#c9fff3"/><circle cx="36" cy="58" r="1.8" fill="#c9fff3"/>
+      ${T(8, 86, "Release", 12, 'font-weight="800" fill="#fff"')}${T(8, 96, "Radar", 9, 'font-weight="600" fill="#bdf3e7"')}`,
+    repeat: (u) => `<defs><linearGradient id="${u}a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3d6b"/><stop offset="1" stop-color="#ffab7a"/></linearGradient></defs>
+      <rect width="100" height="100" fill="url(#${u}a)"/><g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".92"><path d="M28 40h38l-8-8M72 58H34l8 8"/></g>
+      ${T(8, 92, "On Repeat", 12, 'font-weight="800" fill="#fff"')}`,
+    sunday: (u) => `<defs><linearGradient id="${u}a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd59e"/><stop offset=".6" stop-color="#f7a8bf"/><stop offset=".6" stop-color="#7fb4dd"/><stop offset="1" stop-color="#3f7fb6"/></linearGradient></defs>
+      <rect width="100" height="100" fill="url(#${u}a)"/><path d="M28 60a22 22 0 0 1 44 0z" fill="#fff3d1"/>
+      ${[66, 74, 82, 90].map((y, i) => `<path d="M${10 + i * 4} ${y}h${80 - i * 8}" stroke="#fff" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round"/>`).join("")}
+      ${T(8, 16, "sunday slow", 9, 'font-weight="700" fill="#7a3550"')}`,
+    highlife: (u) => `<rect width="100" height="100" fill="#20160c"/><circle cx="58" cy="56" r="38" fill="#0e0e0e"/>${[34, 30, 26, 22, 18].map((r) => `<circle cx="58" cy="56" r="${r}" fill="none" stroke="#2c2c2c" stroke-width=".8"/>`).join("")}
+      <circle cx="58" cy="56" r="12" fill="#d9a521"/><circle cx="58" cy="56" r="2" fill="#20160c"/><path d="M30 30a40 40 0 0 1 20-12" stroke="#fff" stroke-opacity=".2" stroke-width="3" fill="none" stroke-linecap="round"/>
+      ${T(8, 15, "HIGHLIFE", 9, 'font-weight="800" fill="#e8b93a" letter-spacing="1.5"')}${T(8, 25, "GOLD", 9, 'font-weight="800" fill="#e8b93a" letter-spacing="1.5"')}`,
+    run: (u) => `<rect width="100" height="100" fill="#d4573d"/><g fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="1.5">${[0, 8, 16, 24].map((d) => `<path d="M${-10 + d} 110C${10 + d} 60 ${50 + d} 40 ${110} ${30 + d}"/>`).join("")}</g>
+      ${T(8, 20, "RUN", 18, 'font-weight="900" fill="#fff" letter-spacing="-.5"')}${T(8, 34, "CLUB", 18, 'font-weight="900" fill="#ffd8cc" letter-spacing="-.5"')}`,
+    midnight: (u) => `<defs><linearGradient id="${u}a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a0b33"/><stop offset=".55" stop-color="#5a1a6b"/><stop offset=".55" stop-color="#140822"/></linearGradient><linearGradient id="${u}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd36b"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs>
+      <rect width="100" height="100" fill="url(#${u}a)"/><circle cx="50" cy="52" r="20" fill="url(#${u}b)"/><g fill="#5a1a6b"><rect x="28" y="44" width="44" height="2"/><rect x="28" y="49" width="44" height="2.6"/></g>
+      <g stroke="#ff4dd2" stroke-opacity=".8" stroke-width="1"><path d="M50 56L10 100M50 56L90 100M50 56L35 100M50 56L65 100"/><path d="M0 64h100M0 72h100M0 84h100" stroke-opacity=".4"/></g>`
+  };
+  const KEYS = Object.keys(ART);
+  const cover = (key) => {
+    const k = typeof key === "number" ? KEYS[key % KEYS.length] : key;
+    const u = "cv" + cvId++;
+    return `<span class="cv"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${ART[k](u)}
+      <filter id="${u}n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0"/></filter>
+      <rect width="100" height="100" filter="url(#${u}n)" opacity=".16" style="mix-blend-mode:overlay"/></svg></span>`;
   };
 
   window.KEPhone = { icon, av, tabs, top, btn, main, row, banner, sheet, ring, toast, shoe, cover };
