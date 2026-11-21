@@ -256,3 +256,42 @@ a.doc:hover .dstate::after { transform: translateX(4px); }
 /* A file whose preview is a real screenshot */
 .pv-shot .pvi { padding: 9% 9% 9%; }
 .pv-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .12), 0 6px 14px -8px rgba(0, 0, 0, .5); }
+
+/* ===== Depth: files lean back like the folders on the home page ===== */
+.pvw { position: relative; display: block; width: 100%; max-width: 138px; perspective: 620px; }
+.pvw .pv {
+  max-width: none;
+  transform-origin: 50% 100%;
+  transform: rotateX(14deg);
+  transition: transform .55s var(--ease), filter .55s var(--ease);
+  filter: drop-shadow(0 18px 18px rgba(0, 0, 0, .5)) drop-shadow(0 3px 3px rgba(0, 0, 0, .35));
+}
+a.doc:hover .pv, a.doc:focus-visible .pv {
+  transform: rotateX(calc(3deg + var(--rx, 0deg))) rotateY(var(--ry, 0deg)) translateY(-8px);
+  filter: drop-shadow(0 28px 24px rgba(0, 0, 0, .55)) drop-shadow(0 4px 4px rgba(0, 0, 0, .3));
+}
+.pv::before { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -3px 0 rgba(0, 0, 0, .06); }
+/* the paper underneath */
+.pv-stack { position: absolute; inset: 0; z-index: -1; }
+.pv-stack i { position: absolute; inset: 0; border-radius: 4px; transition: transform .55s var(--ease); }
+.pv-stack i:first-child { background: linear-gradient(170deg, #d9d4c9, #c3bdb1); transform: translate(3px, 4px) rotate(1.2deg); }
+.pv-stack i:last-child { background: linear-gradient(170deg, #b9b3a7, #a29c90); transform: translate(6px, 8px) rotate(2.4deg); }
+a.doc:hover .pv-stack i:first-child { transform: translate(4px, 6px) rotate(2deg); }
+a.doc:hover .pv-stack i:last-child { transform: translate(8px, 12px) rotate(3.6deg); }
+/* a soft sheen across the sheet */
+.pvi::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(118deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0) 62%, rgba(0, 0, 0, .05)); mix-blend-mode: soft-light; }
+.pv-shot .pvi::after { mix-blend-mode: screen; opacity: .35; }
+/* shadow on the floor */
+.pv-floor { position: absolute; left: 6%; right: -2%; bottom: -10px; height: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .7), transparent); transition: transform .55s var(--ease), opacity .55s; }
+a.doc:hover .pv-floor { transform: scale(.82); opacity: .6; }
+.doc[aria-disabled="true"] .pvw { opacity: .8; }
+.doc[aria-disabled="true"] .pv { opacity: 1; }
+.doc { padding-top: 14px; }
+
+/* Folders inside a folder lean back too */
+.fold { perspective: 800px; }
+.fold .psvg { transform-origin: 50% 100%; transform: rotateX(16deg); transition: transform .55s var(--ease); }
+.fold:hover .psvg, .fold:focus-visible .psvg { transform: rotateX(calc(4deg + var(--rx, 0deg))) rotateY(var(--ry, 0deg)) translateY(-6px); }
+@media (prefers-reduced-motion: reduce) {
+  .pvw .pv, .fold .psvg { transform: none !important; }
+}

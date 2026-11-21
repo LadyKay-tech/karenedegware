@@ -10,6 +10,9 @@
     doc: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M3.5 1.5h6l3 3v10h-9z"/><path d="M9.5 1.5v3h3"/></svg>'
   };
 
+  /* Two sheets under each file give it thickness */
+  const STACK = '<span class="pv-stack"><i></i><i></i></span>';
+
   /* Little light previews of each prototype, drawn in HTML so they stay crisp */
   const tick = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 6.3l2.3 2.2 4.7-5"/></svg>';
   const PREVIEW = {
@@ -69,17 +72,18 @@
       .map((p) => {
         const isOpen = p.status === "open";
         const pv = p.thumb
-          ? `<span class="pv pv-shot" aria-hidden="true"><span class="pvi"><img src="${root}${p.thumb}" alt="" loading="lazy"></span></span>`
-          : `<span class="pv pv-${p.preview || "blank"}" aria-hidden="true"><span class="pvi"><span class="pv-doc"><i></i><i></i></span>${PREVIEW[p.preview] || ""}<span class="pv-doc pv-end"><i></i><i></i><i></i></span></span></span>`;
+          ? `<span class="pv pv-shot" aria-hidden="true">${STACK}<span class="pvi"><img src="${root}${p.thumb}" alt="" loading="lazy"></span></span>`
+          : `<span class="pv pv-${p.preview || "blank"}" aria-hidden="true">${STACK}<span class="pvi"><span class="pv-doc"><i></i><i></i></span>${PREVIEW[p.preview] || ""}<span class="pv-doc pv-end"><i></i><i></i><i></i></span></span></span>`;
         const meta =
           `<span class="dmeta">` +
           (p.area ? `<span class="darea cap">${escapeHTML(p.area)}</span>` : "") +
           `<span class="dname">${escapeHTML(p.title)}</span>` +
           `<span class="dfile">${escapeHTML(slugify(p.title))}.md</span></span>` +
           `<span class="dstate cap">${isOpen ? (p.note || "Open file") : "Coming soon"}</span>`;
+        const file = `<span class="pvw"><span class="pv-floor"></span>${pv}</span>`;
         return isOpen
-          ? `<li><a class="doc open" href="${p.href}">${pv}${meta}</a></li>`
-          : `<li><div class="doc" aria-disabled="true">${pv}${meta}</div></li>`;
+          ? `<li><a class="doc open" href="${p.href}">${file}${meta}</a></li>`
+          : `<li><div class="doc" aria-disabled="true">${file}${meta}</div></li>`;
       })
       .join("");
   }
@@ -126,6 +130,21 @@
     const g = document.getElementById("files");
     g.classList.add("balanced");
     balance(g);
+  }
+
+  /* Files tilt gently toward the cursor */
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && window.matchMedia("(hover: hover)").matches) {
+    document.addEventListener("pointermove", (e) => {
+      const doc = e.target.closest && e.target.closest("a.doc, a.fold");
+      document.querySelectorAll(".tilting").forEach((d) => { if (d !== doc) { d.classList.remove("tilting"); d.style.removeProperty("--rx"); d.style.removeProperty("--ry"); } });
+      if (!doc) return;
+      const r = doc.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      doc.classList.add("tilting");
+      doc.style.setProperty("--ry", (x * 14).toFixed(2) + "deg");
+      doc.style.setProperty("--rx", (-y * 10).toFixed(2) + "deg");
+    });
   }
 
   /* Escape closes the folder: subfolders go up one level, top folders go home */
