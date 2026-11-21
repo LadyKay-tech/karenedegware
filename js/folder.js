@@ -22,10 +22,6 @@
       `<span class="pv-row"><span>Delivery and fees</span><span>£6.49</span></span>` +
       `<span class="pv-row pv-tot"><span>Total</span><span>£54.49</span></span>` +
       `<span class="pv-btn">Pay £54.49</span>`,
-    savings:
-      `<span class="pv-k">Rent fund</span><span class="pv-big">£640 <em>of £900</em></span>` +
-      `<span class="pv-track"><b style="width:71%"></b></span>` +
-      `<span class="pv-k">£80 added this week</span>`,
     cancel:
       `<span class="pv-h">Before you go</span>` +
       `<span class="pv-chips"><span>Too pricey</span><span class="on">Not using it</span></span>` +
@@ -34,11 +30,6 @@
       `<span class="pv-ok">${tick}20 payments sent</span>` +
       `<span class="pv-k">Send the next batch in one go?</span>` +
       `<span class="pv-btn">Try bulk payouts</span>`,
-    defaults:
-      `<span class="pv-h">Add to your order</span>` +
-      `<span class="pv-cb"><i></i><span>Gift wrap</span><em>£2</em></span>` +
-      `<span class="pv-cb"><i></i><span>Protection plan</span><em>£6</em></span>` +
-      `<span class="pv-cb on"><i>${tick}</i><span>Email receipt</span><em>Free</em></span>`,
     status:
       `<span class="pv-tl done"><i>${tick}</i><span>Sent</span><em>09:12</em></span>` +
       `<span class="pv-tl done"><i>${tick}</i><span>Bank received</span><em>09:13</em></span>` +
@@ -106,10 +97,34 @@
       .join("");
   }
 
+  /*
+    Balanced rows: work out how many files fit across, then spread them evenly
+    over the rows, so 8 files sit 4 and 4 rather than 6 and 2.
+  */
+  function balance(grid) {
+    const MIN = 150, GAP = 14;
+    const fit = () => {
+      const n = grid.children.length;
+      if (!n) return;
+      const w = grid.clientWidth;
+      const most = Math.max(1, Math.floor((w + GAP) / (MIN + GAP)));
+      const rows = Math.ceil(n / most);
+      grid.style.setProperty("--cols", Math.ceil(n / rows));
+    };
+    fit();
+    if ("ResizeObserver" in window) new ResizeObserver(fit).observe(grid);
+    else window.addEventListener("resize", fit);
+  }
+
   if (id === "product-design") designFolders();
   if (id === "philosophy") fileGrid(data.principles, "");
   if (id === "products") fileGrid(data.products.map((p) => Object.assign({ preview: "soon" }, p)), "coming soon");
   if (id === "p3mo") p3mo();
+  if (id === "philosophy" || id === "products") {
+    const g = document.getElementById("files");
+    g.classList.add("balanced");
+    balance(g);
+  }
 
   /* Escape closes the folder: subfolders go up one level, top folders go home */
   const sub = id === "philosophy" || id === "products";

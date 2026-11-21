@@ -242,3 +242,13 @@ a.doc:hover .dstate::after { transform: translateX(4px); }
   .psvg { max-width: 150px; }
   .fold .dname { font-size: 14px; }
 }
+
+/* Files spread evenly over balanced rows (column count set by folder.js) */
+.bgrid.balanced {
+  grid-template-columns: repeat(var(--cols, 4), minmax(0, 220px));
+  justify-content: center;
+  gap: 26px 14px;
+}
+@media (max-width: 700px) {
+  .bgrid.balanced { gap: 16px 8px; }
+}

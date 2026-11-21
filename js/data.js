@@ -36,10 +36,8 @@ window.KE_DATA = {
   principles: [
     { slug: "activation", title: "A sign-up is not activation", area: "Onboarding", preview: "activation", status: "open", href: "activation/" },
     { slug: "show-the-full-price", title: "Show the full price before the last step", area: "Ecommerce", preview: "checkout", status: "open", href: "show-the-full-price/" },
-    { slug: "reward-real-progress", title: "Reward real progress, not empty points", area: "Retention", preview: "savings", status: "open", href: "reward-real-progress/" },
     { slug: "make-leaving-easy", title: "Make leaving easy, and listen on the way out", area: "Subscriptions", preview: "cancel", status: "open", href: "make-leaving-easy/" },
     { slug: "upsell-after-success", title: "Upsell after success, not on a schedule", area: "Expansion", preview: "upsell", status: "open", href: "upsell-after-success/" },
-    { slug: "defaults-are-decisions", title: "Defaults are decisions you make for people", area: "Checkout", preview: "defaults", status: "open", href: "defaults-are-decisions/" },
     { slug: "where-is-my-money", title: "Tell people exactly where their money is", area: "Payments", preview: "status", status: "open", href: "where-is-my-money/" },
     { slug: "explain-every-step", title: "Explain why you need each step", area: "Verification", preview: "kyc", status: "open", href: "explain-every-step/" }
   ],
