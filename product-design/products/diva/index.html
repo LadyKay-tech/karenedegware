@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diva | Karen Edegware</title>
+  <meta name="description" content="Diva, an always-on-top AI command bar that launches specialised AI agents with slash commands or your voice. Live preview.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta name="theme-color" content="#0c0c0c">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500&family=Montserrat:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../../../css/base.css?v=20261121m">
+  <link rel="stylesheet" href="../../../css/principle.css?v=20261121m">
+    <link rel="stylesheet" href="../../../css/product.css?v=20261121m">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="../../../" aria-label="Karen Edegware, home"><span class="wmk">Karen <b>Edegware</b></span></a>
+    <a class="pill" href="mailto:karenjimmyede@gmail.com">Get in touch</a>
+  </header>
+
+  <main class="page-main reveal" data-reveal>
+    <div class="page-bar">
+      <nav class="crumbs cap" aria-label="Breadcrumb">
+        <a href="../../../">Home</a><span aria-hidden="true">/</span>
+        <a href="../../">Product Design &amp; Philosophy</a><span aria-hidden="true">/</span>
+        <a href="../">Products</a><span aria-hidden="true">/</span>
+        <span>diva.md</span>
+      </nav>
+      <a class="pill pbtn" href="../" aria-label="Back to products"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg><span>Back to products</span></a>
+    </div>
+
+    <article class="principle product">
+      <div class="phil">
+        <span class="lbl cap">Product · AI · Desktop and mobile</span>
+        <h1>Diva.</h1>
+        <p>Diva is an AI command bar that floats above everything else on your screen. Highlight text anywhere, press Ctrl and Space or just say “Hey Diva”, and type a slash command. Diva hands the job to a specialised AI agent and streams the answer back without you leaving what you were doing.</p>
+        <p>Most AI tools make you go to them: open a tab, paste, explain, copy back. Diva comes to you. It reads what you’ve highlighted, knows the command you want, and gets out of the way when you press Escape.</p>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Product design and build</dd></div>
+          <div><dt>Platform</dt><dd>macOS, Windows and Linux, with a mobile workflow</dd></div>
+          <div><dt>Built with</dt><dd>Electron, React, Tailwind, OpenAI</dd></div>
+          <div><dt>Stage</dt><dd>Working prototype</dd></div>
+        </dl>
+        <h2 class="sub">Decisions that shaped it</h2>
+        <ul class="calls">
+          <li><b>Always on top, never in the way.</b> One shortcut summons it over any app; Escape sends it away. No window switching.</li>
+          <li><b>Slash commands, not prompts.</b> Twenty five commands, from /summarize to /actionitems, so nobody has to learn prompt writing to get a good result.</li>
+          <li><b>Your selection is the input.</b> Whatever you’ve highlighted or copied is used automatically, so most jobs are two keystrokes.</li>
+        </ul>
+      </div>
+
+      <div class="xd">
+        <div class="ow">
+          <div class="oh">
+            <div>
+              <b class="otitle">Diva, running live</b>
+              <span class="ohint">Select text in the note, then press Ctrl + Space</span>
+            </div>
+            <div class="pv-acts">
+              <a class="pv-btn" href="app/" target="_blank" rel="noopener">Open in a new tab <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+              <button class="ofs" id="fsBtn" type="button" aria-label="Full screen" aria-pressed="false"><svg class="e" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span class="t">Full screen</span><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            </div>
+          </div>
+          <div class="ocv dv-wrap">
+            <div class="dv-desk" id="desk">
+              <div class="dv-menu"><b>Notes</b><span>File</span><span>Edit</span><span>View</span><i></i>
+                <button type="button" class="dv-mic" id="dvMic" aria-label="Say Hey Diva"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Hey Diva</span></button>
+                <span class="dv-clock" id="dvClock">9:41</span></div>
+              <div class="dv-notes">
+                <div class="dv-bar"><i></i><i></i><i></i><span>Launch sync</span></div>
+                <div class="dv-doc" id="dvDoc">
+                  <h3>Launch sync, Tuesday</h3>
+                  <p>We agreed to move the beta launch from 3 March to 17 March so the payments flow can be tested properly. Ngozi will finish the onboarding copy by Friday. Femi owns the payment provider integration and needs sandbox keys from finance this week.</p>
+                  <p>Ada will brief the support team on the new refund policy before launch. Budget for paid ads stays at £4,000 for the first month, with a review after two weeks.</p>
+                  <p>Risks: the app store review could take longer than expected, and two designers are on leave next week.</p>
+                </div>
+              </div>
+              <div class="dv-hint" id="dvHint"><kbd>Ctrl</kbd><kbd>Space</kbd><span>or</span><button type="button" id="dvSummon">Summon Diva</button></div>
+              <div class="dv-heard" id="dvHeard" hidden></div>
+              <div class="dv-toasts" id="dvToasts"></div>
+              <div class="dv-win" id="dvWin" hidden><iframe id="dvFrame" title="Diva live preview" src="about:blank" data-src="app/" allow="clipboard-read; clipboard-write; microphone"></iframe></div>
+            </div>
+          </div>
+        </div>
+        <p class="dv-note">The preview answers with pre-written responses for the sample note, so it never spends real AI credits. The app itself streams answers from OpenAI.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <a href="../../../notes/">Notes</a>
+  </footer>
+
+  <script src="../../../js/fullscreen.js?v=20261121m"></script>
+  <script src="../../../js/diva-desk.js?v=20261121m"></script>
+  <script>
+    (function () {
+      var page = document.querySelector("[data-reveal]");
+      requestAnimationFrame(function () { requestAnimationFrame(function () { page.classList.add("on"); }); });
+    })();
+  </script>
+</body>
+</html>

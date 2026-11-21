@@ -26,11 +26,11 @@ window.KE_DATA = {
     { id: "philosophy", name: "Design Philosophy", path: "philosophy/", note: "Principles, each with a prototype" }
   ],
 
-  /* My products. Placeholders until the real ones are added. */
+  /* My products, each with a live preview */
   products: [
     { slug: "meeqly", title: "Meeqly", area: "Music · Mobile app", status: "open", href: "meeqly/", live: "meeqly", note: "Live preview" },
-    { slug: "product-two", title: "Product two", area: "Product", status: "soon" },
-    { slug: "product-three", title: "Product three", area: "Product", status: "soon" }
+    { slug: "diva", title: "Diva", area: "AI · Desktop and mobile", status: "open", href: "diva/", thumb: "assets/previews/diva.jpg", note: "Live preview" },
+    { slug: "tiqki", title: "Tiqki", area: "Queues · Web app", status: "open", href: "tiqki/", thumb: "assets/previews/tiqki.jpg", note: "Live preview" }
   ],
 
   principles: [

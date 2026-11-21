@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiqki | Karen Edegware</title>
+  <meta name="description" content="Tiqki, queue and appointment management for small businesses. Customers join from a QR code on their own phone. Live preview.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="../../../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../../assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta name="theme-color" content="#0c0c0c">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500&family=Montserrat:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../../../css/base.css?v=20261121m">
+  <link rel="stylesheet" href="../../../css/principle.css?v=20261121m">
+  <link rel="stylesheet" href="../../../css/phone.css?v=20261121m">
+  <link rel="stylesheet" href="../../../css/product.css?v=20261121m">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="../../../" aria-label="Karen Edegware, home"><span class="wmk">Karen <b>Edegware</b></span></a>
+    <a class="pill" href="mailto:karenjimmyede@gmail.com">Get in touch</a>
+  </header>
+
+  <main class="page-main reveal" data-reveal>
+    <div class="page-bar">
+      <nav class="crumbs cap" aria-label="Breadcrumb">
+        <a href="../../../">Home</a><span aria-hidden="true">/</span>
+        <a href="../../">Product Design &amp; Philosophy</a><span aria-hidden="true">/</span>
+        <a href="../">Products</a><span aria-hidden="true">/</span>
+        <span>tiqki.md</span>
+      </nav>
+      <a class="pill pbtn" href="../" aria-label="Back to products"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg><span>Back to products</span></a>
+    </div>
+
+    <article class="principle product wide">
+      <div class="phil">
+        <div class="phil-a">
+          <span class="lbl cap">Product · Queues and bookings · Web</span>
+          <h1>Tiqki.</h1>
+          <p>Tiqki runs the queue for small businesses: clinics, salons, banks, anywhere people stand around waiting. Customers scan a QR code at the door, join from their own phone, and watch their place move. When it is their turn, the page changes and a text arrives.</p>
+          <p>The front desk sees walk-ins and booked appointments in one list, calls the next person with one tap, and gets a feel for wait times across the day. No hardware, no app for anyone to install.</p>
+        </div>
+        <div class="phil-b">
+          <dl class="facts">
+            <div><dt>Role</dt><dd>Product management and design</dd></div>
+            <div><dt>Platform</dt><dd>Web, on any phone or desk</dd></div>
+            <div><dt>Built with</dt><dd>React, Supabase, Twilio, Stripe</dd></div>
+            <div><dt>Stage</dt><dd>MVP</dd></div>
+          </dl>
+          <h2 class="sub">Decisions that shaped it</h2>
+          <ul class="calls">
+            <li><b>Nothing to download.</b> Asking someone to install an app to wait ten minutes loses most of them. A QR code and a web page on their own phone loses almost nobody.</li>
+            <li><b>Walk-ins and bookings in one line.</b> The desk works from a single list, so a booked customer never gets stuck behind the people who just walked in.</li>
+            <li><b>A text when it is your turn.</b> People can step out for a coffee without losing their place, which makes the wait feel shorter than it is.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xd">
+        <div class="ow tq-ow">
+          <div class="oh">
+            <div>
+              <b class="otitle">Tiqki, running live</b>
+              <span class="ohint">Join as a customer, then call them from the front desk</span>
+            </div>
+            <div class="oseg tq-seg" role="tablist" aria-label="Which side">
+              <button type="button" role="tab" aria-selected="true" data-side="cust">Customer<i class="tq-dot" hidden></i></button>
+              <button type="button" role="tab" aria-selected="false" data-side="biz">Front desk<i class="tq-dot" hidden></i></button>
+            </div>
+            <div class="pv-acts">
+              <a class="pv-btn" href="app/#/dashboard" target="_blank" rel="noopener">Open in a new tab <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3h7v7M13 3 4 12"/></svg></a>
+              <button class="pv-btn" type="button" id="pvReset">Reset</button>
+              <button class="ofs" id="fsBtn" type="button" aria-label="Full screen" aria-pressed="false"><svg class="e" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span class="t">Full screen</span><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            </div>
+          </div>
+          <div class="ocv tq-stage" data-side="cust">
+            <section class="tq-pane tq-biz" aria-label="Front desk">
+              <span class="ocl">Front desk</span>
+              <div class="tq-screen" id="tqBizBox"><iframe id="tqBiz" src="app/#/dashboard" title="Tiqki front desk" loading="lazy"></iframe></div>
+            </section>
+            <section class="tq-pane tq-cust" aria-label="Customer">
+              <span class="ocl">Customer’s phone</span>
+              <div class="tq-screen tq-phone"><iframe id="tqCust" src="app/#/join?b=7d1c2a40-5b7e-4c1a-9f3e-2b8a6c1d0e11" title="Tiqki customer view" loading="lazy"></iframe></div>
+            </section>
+          </div>
+          <div class="tq-try">
+            <span class="ocl">Things to try</span>
+            <div class="ph-note good"><i></i><span>Join the Walk-in queue as a customer. The front desk count goes up straight away</span></div>
+            <div class="ph-note good"><i></i><span>Press Call Next at the desk until it is your turn, and watch the customer screen change</span></div>
+            <div class="ph-note good"><i></i><span>Switch Join Now to Schedule to book a time instead</span></div>
+            <p class="pv-small">Brightside Clinic and its customers are made up. Everything stays in your browser, texts are not really sent, and Reset starts it fresh.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <a href="../../../notes/">Notes</a>
+  </footer>
+
+  <script src="../../../js/fullscreen.js?v=20261121m"></script>
+  <script src="../../../js/tiqki-stage.js?v=20261121m"></script>
+</body>
+</html>
