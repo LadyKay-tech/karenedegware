@@ -23,7 +23,7 @@
       { name: "Cloud migration", owner: "Tolu" }, { name: "Data and analytics", owner: "James" },
       { name: "Cyber security", owner: "Chioma" }, { name: "Managed support", owner: "Kwame" }, { name: "Training", owner: "Priya" },
     ];
-    const STAGES = ["New lead", "First meeting", "Qualified", "Solution and demo", "Proposal", "Negotiation", "Contract signed", "Money in bank"];
+    const STAGES = ["New lead", "First meeting", "Qualified", "Solution and demo", "Proposal", "Negotiation", "Contract signed", "Paid"];
     const EXPECT = [7, 10, 14, 14, 10, 14, 21, 30];
     const PROB = [0.05, 0.1, 0.2, 0.35, 0.5, 0.7, 0.9, 1];
     const SECTORS = ["Finance", "Health", "Retail", "Public sector", "Logistics"];
