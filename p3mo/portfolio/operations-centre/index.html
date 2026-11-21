@@ -14,8 +14,8 @@
   <link rel="preload" href="../../../assets/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../../../css/base.css?v=20261121p">
   <link rel="stylesheet" href="../../../css/principle.css?v=20261121p">
-  <link rel="stylesheet" href="../../../css/product.css?v=20261121p">
-  <link rel="stylesheet" href="../../../css/p3m.css?v=20261121t">
+  <link rel="stylesheet" href="../../../css/product.css?v=20261121u">
+  <link rel="stylesheet" href="../../../css/p3m.css?v=20261121v">
 </head>
 <body>
   <header class="top">
@@ -41,7 +41,7 @@
           <h1>Operations centre.</h1>
           <p>This is a rebuild of the operations centre I designed to run a commercial pipeline day to day. The figures are made up, but the layout and the logic are the ones I use. It is built around the questions leadership asks every week: how many updates came in, which opportunities moved forward, which ones are stuck and who is holding them up.</p>
           <p>Every opportunity sits at one of eight stages, from the first conversation to money in the bank, and belongs to an offering with a named owner. A change of stage counts as movement. Anything that has stayed in one stage longer than expected is flagged as stalled, along with the team it is waiting on, whether that is finance, legal, delivery or the client.</p>
-          <p>I built the first version as a single web page so the team could use it straight away, and it later grew into a full application. Use the filters to look at one offering or a different period.</p>
+          <p>This is the Operations Centre itself, running with invented data. Change the date at the top, switch teams in the sidebar or add an entry to see how it responds.</p>
         </div>
         <div class="phil-b">
           <dl class="facts">
@@ -59,14 +59,14 @@
           <div class="oh">
             <div>
               <b class="otitle">The operations centre</b>
-              <span class="ohint">Filter by offering or period</span>
+              <span class="ohint">The live product, with invented data</span>
             </div>
             <span class="pv-wide" title="This tool is laid out for a wider screen"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Best on a laptop or desktop</span>
             <div class="pv-acts">
               <button class="ofs" id="fsBtn" type="button" aria-label="Full screen" aria-pressed="false"><svg class="e" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg><span class="t">Full screen</span><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
             </div>
           </div>
-          <div class="ocv p3-cv"><div class="p3" id="art" data-art="ops"></div></div>
+          <div class="ocv oc-stage"><div class="oc-screen" id="ocBox"><iframe id="ocFrame" src="../../../product-design/products/operations-centre/app/?embed=1#dashboard" title="The operations centre, Operations Centre demo" loading="lazy"></iframe></div></div>
         </div>
         <p class="dv-note">Every name, figure and organisation here is made up.</p>
       </div>
@@ -78,7 +78,18 @@
   </footer>
 
   <script src="../../../js/fullscreen.js?v=20261121m"></script>
-  <script src="../../../js/p3m.js?v=20261121t"></script>
+  <script>
+    (function () {
+      var box = document.getElementById("ocBox"), frame = document.getElementById("ocFrame"), DESK = 1280;
+      function fit() {
+        var w = box.clientWidth, h = box.clientHeight;
+        if (w >= 640 && w < DESK && !document.querySelector(".ow.fs")) { var s = w / DESK; frame.style.width = DESK + "px"; frame.style.height = Math.round(h / s) + "px"; frame.style.transform = "scale(" + s + ")"; }
+        else { frame.style.width = frame.style.height = frame.style.transform = ""; }
+      }
+      if (window.ResizeObserver) new ResizeObserver(fit).observe(box); else window.addEventListener("resize", fit);
+      fit();
+    })();
+  </script>
   <script>
     (function () {
       var page = document.querySelector("[data-reveal]");

@@ -618,5 +618,15 @@ ${list.map((a) => `<tr><td><span class="co"><span class="sq" style="background:$
     draw();
   }
 
+  /* Deep links: app/#reports/scrum opens that view; ?embed=1 starts with the menu folded */
+  function fromHash() {
+    const [v, sub] = location.hash.replace(/^#/, "").split("/");
+    if (V[v]) U.view = v;
+    if (v === "reports" && (sub === "scrum" || sub === "synthesis")) U.rtab = sub;
+    if (v === "commitments" && sub) U.cfilter = sub;
+  }
+  if (/[?&]embed=1/.test(location.search)) $("oc").classList.add("mini");
+  fromHash();
+  window.addEventListener("hashchange", () => { fromHash(); render(); });
   render();
 })();

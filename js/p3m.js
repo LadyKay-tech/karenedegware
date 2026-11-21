@@ -156,41 +156,61 @@
   };
 
   ART.prioritise = function () {
-    const CRIT = [["fit", "Strategic fit"], ["rev", "Revenue impact"], ["cust", "Customer impact"], ["risk", "Delivery risk (lower is better)"]];
+    const CRIT = [["fit", "Strategic fit", "#4b5bdc"], ["rev", "Revenue impact", "#16a36a"], ["cust", "Customer impact", "#e09a12"], ["risk", "Delivery risk", "#e04a43"]];
     const W = { fit: 4, rev: 4, cust: 3, risk: 2 };
     let budget = 600;
     const P = [
-      ["Self-service customer portal", 220, { fit: 5, rev: 4, cust: 5, risk: 3 }],
-      ["Move billing to the cloud", 180, { fit: 4, rev: 2, cust: 2, risk: 4 }],
-      ["Sales dashboard for regional teams", 60, { fit: 4, rev: 4, cust: 2, risk: 1 }],
-      ["New onboarding training academy", 90, { fit: 3, rev: 3, cust: 4, risk: 2 }],
-      ["Replace the ageing helpdesk tool", 120, { fit: 2, rev: 1, cust: 4, risk: 2 }],
-      ["Partner referral programme", 40, { fit: 4, rev: 5, cust: 1, risk: 2 }],
-      ["Security certification", 150, { fit: 5, rev: 3, cust: 3, risk: 3 }],
-      ["Mobile app for field teams", 260, { fit: 3, rev: 3, cust: 3, risk: 5 }],
+      ["Self-service customer portal", 220, { fit: 5, rev: 4, cust: 5, risk: 3 }, "Customer"],
+      ["Move billing to the cloud", 180, { fit: 4, rev: 2, cust: 2, risk: 4 }, "Platform"],
+      ["Sales dashboard for regional teams", 60, { fit: 4, rev: 4, cust: 2, risk: 1 }, "Sales"],
+      ["New onboarding training academy", 90, { fit: 3, rev: 3, cust: 4, risk: 2 }, "People"],
+      ["Replace the ageing helpdesk tool", 120, { fit: 2, rev: 1, cust: 4, risk: 2 }, "Platform"],
+      ["Partner referral programme", 40, { fit: 4, rev: 5, cust: 1, risk: 2 }, "Sales"],
+      ["Security certification", 150, { fit: 5, rev: 3, cust: 3, risk: 3 }, "Compliance"],
+      ["Mobile app for field teams", 260, { fit: 3, rev: 3, cust: 3, risk: 5 }, "Customer"],
     ];
-    function score(s) {
+    function parts(sc) {
       const tot = CRIT.reduce((a, [k]) => a + W[k], 0) || 1;
-      const sum = CRIT.reduce((a, [k]) => a + W[k] * (k === "risk" ? 6 - s[k] : s[k]), 0);
-      return Math.round((sum / (tot * 5)) * 100);
+      return CRIT.map(([k, , c]) => ({ k, c, v: (W[k] * (k === "risk" ? 6 - sc[k] : sc[k])) / (tot * 5) * 100 }));
+    }
+    function ring(used, total) {
+      const r = 52, C = 2 * Math.PI * r, f = Math.min(1, used / total);
+      return `<svg class="p3-ring" viewBox="0 0 132 132" aria-hidden="true"><circle cx="66" cy="66" r="${r}" stroke="#eceae5" stroke-width="14" fill="none"/><circle cx="66" cy="66" r="${r}" stroke="url(#p3g)" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="${C * f} ${C}" transform="rotate(-90 66 66)"/><defs><linearGradient id="p3g" x1="0" x2="1"><stop offset="0" stop-color="#6d7cf2"/><stop offset="1" stop-color="#16a36a"/></linearGradient></defs></svg>`;
     }
     function draw() {
-      const ranked = P.map(([n, c, s]) => ({ n, c, s, sc: score(s) })).sort((a, b) => b.sc - a.sc);
+      const ranked = P.map(([n, c, s, tag]) => { const pt = parts(s); return { n, c, s, tag, pt, sc: Math.round(pt.reduce((a, x) => a + x.v, 0)) }; }).sort((a, b) => b.sc - a.sc || a.c - b.c);
       let run = 0;
-      ranked.forEach((r) => { run += r.c; r.cum = run; r.in = run <= budget; });
+      ranked.forEach((r) => { run += r.c; r.in = run <= budget; });
+      // keep funding smaller items further down if they still fit
+      run = ranked.filter((r) => r.in).reduce((a, r) => a + r.c, 0);
+      ranked.forEach((r) => { if (!r.in && run + r.c <= budget) { r.in = true; r.late = true; run += r.c; } });
       const funded = ranked.filter((r) => r.in);
+      const used = funded.reduce((a, r) => a + r.c, 0);
+      const avg = funded.length ? Math.round(funded.reduce((a, r) => a + r.sc, 0) / funded.length) : 0;
       const lineAt = ranked.findIndex((r) => !r.in);
       root.innerHTML = `
-<div class="p3-app p3-cols">
-  <aside class="p3-card p3-ctrl"><h4>Weights</h4>
-    ${CRIT.map(([k, n]) => `<label class="p3-slider"><span>${n}<b>${W[k]}</b></span><input type="range" min="0" max="5" step="1" value="${W[k]}" data-k="${k}"></label>`).join("")}
-    <h4>Budget</h4>
-    <label class="p3-slider"><span>Available this year<b>${money(budget)}</b></span><input type="range" min="200" max="1200" step="20" value="${budget}" data-b></label>
-    <p class="p3-note">${funded.length} of ${P.length} funded, ${money(funded.reduce((a, r) => a + r.c, 0))} committed, ${money(budget - funded.reduce((a, r) => a + r.c, 0))} left.</p>
-  </aside>
-  <section class="p3-card"><h4>Ranked proposals</h4>
-    <ol class="p3-rank">${ranked.map((r, i) => `${i === lineAt ? `<li class="p3-line"><span>Budget line</span></li>` : ""}<li class="${r.in ? "in" : "out"}"><span class="p3-pos">${i + 1}</span><span class="p3-name">${esc(r.n)}<small>${money(r.c)}</small></span><span class="p3-bar"><i style="width:${r.sc}%"></i></span><b>${r.sc}</b></li>`).join("")}</ol>
-  </section>
+<div class="p3-app p3-fund">
+  <div class="p3-fsum">
+    <div class="p3-card p3-ringcard">${ring(used, budget)}<div class="p3-ringtxt"><b>${money(used)}</b><span>of ${money(budget)} committed</span></div></div>
+    <div class="p3-card p3-fstat"><span>Funded</span><b>${funded.length}<small> of ${P.length}</small></b><em>proposals go ahead</em></div>
+    <div class="p3-card p3-fstat"><span>Average score funded</span><b>${avg}<small> / 100</small></b><em>against agreed weights</em></div>
+    <div class="p3-card p3-fstat"><span>Left in the budget</span><b>${money(budget - used)}</b><em>${budget - used >= 40 ? "room for a small item" : "fully used"}</em></div>
+  </div>
+  <div class="p3-cols">
+    <aside class="p3-card p3-ctrl"><h4>Weights</h4><p class="p3-note">Agree these with leadership before anyone sees the scores.</p>
+      ${CRIT.map(([k, n, c]) => `<label class="p3-slider"><span><i class="p3-dot" style="background:${c}"></i>${n}${k === "risk" ? "&nbsp;<small>(lower is better)</small>" : ""}<b>${W[k]}</b></span><input type="range" min="0" max="5" step="1" value="${W[k]}" data-k="${k}" style="--c:${c};--p:${W[k] * 20}%"></label>`).join("")}
+      <h4 class="p3-mt">Budget</h4>
+      <label class="p3-slider"><span>Available this year<b>${money(budget)}</b></span><input type="range" min="200" max="1200" step="20" value="${budget}" data-b style="--c:#161a23;--p:${((budget - 200) / 1000) * 100}%"></label>
+    </aside>
+    <section class="p3-rankwrap"><div class="p3-rhead"><h4>Ranked proposals</h4><span class="p3-legend2">${CRIT.map(([, n, c]) => `<span><i style="background:${c}"></i>${n}</span>`).join("")}</span></div>
+      <ol class="p3-rank2">${ranked.map((r, i) => `${i === lineAt ? `<li class="p3-line2"><span>Budget line · ${money(budget)}</span></li>` : ""}<li class="${r.in ? "in" : "out"}">
+        <span class="p3-pos2">${i + 1}</span>
+        <span class="p3-name2"><b>${esc(r.n)}</b><small><em>${r.tag}</em>${money(r.c)}</small></span>
+        <span class="p3-stack" title="${r.pt.map((x) => CRIT.find((c) => c[0] === x.k)[1] + " " + Math.round(x.v)).join(", ")}">${r.pt.map((x) => `<i style="width:${x.v}%;background:${x.c}"></i>`).join("")}</span>
+        <b class="p3-sc">${r.sc}</b>
+        <span class="p3-st">${r.in ? (r.late ? "Funded, fits" : "Funded") : "Not this year"}</span></li>`).join("")}</ol>
+    </section>
+  </div>
 </div>`;
     }
     root.addEventListener("input", (e) => {
